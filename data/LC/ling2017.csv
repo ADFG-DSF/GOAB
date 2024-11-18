@@ -1,0 +1,387 @@
+"PORT","SUB","SP","DATE","PAGE","LINE","SEX","LENGTH","WEIGHT","AGE","AGE2","AGECONF","AGEERR","USER","BOATNAME","STATAREA","YEAR","MONTH","DAY","COMMENTS"
+"Homer",,130,2017-07-01,1,1,"F",126,,13,13,2,,"P","P3",525902,2017,7,1,
+"Homer",,130,2017-07-01,1,2,"F",108,,10,10,2,,"P","P3",525902,2017,7,1,
+"Homer",,130,2017-07-01,1,3,"F",110,,10,10,2,,"P","P3",525902,2017,7,1,
+"Homer",,130,2017-07-01,1,4,"F",122,,17,17,1,,"P","P3",525902,2017,7,1,
+"Homer",,130,2017-07-01,1,5,"F",78,,,,,,"C","CASINO",535833,2017,7,1,"FIN MUTILATED, NO SAMPLE (stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,6,"F",78,,,,,,"C","CASINO",535833,2017,7,1,"FIN MUTILATED, NO SAMPLE (stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,7,"F",80,,,,,,"C","CASINO",535833,2017,7,1,"FIN MUTILATED, NO SAMPLE (stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,8,"M",103,,,,,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,9,"F",123,,19,19,2,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,10,"F",116,,14,,2,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,11,"M",95,,20,,2,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,12,"F",125,,18,18,2,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,13,"F",117,,15,,2,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,14,"M",95,,13,,2,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,15,"M",93,,13,,2,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,16,"M",99,,17,17,1,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,17,"M",76,,5,,2,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,18,"F",104,,11,,2,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,19,"F",125,,17,,2,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,20,"F",111,,13,,2,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,21,"F",115,,14,13,2,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-01,1,22,"F",112,,12,12,2,,"C","CASINO",535833,2017,7,1,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,1,"M",89,,13,14,2,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,2,"M",97,,14,14,1,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,3,"F",112,,13,,2,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,4,"F",77,,5,,2,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,5,"F",128,,20,,2,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,6,"M",99,,15,16,2,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,7,"F",108,,12,11,2,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,8,"M",98,,17,,2,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,9,"M",71,,5,5,2,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,10,"F",73,,5,,1,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,11,"F",109,,13,,2,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,12,"M",99,,13,13,1,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,13,"F",78,,5,5,1,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,14,"M",80,,12,,2,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,15,"F",112,,13,,2,,"C","CASINO",535833,2017,7,2,"(stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,16,"F",116,,,,,,"C","CASINO",535833,2017,7,2,"No Finray (stat area not written on envelope)"
+"Homer",,130,2017-07-02,2,17,"F",123,,20,,2,,"C","NAUTILUS II",525902,2017,7,2,
+"Homer",,130,2017-07-02,2,18,"F",129,,18,,1,,"C","NAUTILUS II",525902,2017,7,2,
+"Homer",,130,2017-08-19,3,1,"F",126,,16,,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,2,"F",120,,19,,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,3,"F",116,,14,14,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,4,"F",122,,19,18,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,5,"F",76,,5,5,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,6,"F",111,,12,,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,7,"F",114,,17,,2,,"C","CASINO",515833,2017,8,19,"DAMAGED FIN"
+"Homer",,130,2017-08-19,3,8,"M",90,,12,,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,9,"F",168,,14,14,1,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,10,"F",122,,21,21,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,11,"M",111,,16,,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,12,"F",89,,10,,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,13,"M",97,,15,,1,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,14,"M",107,,10,11,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,15,"F",78,,5,,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,16,"F",114,,13,14,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-19,3,17,"F",94,,14,14,2,,"C","CASINO",515833,2017,8,19,
+"Homer",,130,2017-08-23,4,1,"F",137,,21,21,1,,"P","P2",515902,2017,8,23,
+"Homer",,130,2017-08-23,4,2,"F",132,,22,22,2,,"P","P2",515902,2017,8,23,
+"Homer",,130,2017-07-09,5,1,"F",124,,18,,2,,"C","KACHEMAK KING",,2017,7,9,"NOT ENTERED INTO AWL DURING SEASON"
+"Homer",,130,2017-07-10,5,2,"F",125,,10,,2,,"C","KACHEMAK KING",,2017,7,10,"NOT ENTERED INTO AWL DURING SEASON"
+"Homer",,130,2017-07-09,5,3,"F",108,,11,,2,,"C","KACHEMAK KING",,2017,7,9,"NOT ENTERED INTO AWL DURING SEASON"
+"Kodiak",,130,2017-07-01,1,1,"M",,,5,5,2,,"C","MOON SHADOW",525731,2017,7,1,"8TH RAY REMOVED FROM 4-7"
+"Kodiak",,130,2017-07-02,2,1,"M",81,,12,12,1,,"P","P5",525733,2017,7,2,
+"Kodiak",,130,2017-07-02,2,2,"M",87,,12,12,2,,"P","P5",525733,2017,7,2,
+"Kodiak",,130,2017-07-02,2,3,"M",81,,12,12,2,,"P","P5",525733,2017,7,2,
+"Kodiak",,130,2017-07-02,2,4,"M",90,,12,12,2,,"P","P5",525733,2017,7,2,
+"Kodiak",,130,2017-07-02,2,5,"M",80,,11,11,2,,"P","P5",525733,2017,7,2,
+"Kodiak",,130,2017-07-02,2,6,"F",75,,5,5,2,,"P","P5",525733,2017,7,2,
+"Kodiak",,130,2017-07-03,3,1,"M",73,,5,5,2,,"C","REEL FUN",525731,2017,7,3,
+"Kodiak",,130,2017-07-04,4,1,"",56,,3,3,2,,"P","P1",525733,2017,7,4,
+"Kodiak",,130,2017-07-04,4,2,"",61,,3,3,2,,"C","REEL FUN",525701,2017,7,4,
+"Kodiak",,130,2017-07-04,4,3,"M",54,,3,,2,,"C","REEL FUN",525701,2017,7,4,
+"Kodiak",,130,2017-07-04,4,4,"M",93,,13,13,2,,"C","MOON SHADOW",525733,2017,7,4,
+"Kodiak",,130,2017-07-04,4,5,"M",86,,12,,2,,"C","LANA J",525701,2017,7,4,
+"Kodiak",,130,2017-07-04,4,6,"M",91,,12,,2,,"C","LANA J",525701,2017,7,4,
+"Kodiak",,130,2017-07-04,4,7,"M",87,,12,12,2,,"C","LANA J",525701,2017,7,4,
+"Kodiak",,130,2017-07-04,4,8,"F",117,,18,18,2,,"C","LANA J",525701,2017,7,4,
+"Kodiak",,130,2017-07-04,4,9,"M",86,,12,13,2,,"C","LANA J",525701,2017,7,4,
+"Kodiak",,130,2017-07-04,4,10,"M",89,,12,,2,,"C","LANA J",525701,2017,7,4,
+"Kodiak",,130,2017-07-07,5,1,"M",61,,3,3,2,,"P","P4",525733,2017,7,7,
+"Kodiak",,130,2017-07-08,6,1,"F",60,,3,3,2,,"P","P1",525733,2017,7,8,
+"Kodiak",,130,2017-07-08,6,2,"M",55,,3,3,2,,"P","P1",525733,2017,7,8,
+"Kodiak",,130,2017-07-08,6,3,"M",55,,3,3,2,,"P","P1",525733,2017,7,8,
+"Kodiak",,130,2017-07-08,6,4,"F",77,,5,5,2,,"P","P1",525733,2017,7,8,
+"Kodiak",,130,2017-07-08,6,5,"F",61,,3,3,2,,"P","P1",525733,2017,7,8,
+"Kodiak",,130,2017-07-08,6,6,"M",92,,11,12,2,,"P","P7",525733,2017,7,8,
+"Kodiak",,130,2017-07-09,7,1,"M",69,,5,5,2,,"C","U-RASCAL",525733,2017,7,9,
+"Kodiak",,130,2017-07-09,7,2,"F",108,,12,,2,,"C","U-RASCAL",525733,2017,7,9,
+"Kodiak",,130,2017-07-09,7,3,"M",88,,11,11,2,,"C","U-RASCAL",525733,2017,7,9,
+"Kodiak",,130,2017-07-10,8,1,"M",71,,8,8,2,,"C","LANA J",525731,2017,7,10,
+"Kodiak",,130,2017-07-10,8,2,"M",70,,5,,2,,"C","LANA J",525731,2017,7,10,
+"Kodiak",,130,2017-07-11,9,1,"M",66,,5,5,2,,"P","P1",525733,2017,7,11,
+"Kodiak",,130,2017-07-13,10,1,"M",69,,5,5,2,,"C","MORNING GLORY",525702,2017,7,13,
+"Kodiak",,130,2017-07-13,10,2,"M",79,,12,12,2,,"C","MORNING GLORY",525702,2017,7,13,
+"Kodiak",,130,2017-07-16,11,1,"M",106,,22,22,1,,"P","P4",525702,2017,7,16,
+"Kodiak",,130,2017-07-26,12,1,"F",56,,3,3,1,,"P","P2",525733,2017,7,26,
+"Kodiak",,130,2017-07-26,12,2,"M",94,,16,17,2,,"P","P4",525733,2017,7,26,
+"Kodiak",,130,2017-07-27,13,1,"M",57,,3,,2,,"C","REEL FUN",525702,2017,7,27,
+"Kodiak",,130,2017-07-27,13,2,"M",61,,3,3,2,,"C","REEL FUN",525702,2017,7,27,
+"Kodiak",,130,2017-07-27,13,3,"M",84,,9,9,2,,"C","REEL FUN",525702,2017,7,27,
+"Kodiak",,130,2017-07-31,14,1,"M",70,,5,,2,,"C","HARVEST MOON",525701,2017,7,31,
+"Kodiak",,130,2017-07-31,14,2,"M",76,,7,7,2,,"C","MOON SHADOW",525731,2017,7,31,
+"Kodiak",,130,2017-07-31,14,3,"M",72,,5,,2,,"C","MOON SHADOW",525731,2017,7,31,
+"Kodiak",,130,2017-07-31,14,4,"M",94,,14,14,2,,"C","SHEARWATER",525732,2017,7,31,
+"Kodiak",,130,2017-07-31,14,5,"M",108,,17,17,2,,"C","SHEARWATER",525732,2017,7,31,
+"Kodiak",,130,2017-07-31,14,6,"M",85,,11,11,2,,"C","SHEARWATER",525732,2017,7,31,
+"Kodiak",,130,2017-07-31,14,7,"F",119,,16,,2,,"C","SHEARWATER",525732,2017,7,31,
+"Kodiak",,130,2017-07-31,14,8,"M",90,,13,,2,,"C","SHEARWATER",525732,2017,7,31,
+"Kodiak",,130,2017-07-31,14,9,"M",68,,4,,2,,"C","LANA J",525733,2017,7,31,
+"Kodiak",,130,2017-07-31,14,10,"M",79,,8,8,2,,"C","LANA J",525733,2017,7,31,
+"Kodiak",,130,2017-07-31,14,11,"M",88,,14,13,2,,"C","LANA J",525733,2017,7,31,
+"Kodiak",,130,2017-07-31,14,12,"",87,,13,12,2,,"C","LANA J",525733,2017,7,31,
+"Kodiak",,130,2017-07-31,14,13,"M",88,,12,12,2,,"C","LANA J",525733,2017,7,31,
+"Kodiak",,130,2017-07-31,14,14,"F",80,,5,,2,,"C","LANA J",525733,2017,7,31,
+"Kodiak",,130,2017-08-04,15,1,"M",59,,3,3,2,,"C","U-RASCAL",525731,2017,8,4,
+"Kodiak",,130,2017-08-08,16,1,"M",67,,5,,2,,"C","LANA J",525731,2017,8,8,
+"Kodiak",,130,2017-08-12,17,1,"M",44,,2,2,2,,"P","P4",525733,2017,8,12,
+"Kodiak",,130,2017-08-12,17,2,"M",89,,17,18,2,,"P","P4",525733,2017,8,12,
+"Kodiak",,130,2017-08-14,18,1,"M",92,,14,,2,,"C","LANA J",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,2,"M",86,,10,10,2,,"C","LANA J",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,3,"M",64,,5,5,2,,"C","LANA J",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,4,"M",87,,13,,2,,"C","LANA J",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,5,"M",100,,23,,1,,"C","LANA J",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,6,"M",70,,5,5,2,,"C","LANA J",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,7,"M",71,,5,5,2,,"C","LANA J",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,8,"M",101,,18,18,1,,"C","LANA J",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,9,"M",91,,13,12,2,,"P","P2",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,10,"M",62,,3,3,2,,"P","P2",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,11,"M",82,,11,10,2,,"P","P2",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,12,"M",60,,3,3,1,,"P","P2",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,13,"M",58,,3,3,2,,"P","P2",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,14,"M",58,,3,3,2,,"P","P2",525733,2017,8,14,
+"Kodiak",,130,2017-08-14,18,15,"M",71,,5,5,2,,"P","P2",525733,2017,8,14,
+"Kodiak",,130,2017-08-15,19,1,"M",80,,13,13,2,,"P","P1",515730,2017,8,15,
+"Kodiak",,130,2017-08-15,19,2,"F",113,,12,12,2,,"C","U-RASCAL",525733,2017,8,15,
+"Kodiak",,130,2017-08-15,19,3,"M",108,,,,,,"C","U-RASCAL",525733,2017,8,15,
+"Kodiak",,130,2017-08-18,20,1,"M",90,,12,12,2,,"P","P4",525733,2017,8,18,
+"Kodiak",,130,2017-08-18,20,2,"M",54,,3,3,1,,"P","P6",525733,2017,8,18,
+"Kodiak",,130,2017-08-22,21,1,"F",80,,5,5,2,,"C","U-RASCAL",525731,2017,8,22,
+"Kodiak",,130,2017-07-02,22,1,"F",90,,7,,2,,"P","P8",525807,2017,7,2,"NOT ENTERED INTO AWL DURING SEASON"
+"Kodiak",,130,2017-07-02,22,2,"F",97,,9,,2,,"P","P8",525807,2017,7,2,"NOT ENTERED INTO AWL DURING SEASON"
+"Seward",,130,2017-07-03,1,1,"F",116,,17,17,1,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,2,"F",119,,17,17,2,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,3,"F",118,,15,,2,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,4,"F",111,,15,,2,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,5,"F",105,,14,,2,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,6,"F",113,,15,15,2,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,7,"F",102,,12,12,2,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,8,"F",116,,15,15,2,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,9,"F",120,,19,20,1,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,10,"F",110,,13,,1,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,11,"F",120,,17,,2,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,12,"F",119,,16,17,2,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,13,"F",115,,15,,2,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,14,"F",107,,11,,2,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,15,"F",116,,21,,2,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-03,1,16,"F",105,,10,10,2,,"C","PREDATOR",475932,2017,7,3,
+"Seward",,130,2017-07-13,2,1,"F",119,,16,19,2,,"P","P1",495939,2017,7,13,
+"Seward",,130,2017-07-13,2,2,"F",116,,14,14,2,,"P","P2",495933,2017,7,13,
+"Seward",,130,2017-07-13,2,3,"F",123,,16,,1,,"C","CRACKER JACK",485935,2017,7,13,
+"Seward",,130,2017-07-13,2,4,"F",100,,12,,2,,"C","CRACKER JACK",485935,2017,7,13,
+"Seward",,130,2017-07-13,2,5,"F",114,,13,13,2,,"C","CRACKER JACK",485935,2017,7,13,
+"Seward",,130,2017-07-13,2,6,"F",99,,10,9,1,,"C","CRACKER JACK",485935,2017,7,13,
+"Seward",,130,2017-07-13,2,7,"F",115,,18,19,1,,"C","ORION",485932,2017,7,13,
+"Seward",,130,2017-07-13,2,8,"F",130,,20,21,2,,"C","ORION",485932,2017,7,13,
+"Seward",,130,2017-07-13,2,9,"F",116,,17,,2,,"C","ORION",485932,2017,7,13,
+"Seward",,130,2017-07-27,3,1,"F",103,,12,,2,,"C","JACK POT",505909,2017,7,27,
+"Seward",,130,2017-07-29,4,1,"F",128,,17,17,1,,"C","ARTIC CAT",475931,2017,7,29,
+"Seward",,130,2017-07-29,4,2,"F",134,,23,,1,,"C","ARTIC CAT",475931,2017,7,29,
+"Seward",,130,2017-07-29,4,3,"F",116,,16,,2,,"C","ARTIC CAT",475931,2017,7,29,
+"Seward",,130,2017-07-29,4,4,"F",117,,18,20,2,,"C","ROGUE",475932,2017,7,29,
+"Seward",,130,2017-07-29,4,5,"F",101,,13,,1,,"C","ARTIC CAT",475931,2017,7,29,
+"Seward",,130,2017-07-29,4,6,"F",115,,20,,2,,"C","ARTIC CAT",475931,2017,7,29,
+"Seward",,130,2017-07-29,4,7,"F",126,,20,20,2,,"C","ARTIC CAT",475931,2017,7,29,
+"Seward",,130,2017-07-29,4,8,"F",103,,13,13,2,,"C","ARTIC CAT",475931,2017,7,29,
+"Seward",,130,2017-07-31,5,1,"F",92,,10,,2,,"C","BIG IRON",495932,2017,7,31,
+"Seward",,130,2017-07-31,5,2,"M",96,,16,,1,,"C","BIG IRON",495932,2017,7,31,
+"Seward",,130,2017-07-31,5,3,"M",105,,18,18,1,,"C","BIG IRON",495932,2017,7,31,
+"Seward",,130,2017-07-31,5,4,"F",126,,19,,1,,"C","BIG IRON",495932,2017,7,31,
+"Seward",,130,2017-07-31,5,5,"F",122,,18,,2,,"C","HAVESTER",485931,2017,7,31,
+"Seward",,130,2017-07-31,5,6,"F",105,,12,12,2,,"P","P1",495938,2017,7,31,
+"Seward",,130,2017-08-05,6,1,"F",114,,14,,2,,"C","JACK POT",505909,2017,8,5,
+"Seward",,130,2017-08-06,7,1,"F",124,,21,20,2,,"C","ROGUE",475932,2017,8,6,
+"Seward",,130,2017-08-06,7,2,"F",134,,19,19,2,,"C","OFFSHORE HUNTER",485932,2017,8,6,
+"Seward",,130,2017-08-07,8,1,"F",97,,12,11,1,,"C","INTECEPTOR",475931,2017,8,7,
+"Seward",,130,2017-08-07,8,2,"F",114,,16,,2,,"C","INTECEPTOR",475931,2017,8,7,
+"Seward",,130,2017-08-07,8,3,"F",106,,11,,2,,"C","INTECEPTOR",475931,2017,8,7,
+"Seward",,130,2017-08-07,8,4,"F",103,,12,,2,,"C","INTECEPTOR",475931,2017,8,7,
+"Seward",,130,2017-08-07,8,5,"F",104,,12,12,2,,"C","INTECEPTOR",475931,2017,8,7,
+"Seward",,130,2017-08-07,8,6,"F",100,,9,9,2,,"C","INTECEPTOR",475931,2017,8,7,
+"Seward",,130,2017-08-13,9,1,"F",123,,14,,2,,"C","BANDIT",485935,2017,8,13,
+"Seward",,130,2017-08-14,10,1,"F",110,,13,,1,,"C","PURSUIT",475931,2017,8,14,
+"Seward",,130,2017-08-14,10,2,"F",106,,14,,2,,"C","PURSUIT",475931,2017,8,14,
+"Seward",,130,2017-08-14,10,3,"F",91,,8,8,2,,"C","PURSUIT",475931,2017,8,14,
+"Seward",,130,2017-08-14,10,4,"F",111,,13,,2,,"C","PURSUIT",475931,2017,8,14,
+"Seward",,130,2017-08-14,10,5,"F",105,,11,,2,,"C","PURSUIT",475931,2017,8,14,
+"Seward",,130,2017-08-14,10,6,"M",90,,13,13,2,,"C","PURSUIT",475931,2017,8,14,
+"Seward",,130,2017-08-14,10,7,"M",96,,16,,2,,"C","PURSUIT",475931,2017,8,14,
+"Seward",,130,2017-08-16,11,1,"F",119,,21,20,1,,"P","P1",485931,2017,8,16,
+"Seward",,130,2017-08-16,11,2,"F",120,,15,16,1,,"P","P1",485931,2017,8,16,
+"Seward",,130,2017-08-18,12,1,"F",124,,17,,2,,"C","BIG IRON",495932,2017,8,18,
+"Seward",,130,2017-08-18,12,2,"F",121,,17,,2,,"C","BIG IRON",495932,2017,8,18,
+"Seward",,130,2017-08-18,12,3,"F",120,,18,18,2,,"C","BIG IRON",495932,2017,8,18,
+"Seward",,130,2017-08-18,12,4,"F",108,,21,,1,,"C","TAILWATCHER",475933,2017,8,18,
+"Seward",,130,2017-08-18,12,5,"F",96,,9,,1,,"C","TAILWATCHER",475933,2017,8,18,
+"Seward",,130,2017-08-18,12,6,"F",106,,16,16,2,,"C","TAILWATCHER",475933,2017,8,18,
+"Seward",,130,2017-08-18,12,7,"F",113,,18,,1,,"C","TAILWATCHER",475933,2017,8,18,
+"Seward",,130,2017-08-18,12,8,"F",105,,12,,2,,"C","TAILWATCHER",475933,2017,8,18,
+"Seward",,130,2017-08-23,13,1,"M",99,,20,22,1,,"C","PROFISH",475931,2017,8,23,
+"Seward",,130,2017-08-23,13,2,"F",98,,9,,2,,"C","PROFISH",475931,2017,8,23,
+"Seward",,130,2017-08-23,13,3,"F",110,,16,,2,,"C","PROFISH",475931,2017,8,23,
+"Seward",,130,2017-08-23,13,4,"F",96,,11,11,2,,"C","PROFISH",475931,2017,8,23,
+"Seward",,130,2017-08-23,13,5,"F",120,,20,,1,,"C","PROFISH",475931,2017,8,23,
+"Seward",,130,2017-08-27,14,1,"F",127,,19,19,1,,"C","PROFISH",505932,2017,8,27,
+"Seward",,130,2017-08-27,14,2,"F",96,,13,12,1,,"C","ORION",485932,2017,8,27,
+"Seward",,130,2017-07-24,15,1,"M",92,,13,,2,,"C","LEGACY",485932,2017,7,24,"This sample was labeled pg2, ln1, but there was already a pg 2 - moved to end and changed to pg 15"
+"Valdez",,130,2017-07-01,1,1,"M",96,,16,16,2,,"C","NUNATAK",466003,2017,7,1,
+"Valdez",,130,2017-07-01,1,2,"M",87,,,,,,"C","SEA HUNTER",466003,2017,7,1,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-01,1,3,"F",100,,17,,1,,"C","SEA HUNTER",466003,2017,7,1,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-01,1,4,"M",97,,20,20,1,,"C","HALIBUT GROVE",466002,2017,7,1,"CHEWED UP/ BROKE collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-01,1,5,"M",92,,11,,2,,"C","HALIBUT GROVE",466002,2017,7,1,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-01,1,6,"F",105,,12,13,2,,"C","HALIBUT GROVE",466002,2017,7,1,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-02,2,1,"F",110,,14,13,1,,"C","JAMIE LYNN",465932,2017,7,2,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-02,2,2,"F",124,,19,17,1,,"C","JAMIE LYNN",465932,2017,7,2,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-02,2,3,"F",101,,13,13,2,,"C","JAMIE LYNN",465932,2017,7,2,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-02,2,4,"F",122,,15,,2,,"C","JAMIE LYNN",465932,2017,7,2,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-02,2,5,"F",116,,18,,2,,"C","JAMIE LYNN",465932,2017,7,2,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-02,2,6,"F",116,,15,15,2,,"C","JAMIE LYNN",465932,2017,7,2,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-02,2,7,"F",114,,17,,2,,"C","JAMIE LYNN",465932,2017,7,2,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-02,2,8,"F",110,,15,,2,,"C","JAMIE LYNN",465932,2017,7,2,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-02,2,9,"F",121,,17,18,1,,"C","JAMIE LYNN",465932,2017,7,2,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-02,2,10,"F",116,,16,16,2,,"C","JAMIE LYNN",465932,2017,7,2,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-03,3,1,"F",103,,12,12,2,,"C","HALIBUT GROVE",475932,2017,7,3,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-04,4,1,"M",105,,,,,,"C","HALIBUT GROVE",475932,2017,7,4,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-04,4,2,"M",94,,19,,2,,"C","HALIBUT GROVE",475932,2017,7,4,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-04,4,3,"M",92,,16,16,2,,"C","HALIBUT GROVE",475932,2017,7,4,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-04,4,4,"M",99,,18,18,1,,"C","HALIBUT GROVE",475932,2017,7,4,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-04,4,5,"F",124,,17,18,1,,"C","HALIBUT GROVE",475932,2017,7,4,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-04,4,6,"F",103,,12,13,2,,"C","HALIBUT GROVE",475932,2017,7,4,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-04,4,7,"F",130,,18,18,1,,"C","HALIBUT GROVE",475932,2017,7,4,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-04,4,8,"F",119,,17,,1,,"C","HALIBUT GROVE",475932,2017,7,4,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-04,4,9,"F",103,,12,12,2,,"C","HALIBUT GROVE",475932,2017,7,4,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-04,4,10,"F",101,,13,,2,,"C","HALIBUT GROVE",475932,2017,7,4,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-04,4,11,"F",128,,18,17,2,,"C","HALIBUT GROVE",475932,2017,7,4,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-13,5,1,"F",124,,19,19,2,,"C","HALIBUT GROVE",475932,2017,7,13,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-17,6,1,"F",116,,19,,2,,"C","DAN ORION",475932,2017,7,17,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-23,7,1,"M",92,,17,18,2,,"C","NUNATAK",465932,2017,7,23,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-23,7,2,"M",90,,12,13,2,,"C","NUNATAK",465932,2017,7,23,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-23,7,3,"M",92,,17,,1,,"C","NUNATAK",465932,2017,7,23,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-23,7,4,"M",94,,14,14,2,,"C","NUNATAK",465932,2017,7,23,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-23,7,5,"F",118,,18,17,2,,"C","NUNATAK",465932,2017,7,23,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-23,7,6,"F",118,,21,,2,,"C","NUNATAK",465932,2017,7,23,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-23,7,7,"F",98,,10,,2,,"C","NUNATAK",465932,2017,7,23,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-23,7,8,"F",115,,18,18,2,,"C","NUNATAK",465932,2017,7,23,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-23,7,9,"F",112,,15,,2,,"C","NUNATAK",465932,2017,7,23,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-23,7,10,"F",114,,15,,1,,"C","NUNATAK",465932,2017,7,23,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-23,7,11,"F",110,,11,,2,,"C","NUNATAK",465932,2017,7,23,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,1,"M",93,,17,17,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,2,"M",95,,16,17,1,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,3,"M",100,,15,15,1,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,4,"M",91,,12,12,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,5,"M",98,,15,14,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,6,"F",116,,17,17,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,7,"F",105,,10,10,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,8,"F",114,,16,15,1,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,9,"F",108,,13,13,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,10,"F",102,,13,13,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,11,"F",112,,12,12,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,12,"F",116,,16,16,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,13,"F",123,,17,16,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,14,"F",125,,,,,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,15,"F",107,,14,14,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,16,"F",125,,19,19,1,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,17,"F",108,,11,11,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,18,"F",101,,11,11,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,19,"F",108,,13,13,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,20,"F",102,,11,12,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,21,"F",121,,17,17,2,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-26,8,22,"F",124,,,,,,"P","P1",465932,2017,7,26,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-30,9,1,"M",93,,14,13,1,,"P","P1",465932,2017,7,30,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-30,9,2,"F",119,,19,19,2,,"P","P1",465932,2017,7,30,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-30,9,3,"F",92,,11,11,2,,"P","P1",465932,2017,7,30,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-07-30,9,4,"F",115,,17,17,1,,"P","P1",465932,2017,7,30,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-03,10,1,"M",91,,17,,1,,"C","HALIBUT GROVE",475932,2017,8,3,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-03,10,2,"F",110,,13,12,1,,"C","VALDEZ PEARL",475932,2017,8,3,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-04,11,1,"M",94,,,,,,"C","CHINOOK",466002,2017,8,4,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-04,11,2,"F",120,,11,,2,,"C","VALDEZ PEARL",475932,2017,8,4,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-05,12,1,"F",120,,21,20,1,,"C","VALDEZ PEARL",465932,2017,8,5,"CHEWED UP/ BROKE collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-05,12,2,"F",107,,13,13,2,,"C","VALDEZ PEARL",465932,2017,8,5,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-05,12,3,"F",98,,15,15,1,,"C","VALDEZ PEARL",465932,2017,8,5,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-05,12,4,"F",93,,17,16,1,,"C","VALDEZ PEARL",465932,2017,8,5,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-05,12,5,"F",118,,13,,2,,"C","VALDEZ PEARL",465932,2017,8,5,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-05,12,6,"F",103,,14,,2,,"C","VALDEZ PEARL",465932,2017,8,5,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-05,12,7,"M",102,,,,,,"C","VALDEZ PEARL",465932,2017,8,5,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-05,12,8,"M",95,,18,,2,,"C","VALDEZ PEARL",465932,2017,8,5,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-05,12,9,"M",88,,12,12,2,,"C","VALDEZ PEARL",465932,2017,8,5,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-05,12,10,"M",97,,22,,1,,"C","VALDEZ PEARL",465932,2017,8,5,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-05,12,11,"M",93,,13,13,1,,"C","VALDEZ PEARL",465932,2017,8,5,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-05,12,12,"M",92,,13,,2,,"C","VALDEZ PEARL",465932,2017,8,5,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-07,13,1,"F",97,,11,11,2,,"C","DAN ORION",465932,2017,8,7,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-07,13,2,"F",129,,16,,2,,"C","DAN ORION",465932,2017,8,7,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-07,13,3,"F",114,,18,18,2,,"C","DAN ORION",465932,2017,8,7,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-07,13,4,"F",115,,22,20,1,,"C","DAN ORION",465932,2017,8,7,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-07,13,5,"F",121,,17,,1,,"C","DAN ORION",465932,2017,8,7,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-08,14,1,"F",95,,11,,2,,"C","BOLD EAGLE",475932,2017,8,8,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-13,15,1,"F",117,,19,20,2,,"C","P1",466004,2017,8,13,"collected the wrong finrays (only the first 3, including the tiny short ones)"
+"Valdez",,130,2017-08-14,16,1,"M",92,,13,,1,,"C","DAN ORION",466004,2017,8,14,"entered post-season"
+"Valdez",,130,2017-08-14,16,2,"M",96,,19,,1,,"C","DAN ORION",466004,2017,8,14,"entered post-season"
+"Valdez",,130,2017-08-14,16,3,"F",132,,20,,1,,"C","DAN ORION",466004,2017,8,14,"entered post-season"
+"Valdez",,130,2017-08-14,16,4,"F",127,,19,,2,,"C","DAN ORION",466004,2017,8,14,"entered post-season"
+"Whittier",,130,2017-07-01,1,1,"M",102,,20,21,1,,"C","I CRAZY II",486001,2017,7,1,
+"Whittier",,130,2017-07-01,1,2,"M",93,,12,12,2,,"C","I CRAZY II",486001,2017,7,1,
+"Whittier",,130,2017-07-02,2,1,"F",122,,18,,2,,"C","CRAZY RAY",466002,2017,7,2,
+"Whittier",,130,2017-07-02,2,2,"F",114,,16,,2,,"C","CRAZY RAY",466002,2017,7,2,
+"Whittier",,130,2017-07-02,2,3,"F",107,,11,,2,,"C","CRAZY RAY",466002,2017,7,2,
+"Whittier",,130,2017-07-02,2,4,"M",96,,13,13,2,,"C","CRAZY RAY",466002,2017,7,2,
+"Whittier",,130,2017-07-02,2,5,"M",94,,18,17,1,,"C","I CRAZY II",466002,2017,7,2,
+"Whittier",,130,2017-07-02,2,6,"F",117,,21,21,2,,"C","I CRAZY II",466002,2017,7,2,
+"Whittier",,130,2017-07-03,3,1,"M",97,,,,,,"C","JAXXMAXX",475934,2017,7,3,"CAS"
+"Whittier",,130,2017-07-03,3,2,"M",99,,16,,2,,"C","JAXXMAXX",475934,2017,7,3,"CAS"
+"Whittier",,130,2017-07-03,3,3,"F",107,,13,,2,,"C","CRAZY RAY",466002,2017,7,3,
+"Whittier",,130,2017-07-03,3,4,"M",91,,11,12,2,,"C","CRAZY RAY",466002,2017,7,3,
+"Whittier",,130,2017-07-03,3,5,"F",99,,11,,2,,"C","I CRAZY II",466002,2017,7,3,
+"Whittier",,130,2017-07-03,3,6,"F",92,,7,,2,,"C","I CRAZY II",466002,2017,7,3,
+"Whittier",,130,2017-07-03,3,7,"F",98,,10,,2,,"C","I CRAZY II",466002,2017,7,3,
+"Whittier",,130,2017-07-03,3,8,"F",105,,11,11,2,,"C","I CRAZY II",466002,2017,7,3,
+"Whittier",,130,2017-07-07,4,1,"",91,,17,,1,,"C","JAXXMAXX",466002,2017,7,7,"CAS"
+"Whittier",,130,2017-07-07,4,2,"",93,,11,,2,,"C","JAXXMAXX",466002,2017,7,7,"CAS"
+"Whittier",,130,2017-07-07,4,3,"",106,,15,,2,,"C","JAXXMAXX",466002,2017,7,7,"CAS"
+"Whittier",,130,2017-07-09,5,1,"F",118,,16,,2,,"C","I CRAZY II",466002,2017,7,9,
+"Whittier",,130,2017-07-10,6,1,"M",94,,12,13,1,,"C","CRAZY RAY",486001,2017,7,10,
+"Whittier",,130,2017-07-10,6,2,"M",88,,12,12,2,,"C","I CRAZY II",466002,2017,7,10,
+"Whittier",,130,2017-07-10,6,3,"F",118,,18,18,2,,"C","I CRAZY II",466002,2017,7,10,
+"Whittier",,130,2017-07-11,7,1,"M",101,,21,19,1,,"C","CRAZY RAY",466002,2017,7,11,
+"Whittier",,130,2017-07-13,8,1,"F",100,,13,,2,,"C","CRAZY RAY",476001,2017,7,13,
+"Whittier",,130,2017-07-13,8,2,"F",101,,11,,2,,"C","CRAZY RAY",476001,2017,7,13,
+"Whittier",,130,2017-07-13,8,3,"F",108,,15,,2,,"C","CRAZY RAY",476001,2017,7,13,
+"Whittier",,130,2017-07-13,8,4,"F",110,,14,14,2,,"C","CRAZY RAY",476001,2017,7,13,
+"Whittier",,130,2017-07-13,8,5,"F",114,,17,,2,,"C","CRAZY RAY",476001,2017,7,13,
+"Whittier",,130,2017-07-13,8,6,"F",109,,15,,1,,"C","CRAZY RAY",476001,2017,7,13,
+"Whittier",,130,2017-07-13,8,7,"F",108,,12,12,2,,"C","CRAZY RAY",476001,2017,7,13,
+"Whittier",,130,2017-07-13,8,8,"F",117,,16,,2,,"C","CRAZY RAY",476001,2017,7,13,
+"Whittier",,130,2017-07-13,8,9,"F",128,,16,,2,,"C","CRAZY RAY",476001,2017,7,13,
+"Whittier",,130,2017-07-13,8,10,"F",104,,12,13,2,,"C","CRAZY RAY",476001,2017,7,13,
+"Whittier",,130,2017-07-13,8,11,"F",119,,17,,2,,"C","CRAZY RAY",476001,2017,7,13,
+"Whittier",,130,2017-07-13,8,12,"F",115,,15,,2,,"C","CRAZY RAY",476001,2017,7,13,
+"Whittier",,130,2017-07-13,8,13,"M",89,,13,,2,,"C","I CRAZY II",466002,2017,7,13,
+"Whittier",,130,2017-07-13,8,14,"F",118,,15,16,2,,"C","I CRAZY II",466002,2017,7,13,
+"Whittier",,130,2017-07-13,8,15,"M",95,,18,,2,,"C","I CRAZY II",466002,2017,7,13,
+"Whittier",,130,2017-07-16,9,1,"M",99,,16,,2,,"C","I CRAZY II",466002,2017,7,16,
+"Whittier",,130,2017-07-16,9,2,"F",97,,9,,2,,"C","CRAZY RAY",476001,2017,7,16,
+"Whittier",,130,2017-07-16,9,3,"F",117,,17,,2,,"C","CRAZY RAY",476001,2017,7,16,
+"Whittier",,130,2017-07-16,9,4,"F",100,,13,13,2,,"C","CRAZY RAY",476001,2017,7,16,
+"Whittier",,130,2017-07-16,9,5,"F",122,,17,18,2,,"C","CRAZY RAY",476001,2017,7,16,
+"Whittier",,130,2017-07-16,9,6,"F",99,,13,13,2,,"C","CRAZY RAY",476001,2017,7,16,
+"Whittier",,130,2017-07-16,9,7,"F",110,,13,,2,,"C","CRAZY RAY",476001,2017,7,16,
+"Whittier",,130,2017-07-16,9,8,"F",105,,13,,2,,"C","CRAZY RAY",476001,2017,7,16,
+"Whittier",,130,2017-07-16,9,9,"F",111,,13,,2,,"C","CRAZY RAY",476001,2017,7,16,
+"Whittier",,130,2017-07-16,9,10,"F",112,,16,,2,,"C","CRAZY RAY",476001,2017,7,16,
+"Whittier",,130,2017-07-16,9,11,"F",101,,10,10,2,,"C","CRAZY RAY",476001,2017,7,16,
+"Whittier",,130,2017-07-16,9,12,"F",121,,16,,2,,"C","CRAZY RAY",476001,2017,7,16,
+"Whittier",,130,2017-07-16,9,13,"M",113,,15,,2,,"C","CRAZY RAY",476001,2017,7,16,
+"Whittier",,130,2017-07-17,10,1,"F",129,,17,,2,,"C","CRAZY RAY",466002,2017,7,17,
+"Whittier",,130,2017-07-17,10,2,"F",103,,13,13,2,,"C","CRAZY RAY",466002,2017,7,17,
+"Whittier",,130,2017-07-17,10,3,"F",105,,12,,2,,"C","CRAZY RAY",466002,2017,7,17,
+"Whittier",,130,2017-07-17,10,4,"M",91,,12,,2,,"C","CRAZY RAY",466002,2017,7,17,
+"Whittier",,130,2017-07-17,10,5,"F",123,,20,20,2,,"C","CRAZY RAY",466002,2017,7,17,
+"Whittier",,130,2017-07-17,10,6,"F",106,,11,,2,,"C","CRAZY RAY",466002,2017,7,17,
+"Whittier",,130,2017-07-17,10,7,"F",122,,19,19,2,,"C","CRAZY RAY",466002,2017,7,17,
+"Whittier",,130,2017-07-17,10,8,"F",101,,11,11,2,,"C","CRAZY RAY",466002,2017,7,17,
+"Whittier",,130,2017-07-17,10,9,"M",89,,14,,2,,"C","I CRAZY II",466002,2017,7,17,
+"Whittier",,130,2017-07-17,10,10,"F",121,,19,,2,,"C","CRAZY RAY",466002,2017,7,17,
+"Whittier",,130,2017-07-17,10,11,"F",116,,15,16,2,,"C","CRAZY RAY",466002,2017,7,17,
+"Whittier",,130,2017-07-17,10,12,"M",90,,12,,1,,"C","CRAZY RAY",466002,2017,7,17,
+"Whittier",,130,2017-07-17,10,13,"F",101,,13,,2,,"C","CRAZY RAY",466002,2017,7,17,
+"Whittier",,130,2017-07-17,10,14,"F",103,,12,12,2,,"C","I CRAZY II",466002,2017,7,17,
+"Whittier",,130,2017-07-27,11,1,"F",112,,14,,2,,"C","CRAZY RAY",466002,2017,7,27,
+"Whittier",,130,2017-07-27,11,2,"F",101,,12,,2,,"C","CRAZY RAY",466002,2017,7,27,
+"Whittier",,130,2017-07-28,12,1,"F",109,,14,14,2,,"C","I CRAZY II",466002,2017,7,28,
+"Whittier",,130,2017-07-29,13,1,"F",128,,20,19,1,,"P","P1",485932,2017,7,29,
+"Whittier",,130,2017-07-29,13,2,"F",106,,13,,2,,"C","I CRAZY II",466002,2017,7,29,
+"Whittier",,130,2017-07-29,13,3,"M",104,,17,17,2,,"C","CRAZY RAY",486001,2017,7,29,
+"Whittier",,130,2017-07-30,14,1,"F",122,,16,,2,,"C","I CRAZY II",466002,2017,7,30,
+"Whittier",,130,2017-08-09,15,1,"F",115,,22,21,1,,"C","I CRAZY II",476004,2017,8,9,
+"Whittier",,130,2017-08-15,16,1,"F",123,,17,17,2,,"C","CRAZY RAY",476007,2017,8,15,
