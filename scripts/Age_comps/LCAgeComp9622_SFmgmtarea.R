@@ -9,69 +9,30 @@
 # Translated from SAS to R by CWM 06/13/23
 ###############################################################################
 
-library(plyr)
 library(tidyverse)
 
-get_data <- function(a) {
-  
-  
-  print(a)
-  
-  files <- list.files(path=a,
-                      pattern="*.csv", full.names=F, recursive=FALSE)
-  
-  
-  for(i in seq(1, length(files))) {
-    print(files[[i]])
-    n <- gsub(".csv", "",files[[i]])
-    assign(n, read.csv(paste0(a,files[[i]])), envir = .GlobalEnv)
-    
-  }
-  
-}
+
+source("functions.R")
 
 #Function call
-get_data("O:/DSF/GOAB/R data/LC/")
+get_data("data/LC/")
 
 library(plyr)
-agecomp <- do.call(rbind.fill, list(ling9104, ling2005, ling2006, ling2007, ling2008, 
+age <- do.call(rbind.fill, list(ling9104, ling2005, ling2006, ling2007, ling2008, 
                                     ling2009, ling2010, ling2011, ling2012, ling2013, 
                                     ling2014, ling2015, ling2016, ling2017, ling2018, 
                                     ling2019, ling2020, ling2021, ling2022))
 detach(package:plyr)
 
 
-agecomp <- agecomp %>% filter(!(PORT %in% c('CCI', 'Cordova')), YEAR >= 1996, !is.na(AGE)) %>% 
-  mutate(SFmgmtarea = case_when(
-    STATAREA > 440000 & STATAREA < 480000 | STATAREA %in% c(485430, 485500, 485530, 485600,
-                                                            485630, 485700, 485730, 485800, 485831, 485901, 485931, 485932, 485935,
-                                                            486001, 486002, 486003, 486004, 486005, 486031, 486032, 486033, 486034,
-                                                            486100) ~ 'PWS',
-    STATAREA %in% c(485832, 485902, 485933, 485934, 485935, 486002, 495831, 495901, 495902,
-                    495931, 495932, 495933, 495934, 495935, 495936, 495937, 495938, 495939, 496001, 496002,
-                    505831, 505901, 505902, 505903, 505904, 505905, 505906, 505907, 505908, 505909, 505931, 505932,
-                    505933, 505934) ~ 'NG',
-    STATAREA %in% c(495800, 495832, 505700, 505730, 505800, 505832, 515630, 515700, 515730,
-                    515801, 515802, 515833, 525600, 525630, 525701, 525702, 525703, 525731, 525732, 525733,
-                    525801, 525802, 525803, 525804, 525805, 525806, 525807, 525832, 525833, 525834, 535601,
-                    535602, 535631, 535632, 535633, 535634, 535701, 535702, 535703, 535704, 535705, 535706,
-                    535707, 535731, 535732, 535733, 535734, 535802, 535803, 535831, 545601, 545602, 545631,
-                    545632, 545633, 545701, 545702, 545703, 545704, 545732, 545733, 545734, 545804, 555630,
-                    555701, 555733) ~ 'KOD',
-    STATAREA %in% c(555731, 555732, 545731, 545801, 545802, 545803, 535801, 535832) ~ 'AKPen',
-    STATAREA %in% c(515831, 515832, 515901, 515902, 515903, 515904, 515905, 515906, 515907,
-                    515908, 515931, 515932, 515933, 515934, 515935, 515936, 515937, 515938, 515939,
-                    516001, 516002, 525831, 525835, 525836, 525837, 525901, 525902, 525931, 525932,
-                    526002, 526003, 535833, 535834, 535901, 535902, 535903, 535904, 535905, 535906,
-                    535931, 535932, 535933, 545900) ~ 'CI',
-  ),
-  SFmgmtarea = (case_when(
-    PORT %in% c('Homer', 'CCI') ~ 'CI',
-    PORT == 'Kodiak' ~ 'KOD',
-    PORT %in% c('Whittier', 'Valdez', 'Cordova') ~ 'PWS',
-    PORT == 'Seward' ~ 'NG',
-    TRUE ~ PORT
-  ))) %>% filter (YEAR >= 1996)
+agecomp <- age %>% 
+  filter(
+    !(PORT %in% c('CCI', 'Cordova')), 
+    YEAR >= 1996, 
+    !is.na(AGE)
+    ) %>% 
+  area_split_sf() %>% 
+  filter (YEAR >= 1996)
 
 # Sort the data by port, year, and user 
 agecomp <- agecomp %>% 

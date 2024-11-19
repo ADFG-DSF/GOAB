@@ -2,25 +2,10 @@
 library(tidyverse)
 library(gt)
 
-get_data <- function(a) {
-  
-  print(a)
-  
-  files <- list.files(path=a,
-                      pattern="*.csv", full.names=F, recursive=FALSE)
-  
-  
-  for(i in seq(1, length(files))) {
-    print(files[[i]])
-    n <- gsub(".csv", "",files[[i]])
-    assign(n, read.csv(paste0(a,files[[i]])), envir = .GlobalEnv)
-    
-  }
-  
-}
+source("functions.R")
 
 #Function call
-get_data("O:/DSF/GOAB/R data/RF/")
+get_data("data/RF/")
 
 rock2020$LENGTH <- rock2020$FORK_LENGTH
 #Combine data
@@ -38,27 +23,6 @@ rf_dat <- rock %>%
   filter(STATAREA != '') %>%
   filter(STATAREA >= 100000) %>%
   mutate(
-    MgmtArea = case_when(
-      STATAREA < 490000 & STATAREA > 440000 & !(STATAREA %in% c(485832,485902,485933,485934)) ~ "PWS",
-      STATAREA %in% c(485832,485902,485933,485934,485935,486002,495831,495901,495902,
-                      495931,495932,495933,495934,495935,495936,495937,495938,495939,496001,496002,
-                      505831,505901,505902,505903,505904,505905,505906,505907,505908,505909,505931,505932, 
-                      505933,505934) ~ "NG",
-      STATAREA %in% c(495800,495832,505700,505730,505800,505832,515630,515700,515730,
-                      515801,515802,515833,525600,525630,525701,525702,525703,525731,525732,525733,
-                      525801,525802,525803,525804,525805,525806,525807,525832,525833,525834,535601,
-                      535602,535631,535632,535633,535634,535701,535702,535703,535704,535705,535706,
-                      535707,535731,535732,535733, 535734,535802,535803,535831,545601,545602,545631,
-                      545632,545633,545701,545702,545703,545704,545732,545733,545734,545804,555630,
-                      555701,555733) ~ "Kod",
-      STATAREA %in% c(515831,515832,515901,515902,515903,515904,515905,515906,515907,
-                      515908,515931,515932,515933,515934,515935,515936,515937,515938,	515939,
-                      516001,516002,525831,525835,525836,525837,525901,525902,525931,	525932,
-                      526002,526003,535833,535834,535901,535902,535903,535904,535905,535906,
-                      535931,	535932,535933,545900) ~ "CI",
-      STATAREA %in% c(555731,555732,545731,545801,545802,545803,535801,535832) ~ "AP",
-      TRUE ~ 'Err'
-    ),
     # if sp = 154 then species = 'DuskyDrk';
     # *{Apply Length-Weight parameters from 1992-1995 report};
     # if SP = 142 then predwt = (10**-4.61487)*length**2.90447;
@@ -134,13 +98,14 @@ rf_dat <- rock %>%
       ASSEMB == 'Slope' ~ 'Demersal',
       TRUE ~ ASSEMB
     ),
-  )
+  ) %>% 
+  area_split_sf()
 
 # Species composition
 gt(
 spcomp <- rf_dat %>% 
-  filter(MgmtArea == 'PWS') %>% 
-  group_by(MgmtArea, YEAR, ASSEMB) %>%
+  filter(SFmgmtarea == 'PWS') %>% 
+  group_by(SFmgmtarea, YEAR, ASSEMB) %>%
   summarise(count = n()) %>%
   mutate(p = count / sum(count))
 )
@@ -149,8 +114,8 @@ spcomp <- rf_dat %>%
 # Avg weights
 gt(
   spcomp <- rf_dat %>% 
-    filter(MgmtArea == 'PWS') %>% 
-    group_by(MgmtArea, YEAR, ASSEMB) %>%
+    filter(SFmgmtarea == 'PWS') %>% 
+    group_by(SFmgmtarea, YEAR, ASSEMB) %>%
     reframe(avg_wt = mean(predwt3, na.rm = TRUE),
             avg_wt_lb = avg_wt * 2.20462)
 )

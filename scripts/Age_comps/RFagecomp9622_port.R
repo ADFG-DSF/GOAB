@@ -19,26 +19,10 @@
 library(tidyverse)
 
 
-get_data <- function(a) {
-  
-  
-  print(a)
-  
-  files <- list.files(path=a,
-                      pattern="*.csv", full.names=F, recursive=FALSE)
-  
-  
-  for(i in seq(1, length(files))) {
-    print(files[[i]])
-    n <- gsub(".csv", "",files[[i]])
-    assign(n, read.csv(paste0(a,files[[i]])), envir = .GlobalEnv)
-    
-  }
-  
-}
+source("functions.R")
 
 #Function call
-get_data("O:/DSF/GOAB/R data/RF/")
+get_data("data/RF/")
 
 #####
 library(plyr)

@@ -1,9 +1,9 @@
 ################################################################################
-# Apportion rockfish to mgmtareas.sas
+# Apportion rockfish to SFmgmtareas.sas
 # 
 # This code estimates the proportions of rockfish harvest and release by management
 # area. In other words, it apportions reported harvest and release from port
-# sampling interviews to the mgmtarea of capture. 
+# sampling interviews to the SFmgmtarea of capture. 
 # 
 # Use these data to reapportion harvest estimates to management areas
 # 
@@ -21,30 +21,12 @@
 
 library(tidyverse)
 library(data.table)
-library(dplyr)
 library(gt)
 
-
-get_data <- function(a) {
-  
-
-  print(a)
-  
-  files <- list.files(path=a,
-                      pattern="*.csv", full.names=F, recursive=FALSE)
-  
-  
-  for(i in seq(1, length(files))) {
-    print(files[[i]])
-    n <- gsub(".csv", "",files[[i]])
-    assign(n, read.csv(paste0(a,files[[i]])), envir = .GlobalEnv)
-    
-  }
-  
-}
+source("functions.R")
 
 #Function call
-get_data("O:/DSF/GOAB/R data/Intervw/")
+get_data("data/Intervw/")
 
 #Make dataframe
 
@@ -90,46 +72,26 @@ int <- int_all %>%
       is.na(ADFGSTATRF) & !is.na(ADFGSTATOTH) ~ ADFGSTATOTH
     ),
     TRUE ~ ADFGSTAT
-  ),
-    # Create a new variable 'MgmtArea' to assign management areas based on location of harvest
-  MgmtArea = case_when(
-    ADFGSTAT < 490000 & ADFGSTAT > 440000 & !(ADFGSTAT %in% c(485832,485902,485933,485934)) ~ "PWS",
-    ADFGSTAT %in% c(485832,485902,485933,485934,485935,486002,495831,495901,495902,
-                    495931,495932,495933,495934,495935,495936,495937,495938,495939,496001,496002,
-                    505831,505901,505902,505903,505904,505905,505906,505907,505908,505909,505931,505932, 
-                    505933,505934) ~ "NG",
-    ADFGSTAT %in% c(495800,495832,505700,505730,505800,505832,515630,515700,515730,
-                    515801,515802,515833,525600,525630,525701,525702,525703,525731,525732,525733,
-                    525801,525802,525803,525804,525805,525806,525807,525832,525833,525834,535601,
-                    535602,535631,535632,535633,535634,535701,535702,535703,535704,535705,535706,
-                    535707,535731,535732,535733, 535734,535802,535803,535831,545601,545602,545631,
-                    545632,545633,545701,545702,545703,545704,545732,545733,545734,545804,555630,
-                    555701,555733) ~ "Kod",
-    ADFGSTAT %in% c(515831,515832,515901,515902,515903,515904,515905,515906,515907,
-                    515908,515931,515932,515933,515934,515935,515936,515937,515938,	515939,
-                    516001,516002,525831,525835,525836,525837,525901,525902,525931,	525932,
-                    526002,526003,535833,535834,535901,535902,535903,535904,535905,535906,
-                    535931,	535932,535933,545900) ~ "CI",
-    ADFGSTAT %in% c(555731,555732,545731,545801,545802,545803,535801,535832) ~ "AP",
-    TRUE ~ 'Err'
   )
-  ) %>% filter(PORT != "SandPt" & PORT != "Cordova",
+  ) %>%
+  area_split_sf() %>% 
+  filter(PORT != "SandPt" & PORT != "Cordova",
                # Remove rows where 'user' is equal to 'Military'
                USER != "Military",
                # Remove rows where ADFGSTAT is not available or less than 100000 (i.e. salmon stat areas reported in 1994)
                ADFGSTAT  > 0, ADFGSTAT >= 100000)
 ##Work with the data
-#Mgmtarea assignments - all years pooled
+#SFmgmtarea assignments - all years pooled
 gt(
   int %>%
-    count(MgmtArea, PORT, name = "count") %>%
-    group_by(MgmtArea) %>%
+    count(SFmgmtarea, PORT, name = "count") %>%
+    group_by(SFmgmtarea) %>%
     mutate(percent = count / sum(count) * 100) %>%
     ungroup()
 )
 
 ############################################################################
-#Estimate MgmtArea of capture proportions for Rockfish harvest by port using interview data
+#Estimate SFmgmtarea of capture proportions for Rockfish harvest by port using interview data
 ############################################################################
 
 # intnoNA <- int %>% # Remove interviews with no kept rockfish
@@ -139,30 +101,30 @@ gt(
 int %>%
   arrange(PORT, USER, YEAR) %>% # sort by port, user, and year
   group_by(PORT, USER, YEAR) %>% # group by port, user, and year
-  reframe(MgmtArea = unique(MgmtArea), w_rfkept = sum(RFKEPT, na.rm = TRUE)) %>% # calculate sum of RFKEPT for each unique combination of port, user, year, and MgmtArea
+  reframe(SFmgmtarea = unique(SFmgmtarea), w_rfkept = sum(RFKEPT, na.rm = TRUE)) %>% # calculate sum of RFKEPT for each unique combination of port, user, year, and SFmgmtarea
   # ungroup() %>% # remove grouping
-  group_by(PORT, MgmtArea) %>% # group by port and MgmtArea
-  reframe(prop = sum(w_rfkept) / sum(int$RFKEPT, na.rm = TRUE)) # calculate the proportion of RFKEPT for each MgmtArea and port, using the total sum of RFKEPT in the dataset
+  group_by(PORT, SFmgmtarea) %>% # group by port and SFmgmtarea
+  reframe(prop = sum(w_rfkept) / sum(int$RFKEPT, na.rm = TRUE)) # calculate the proportion of RFKEPT for each SFmgmtarea and port, using the total sum of RFKEPT in the dataset
 ) %>% 
   tab_header(
     title = 'Proportion of Rockfish Catch by Port and Management area of capture',
     subtitle = 'All years combined'
   )
 
-# Estimate MgmtArea of capture proportions for Rockfish harvest by port using interview data
-byMgmtArea <- int %>%
-  group_by(PORT, USER, YEAR, MgmtArea) %>%
+# Estimate SFmgmtarea of capture proportions for Rockfish harvest by port using interview data
+bySFmgmtarea <- int %>%
+  group_by(PORT, USER, YEAR, SFmgmtarea) %>%
   summarise(count = sum(RFKEPT, na.rm = TRUE)) %>%
   ungroup()
 
 # Transpose the data
-byAreaT <- byMgmtArea %>%
+byAreaT <- bySFmgmtarea %>%
   # select(-count) %>%
-  spread(MgmtArea, count)
+  spread(SFmgmtarea, count)
 
 # Reshape the data from wide to long format
-byAreaT <- byMgmtArea %>% 
-  pivot_wider(names_from = MgmtArea, values_from = count, values_fill = 0) %>% 
+byAreaT <- bySFmgmtarea %>% 
+  pivot_wider(names_from = SFmgmtarea, values_from = count, values_fill = 0) %>% 
   mutate(n = CI + Kod + NG + PWS,
          pCI = CI / n,
          pKod = Kod / n,
@@ -188,14 +150,14 @@ ggplot(byAreaT, aes(x = YEAR, y = pPWS)) +
   ggtitle('Percent of PWS Rockfish harvest by mgmt area (interview data)')
 
 
-# Create a frequency table by port, user, year, and MgmtArea, weighted by RFREL
-byMgmtAreaRel <- int %>% group_by(PORT, USER, YEAR, MgmtArea) %>%
+# Create a frequency table by port, user, year, and SFmgmtarea, weighted by RFREL
+bySFmgmtareaRel <- int %>% group_by(PORT, USER, YEAR, SFmgmtarea) %>%
   summarise(count = sum(RFREL)) %>%
   ungroup()
 
 # Reshape the data using the transpose function from the tidyr package
-byAreaRelT <- byMgmtAreaRel %>% pivot_wider(names_from = MgmtArea, values_from = count, values_fill = 0)
-#Calculate MgmtArea Porportions
+byAreaRelT <- bySFmgmtareaRel %>% pivot_wider(names_from = SFmgmtarea, values_from = count, values_fill = 0)
+#Calculate SFmgmtarea Porportions
 byAreaRelT <- byAreaRelT %>%
   mutate(CI = if_else(is.na(CI), 0, CI),
          Kod = if_else(is.na(Kod), 0, Kod),
@@ -249,51 +211,36 @@ awl$USER[awl$USER %in% c("HomCPort", "HomCSea" )] <- "Charter"
 awl <- awl %>%
   filter(USER != 'SewMilC', USER != 'Unknown', USER != 'Elfin_Co', USER != 'Gustavus', USER != "Juneau") %>%
   filter(!(PORT %in% c('SandPt', 'Cordova'))) %>%
-  filter(!is.na(STATAREA)) %>%
-  mutate(MgmtArea = case_when(
-    STATAREA <490000 & STATAREA >= 440000 & !(STATAREA %in% c(485832, 485902, 485933, 485934)) ~ 'PWS',
-    #int(STATAREA / 10000) < 49 & int(STATAREA / 10000) >= 44 & !(STATAREA %in% c(485832, 485902, 485933, 485934)) ~ 'PWS',
-    STATAREA %in% c(485832, 485902, 485933, 485934, 485935, 486002, 495831, 495901, 495902, 495931, 495932, 495933, 495934, 
-                    495935, 495936, 495937, 495938, 495939, 496001, 496002, 505831, 505901, 505902, 505903, 505904, 505905, 
-                    505906, 505907, 505908, 505909, 505931, 505932, 505933, 505934) ~ 'NG',
-    STATAREA %in% c(495800, 495832, 505700, 505730, 505800, 505832, 515630, 515700, 515730, 515801, 515802, 515833, 525600, 
-                    525630, 525701, 525702, 525703, 525731, 525732, 525733, 525801, 525802, 525803, 525804, 525805, 525806, 
-                    525807, 525832, 525833, 525834, 535601, 535602, 535631, 535632, 535633, 535634, 535701, 535702, 535703, 
-                    535704, 535705, 535706, 535707, 535731, 535732, 535733, 535734, 535802, 535803, 535831, 545601, 545602, 
-                    545631, 545632, 545633, 545701, 545702, 545703, 545704, 545732, 545733, 545734, 545804, 555630, 555701, 
-                    555733) ~ 'Kod',
-    STATAREA %in% c(555731, 555732, 545731, 545801, 545802, 545803, 535801, 535832) ~ 'AP',
-    STATAREA %in% c(515831,515832,515901,515902,515903,515904,515905,515906,515907,
-                    515908,515931,515932,515933,515934,515935,515936,515937,515938,	515939,
-                    516001,516002,525831,525835,525836,525837,525901,525902,525931,	525932,
-                    526002,526003,535833,535834,535901,535902,535903,535904,535905,535906,
-                    535931,535932,535933,545900) ~ 'CI',
-    TRUE ~ "Err")) 
-#check MgmtArea assignments
+  filter(!is.na(STATAREA)) %>% 
+  area_split_sf()
+#check SFmgmtarea assignments
 awl %>%
-  filter(!is.na(MgmtArea)) %>%
-  group_by(PORT, YEAR, MgmtArea) %>%
+  filter(
+    !is.na(SFmgmtarea),
+    SFmgmtarea != 'ZZZ'
+    ) %>%
+  group_by(PORT, YEAR, SFmgmtarea) %>%
   summarize(n = n()) %>%
   group_by(PORT, YEAR) %>%
   mutate(percent = n / sum(n) * 100) %>%
   ungroup() %>%
-  pivot_wider(names_from = MgmtArea, values_from = c(n, percent), 
+  pivot_wider(names_from = SFmgmtarea, values_from = c(n, percent), 
               #names_prefix = "count_", values_prefix = "n_",
               values_fill = list(n_percent = 0)) %>%
   select(PORT, YEAR, contains("count"), contains("percent"), -ends_with("_percent"))
 
 
 awl %>%
-  filter(YEAR == 2004, MgmtArea == "Err") %>%
-  select(USER, PORT, YEAR, MgmtArea, STATAREA)
-#Estimate proportions of Seward Rockfish harvest by MgmtArea
+  filter(YEAR == 2004, SFmgmtarea == "Err") %>%
+  select(USER, PORT, YEAR, SFmgmtarea, STATAREA)
+#Estimate proportions of Seward Rockfish harvest by SFmgmtarea
 # sort the data
 awl_sorted <- awl %>%
   arrange(PORT, USER, YEAR)
 
 # get frequency table
 freq_table <- awl_sorted %>%
-  group_by(PORT, USER, YEAR, MgmtArea) %>%
+  group_by(PORT, USER, YEAR, SFmgmtarea) %>%
   summarise(count = n()) %>%
   ungroup() 
 
@@ -304,7 +251,7 @@ gt(freq_table) %>%
 
 # transpose the data
 transposed_data <- freq_table %>%
-  pivot_wider(names_from = MgmtArea, values_from = count, values_fill = 0)
+  pivot_wider(names_from = SFmgmtarea, values_from = count, values_fill = 0)
 
 # calculate proportions and standard errors
 transposed_data <- transposed_data %>%
