@@ -60,13 +60,10 @@ agecomp <- rf_pws %>%
 comp_age <- agecomp %>%
   group_by(SFmgmtarea, USER, YEAR, SPECIES, AGE) %>%
   summarise(COUNT = n()) %>%
-  ungroup()
-
+  ungroup() %>% 
 ##restructure data file so sample size (nj) by each user group is a separate variable,
 ##all on one line for each species
-
 # Assign values to respective variables based on user value
-comp_age <- comp_age %>%
   mutate(nijC = if_else(USER == 'Charter', COUNT, 0),
          nijP = if_else(USER == 'Private', COUNT, 0),
          nijU = if_else(USER == 'Unknown', COUNT, 0),

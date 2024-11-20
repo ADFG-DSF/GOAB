@@ -37,14 +37,10 @@ detach(package:plyr)
 
 # Filter rows with non-missing age
 agecomp <- agecomp %>%
-  filter(!is.na(AGE))
-
+  filter(!is.na(AGE)) %>% 
 # Filter out specific species
-agecomp <- agecomp %>%
-  filter(!(SP %in% c(144, 168, 169)))
-
+  filter(!(SP %in% c(144, 168, 169))) %>% 
 # Rename specific species
-agecomp <- agecomp %>%
   mutate(SPECIES = case_when(
     SPECIES == 'Blackgll' ~ 'Blackgill',
     SPECIES == 'Quill' ~ 'Quillback',
@@ -79,9 +75,9 @@ boxplot <- ggplot(data = bysex) +
   theme_bw()
 
 # Save the plot as PDF file
-pdf("O:/DSF/GOAB/R Code/Figures/rfbysex_boxplot.pdf")
-boxplot
-dev.off()
+# pdf("O:/DSF/GOAB/R Code/Figures/rfbysex_boxplot.pdf")
+# boxplot
+# dev.off()
 
 ##Start with raw age freq of each species by port, user, year
 # Sort the dataframe
@@ -92,21 +88,15 @@ agecomp <- agecomp %>%
 comp <- agecomp %>%
   group_by(PORT, USER, YEAR, SPECIES, AGE) %>%
   summarise(COUNT = n()) %>%
-  ungroup()
-
+  ungroup() %>% 
 ##restructure data file so sample size (nj) by each user group is a separate variable,
 ##all on one line for each species
-
 # Assign values to respective variables based on user value
-comp <- comp %>%
   mutate(nijC = if_else(USER == 'Charter', COUNT, 0),
          nijP = if_else(USER == 'Private', COUNT, 0),
          nijU = if_else(USER == 'Unknown', COUNT, 0),
          nijM = if_else(USER == 'SewMilC', COUNT, 0)) %>%
-  select(-COUNT)
-
-# Sort the dataframe
-comp <- comp %>%
+  select(-COUNT) %>%
   arrange(PORT, YEAR, SPECIES, AGE)
 
 # Calculate sums of nijC, nijP, nijU, nijM
@@ -129,11 +119,7 @@ totaln <- comp2 %>%
   ungroup()
 
 # Merge comp2 and totaln data frames
-comp3 <- merge(comp2, totaln, by = c("PORT", "YEAR", "SPECIES"))
-
-
-# Calculate pijC, vpijC, pijP, vpijP
-comp3 <- comp3 %>%
+comp3 <- merge(comp2, totaln, by = c("PORT", "YEAR", "SPECIES")) %>%
   mutate(pijC = nijC / niC,
          vpijC = pijC * (1 - pijC) / (niC - 1),
          pijP = nijP / niP,
@@ -141,14 +127,12 @@ comp3 <- comp3 %>%
 
 
 ##obtain proportion of harvest by species externally, file created by RFspcomp9616
-get_data("O:/DSF/GOAB/R data/Harvest/RF/")
+get_data("data/Harvest/RF/")
 #####
-
-
-
-pharv <- harvbyspecies
-# Replace species values with full names
-pharv <- pharv %>% 
+# There is no data for HiC in harvbyspecies
+    # Kind of ruins all following code that is contingent on this variable
+      # Something to figure out later if this code is needed. Currently I don't use it
+pharv <- harvbyspecies %>% 
   mutate(SPECIES = case_when(
     species == "Blackgll" ~ "Blackgill",
     species == "Quill" ~ "Quillback",
@@ -163,22 +147,14 @@ pharv <- pharv %>%
     species == "Yelltail" ~ "Yellowtail",
     species == "DuskyDark" ~ "DuskyDark",
     TRUE ~ species
-  ))
-
-# Calculate vHiC, vHi, vHiP
-pharv <- pharv %>% 
+  )) %>% 
   mutate(vHiC = SEHiC^2,
          vHi = SEHi^2,
-         vHiP = SEHiP^2)
-
-
-pharv <- pharv %>% 
+         vHiP = SEHiP^2) %>% 
   arrange(PORT, YEAR, SPECIES)
 
 ##Marge harvest by species and estimate age comp
-comp4 <- merge(comp3, pharv, by = c("PORT", "YEAR", "SPECIES"))
-
-comp4 <- comp4 %>%
+comp4 <- merge(comp3, pharv, by = c("PORT", "YEAR", "SPECIES")) %>%
   mutate(
     n = niC + niP,
     HijC = pijC * HiC,
@@ -192,9 +168,7 @@ comp4 <- comp4 %>%
     pij = Hij / Hi,
     vpij = (1 / Hi^2) * (vHiC * (pijC * HiP - HijP)^2 / Hi^2 + vHiP * (pijP * HiC - HijC)^2 / Hi^2 + vpijC * HiC^2 + vpijP * HiP^2),
     SEpij = sqrt(vpij)
-  )
-
-comp4 <- comp4 %>%
+  ) %>%
   filter(!(PORT == "Whittier" & YEAR >= 1996 & YEAR <= 1998)) %>%
   select(-vHijC, -vHijP, -vpij)
 
@@ -222,17 +196,21 @@ plotages <- primarycomp %>%
 black <- plotages %>%
   filter(species == 'Black')
 
+scale_b <- max(black$n) / max(black$AGE)
 
-ggplot(data = black, aes(x = YEAR, y = AGE, linewidth = pij, fill = pij)) +
-  geom_point(shape = 21, color = 'gray', stroke = 0.01, alpha = 0.7) +
-  #geom_line(aes(y = n), color = 'red', size = 3, linetype = 'solid', alpha = 0.7) +
+ggplot(data = black) +
+  geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'gray', stroke = 0.01, alpha = 0.7) +
+  geom_line(aes(x = YEAR, y = n / scale_b), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_y_continuous(breaks = seq(0, 65, 5), name = 'Age',
+                     sec.axis = sec_axis(~ . * scale_b, name = 'Sample Size', breaks = seq(0, 1500, 250))) +  # Add a second Y-axis for 'n'
   facet_wrap(~ PORT) +
   scale_x_continuous(breaks = seq(1995, 2020, 5), labels = as.character(seq(1995, 2020, 5)), name = 'Year') +
-  scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age') +
   scale_size_continuous(range = c(0.1, 2), guide = FALSE) +
   scale_fill_continuous(guide = FALSE) +
   theme_bw() +
   labs(title = 'Black Rockfish Age Comps')
+
+
 
 #Yelloweye rockfish
 ye <- plotages %>%

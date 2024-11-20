@@ -43,6 +43,7 @@
 
 
 library(tidyverse)
+library(readxl)
 
 
 source("functions.R")
@@ -63,7 +64,7 @@ detach(package:plyr)
 
 
 
-# Modify the 'rf' dataframe using mutate() and case_when()
+
 lc <- lc %>%
   mutate(USER = if_else(USER == '', 'Unknown', USER),
          PORT = case_when(PORT %in% c('CCI', 'Cordova') ~ NA_character_, #Not enough data to use, unsure how to weight Cordova data
@@ -125,13 +126,7 @@ MeanWt <- MeanWt %>%
 # MeanWt <- MeanWt %>% mutate(meankg = round(meankg, 0.1), SEkg = round(SEkg, 0.01))
 
 
-
-
-
-
-library(readxl)
-
-R2SWHS <- read_xlsx('O:/DSF/GOAB/Harvest/Prelim LC yield/R2_SWHS91-17_SFmgmtarea_LC.xlsx', sheet = 'R2_SWHS91-15')
+R2SWHS <- read_xlsx('data/Harvest/R2_SWHS91-17_SFmgmtarea_LC.xlsx', sheet = 'R2_SWHS91-15')
 
 R2SWHS <- R2SWHS %>%
   filter(!(Port == 'PWS' & Year >= 1999)) %>% 

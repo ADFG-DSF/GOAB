@@ -30,7 +30,8 @@
 
 
 library(tidyverse)
-
+library(readxl)
+library(survminer)
 
 source("functions.R")
 
@@ -41,7 +42,7 @@ get_data("data/RF/")
 #####
 
 library(plyr)
-spcomp_init <- do.call(rbind.fill, list(rock9195, rock9600, rock2001, rock2002, rock2003, 
+rf <- do.call(rbind.fill, list(rock9195, rock9600, rock2001, rock2002, rock2003, 
                                     rock2004, rock2005, rock2006, rock2007, rock2008, 
                                     rock2009, rock2010, rock2011, rock2012, rock2013, 
                                     rock2014, rock2015, rock2016, rock2017, rock2018, 
@@ -49,7 +50,8 @@ spcomp_init <- do.call(rbind.fill, list(rock9195, rock9600, rock2001, rock2002, 
 detach(package:plyr)
 
 
-spcomp_init <- spcomp_init %>% filter(YEAR >= 1996) %>% 
+spcomp_init <- rf %>% 
+  filter(YEAR >= 1996) %>% 
   mutate(
     abbrev = case_when(
       SP == 142 ~ "BLK",
@@ -142,8 +144,8 @@ pcheck <- aggregate(cbind(piC, piP) ~ PORT + YEAR, data = comp3, sum)
 pcheck$sumC <- NULL
 pcheck$sumP <- NULL
 #Loading excel data
-library(readxl)
-pharv <- read_xlsx("O:/DSF/GOAB/SASCODE/Harvest/RF/RFHarvByUser9619.xlsx", sheet = "Sheet3")
+
+pharv <- read_xlsx("data/Harvest/RF/RFHarvByUser9619.xlsx", sheet = "Sheet3")
 pharv <- pharv[1:8]
 
 
@@ -162,9 +164,6 @@ pharv$vH <- with(pharv, SEH^2)
 pharv$SEHC <- NULL
 pharv$SEHP <- NULL
 pharv$SEH <- NULL
-
-
-
 
 
 comp4 <- merge(comp3, pharv, by=c("PORT", "YEAR"))
@@ -200,9 +199,6 @@ comp4 <- comp4 %>% filter(YEAR >= 1996) %>%
   group_by(PORT, YEAR, SPECIES, n, piC, vpiC, HiC, SEHiC, piP, vpiP, 
            HiP, SEHiP, pi, SEpi, Hi, SEHi)
 #bubble plots for publication, trying to make bubble plot for main RF SPECIES
-library(ggplot2)
-
-
 # filter data
 plotcomp <- comp4 %>%
   filter(PORT == "Whittier",
@@ -267,11 +263,6 @@ otherspp <- !(comp4$SPECIES %in% c("Black","Yelloweye","Quillback","Copper",
 comp5$SPECIES[otherspp] <- "Other"
 
 comp5_TSpi <- comp5 %>% group_by(PORT, YEAR, SPECIES) %>% summarise(proportion = pi)
-
-
-library(survminer)
-
-
 
 
 

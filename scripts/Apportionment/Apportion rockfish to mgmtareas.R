@@ -65,7 +65,7 @@ int <- int_all %>%
   ),
     rfcatch = RFKEPT + RFREL,
     # Adjust for changes to stat area protocol in 2021
-  ADFGSTAT = case_when(
+  STATAREA = case_when(
     YEAR >= 2021 ~ case_when(
       !is.na(ADFGSTATRF) ~ ADFGSTATRF,
       is.na(ADFGSTATRF) & !is.na(ADFGSTATCOMBI) ~ ADFGSTATCOMBI,
@@ -78,8 +78,8 @@ int <- int_all %>%
   filter(PORT != "SandPt" & PORT != "Cordova",
                # Remove rows where 'user' is equal to 'Military'
                USER != "Military",
-               # Remove rows where ADFGSTAT is not available or less than 100000 (i.e. salmon stat areas reported in 1994)
-               ADFGSTAT  > 0, ADFGSTAT >= 100000)
+               # Remove rows where STATAREA is not available or less than 100000 (i.e. salmon stat areas reported in 1994)
+               STATAREA  > 0, STATAREA >= 100000)
 ##Work with the data
 #SFmgmtarea assignments - all years pooled
 gt(
@@ -125,16 +125,16 @@ byAreaT <- bySFmgmtarea %>%
 # Reshape the data from wide to long format
 byAreaT <- bySFmgmtarea %>% 
   pivot_wider(names_from = SFmgmtarea, values_from = count, values_fill = 0) %>% 
-  mutate(n = CI + Kod + NG + PWS,
+  mutate(n = CI + KOD + NG + PWS,
          pCI = CI / n,
-         pKod = Kod / n,
+         pKod = KOD / n,
          pNG = NG / n,
          pPWS = PWS / n,
          SEpCI = sqrt(pCI * (1 - pCI) / (n - 1)),
          SEpKod = sqrt(pKod * (1 - pKod) / (n - 1)),
          SEpNG = sqrt(pNG * (1 - pNG) / (n - 1)),
          SEpPWS = sqrt(pPWS * (1 - pPWS) / (n - 1))) %>% 
-  select(-c("CI", "Kod", "NG", "PWS"))
+  select(-c("CI", "KOD", "NG", "PWS"))
 
 # Print the data for Seward
 gt(
@@ -160,12 +160,12 @@ byAreaRelT <- bySFmgmtareaRel %>% pivot_wider(names_from = SFmgmtarea, values_fr
 #Calculate SFmgmtarea Porportions
 byAreaRelT <- byAreaRelT %>%
   mutate(CI = if_else(is.na(CI), 0, CI),
-         Kod = if_else(is.na(Kod), 0, Kod),
+         KOD = if_else(is.na(KOD), 0, KOD),
          NG = if_else(is.na(NG), 0, NG),
          PWS = if_else(is.na(PWS), 0, PWS)) %>%
-  mutate(n = CI + Kod + NG + PWS,
+  mutate(n = CI + KOD + NG + PWS,
          pCI = CI/n,
-         pKod = Kod/n,
+         pKod = KOD/n,
          pNG = NG/n,
          pPWS = PWS/n,
          SEpCI = sqrt(pCI*(1-pCI)/(n-1)),
@@ -176,7 +176,7 @@ byAreaRelT <- byAreaRelT %>%
 gt(
   byAreaRelT %>% 
   filter(PORT == "Seward") %>% 
-  select(PORT, USER, YEAR, CI, Kod, NG, PWS, pCI, SEpCI, pKod, SEpKod, pNG, SEpNG, pPWS, SEpPWS)
+  select(PORT, USER, YEAR, CI, KOD, NG, PWS, pCI, SEpCI, pKod, SEpKod, pNG, SEpNG, pPWS, SEpPWS)
   )
 
 #plot pPWS for releases
@@ -193,11 +193,10 @@ ggplot(data = byAreaRelT_s, aes(x = YEAR)) +
 
 #Harvest proportion analysis as above but using biological samples
 #load in and combine data
-get_data("O:/DSF/GOAB/R Data/RF/")
+get_data("data/RF/")
 
 library(plyr)
-awl <- data.frame()
-awl <- do.call(rbind.fill, list(rock9195, rock9600,
+rf <- do.call(rbind.fill, list(rock9195, rock9600,
                                 rock2001, rock2002, rock2003, rock2004, rock2005,
                                 rock2006, rock2007, rock2008, rock2009, rock2010,
                                 rock2011, rock2012, rock2013, rock2014,rock2015, 
@@ -205,16 +204,16 @@ awl <- do.call(rbind.fill, list(rock9195, rock9600,
                                 rock2021, rock2022, rock2023))
 detach(package:plyr)
 
-awl$USER[awl$USER %in% c("HomCPort", "HomCSea" )] <- "Charter"
+rf$USER[rf$USER %in% c("HomCPort", "HomCSea" )] <- "Charter"
 
 
-awl <- awl %>%
+awl <- rf %>%
   filter(USER != 'SewMilC', USER != 'Unknown', USER != 'Elfin_Co', USER != 'Gustavus', USER != "Juneau") %>%
   filter(!(PORT %in% c('SandPt', 'Cordova'))) %>%
   filter(!is.na(STATAREA)) %>% 
   area_split_sf()
 #check SFmgmtarea assignments
-awl %>%
+gt(awl %>%
   filter(
     !is.na(SFmgmtarea),
     SFmgmtarea != 'ZZZ'
@@ -227,11 +226,11 @@ awl %>%
   pivot_wider(names_from = SFmgmtarea, values_from = c(n, percent), 
               #names_prefix = "count_", values_prefix = "n_",
               values_fill = list(n_percent = 0)) %>%
-  select(PORT, YEAR, contains("count"), contains("percent"), -ends_with("_percent"))
+  select(PORT, YEAR, contains("count"), contains("percent"), -ends_with("_percent")))
 
 
 awl %>%
-  filter(YEAR == 2004, SFmgmtarea == "Err") %>%
+  filter(YEAR == 2004, SFmgmtarea == "ZZZ") %>%
   select(USER, PORT, YEAR, SFmgmtarea, STATAREA)
 #Estimate proportions of Seward Rockfish harvest by SFmgmtarea
 # sort the data
@@ -255,9 +254,9 @@ transposed_data <- freq_table %>%
 
 # calculate proportions and standard errors
 transposed_data <- transposed_data %>%
-  mutate(n = CI + Kod + NG + PWS,
+  mutate(n = CI + KOD + NG + PWS,
          pCI = CI / n,
-         pKod = Kod / n,
+         pKod = KOD / n,
          pNG = NG / n,
          pPWS = PWS / n,
          SEpCI = sqrt(pCI * (1 - pCI) / (n - 1)),
@@ -277,10 +276,10 @@ byAreaTbio <- transposed_data %>% filter(USER %in% c("Charter", "Private"))
 
 ggplot(byAreaTbio, aes(x = YEAR)) +
   geom_point(aes(y = pCI, color = "CI")) +
-  geom_point(aes(y = pKod, color = "Kod")) +
+  geom_point(aes(y = pKod, color = "KOD")) +
   geom_point(aes(y = pNG, color = "NG")) +
   geom_point(aes(y = pPWS, color = "PWS")) +
-  scale_color_manual(name = "Mgmt Area", values = c(CI = "red", Kod = "green", NG = "blue", PWS = "purple")) +
+  scale_color_manual(name = "Mgmt Area", values = c(CI = "red", KOD = "green", NG = "blue", PWS = "purple")) +
   facet_grid(cols = vars(PORT), rows = vars(USER), switch = "both") +
   theme_minimal() +
   labs(title = "Percent of Rockfish releases by mgmt area (interview data)",

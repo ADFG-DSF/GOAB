@@ -26,11 +26,16 @@ agecomp <- do.call(rbind.fill, list(ling9104, ling2005, ling2006, ling2007, ling
 detach(package:plyr)
 
 
-agecomp <- agecomp %>% filter(!(PORT %in% c('CCI', 'Cordova')), YEAR >= 1996, !is.na(AGE))
-
-# Sort the data by port, year, and user 
 agecomp <- agecomp %>% 
-  arrange(PORT, YEAR, USER)
+  filter(
+    !(PORT %in% c('CCI', 'Cordova')), 
+    YEAR >= 1996, 
+    !is.na(AGE),
+    !(AGE %in% c("I", "")) # Not sure what is up with these values for age
+    )
+
+agecomp$AGE <- as.numeric(agecomp$AGE) # Weird values for age made them characters
+
 
 # Perform frequency analysis
 comp <- agecomp %>%
@@ -41,7 +46,7 @@ comp <- agecomp %>%
 # Perform means analysis
 means <- agecomp %>%
   group_by(PORT, YEAR) %>%
-  summarise(MEAN_AGE = mean(AGE))
+  summarise(MEAN_AGE = mean(AGE, na.rm = TRUE))
 ##restructure data file so sample size (nj) by each user group is a separate variable,
 ##all on one line for each species
 # Update the comp data frame based on user values
@@ -52,10 +57,7 @@ comp <- comp %>%
     nijU = if_else(USER == 'Unknown', COUNT, 0),
     nijM = if_else(USER == 'SewMilC', COUNT, 0)
   ) %>%
-  select(-USER, -COUNT, -PERCENT, AGE)
-
-# Sort the comp data frame by port, year, and age
-comp <- comp %>% 
+  select(-USER, -COUNT, -PERCENT, AGE) %>% 
   arrange(PORT, YEAR, AGE)
 
 # Calculate the sum of nijC, nijP, nijU, and nijM by port, year, and age
@@ -64,10 +66,8 @@ comp2 <- comp %>%
   summarise(nijC = sum(nijC),
             nijP = sum(nijP),
             nijU = sum(nijU),
-            nijM = sum(nijM))
-
+            nijM = sum(nijM)) %>% 
 # Replace missing values with 0 in comp2
-comp2 <- comp2 %>%
   mutate(across(starts_with("nij"), ~ if_else(is.na(.), 0, .)))
 
 ##Obtain and merge total lc sample size for each user group
@@ -80,28 +80,23 @@ totaln <- comp2 %>%
             niM = sum(nijM))
 
 # Merge comp2 and totaln data frames by port and year
-comp3 <- merge(comp2, totaln, by = c("PORT", "YEAR"))
-
-
+comp3 <- merge(comp2, totaln, by = c("PORT", "YEAR")) %>% 
 # Calculate pijC, vpijC, pijP, vpijP
-comp3 <- comp3 %>%
   mutate(pijC = nijC / niC,
          vpijC = pijC * (1 - pijC) / (niC - 1),
          pijP = nijP / niP,
          vpijP = pijP * (1 - pijP) / (niP - 1))
 
 ##obtain proportion of harvest by species externally
-get_data("O:/DSF/GOAB/R data/Harvest/LC/")
+get_data("data/Harvest/LC/")
 
-pharv <- harvbyport
-pharv <- rename(pharv, PORT = Port)
+pharv <- harvbyport 
+pharv <-  rename(pharv, PORT = Port)
 
 #Estimate age comp
 # Merge comp3 and pharv data frames by port and year
-comp4 <- merge(comp3, pharv, by = c("PORT", "YEAR"))
-
+comp4 <- merge(comp3, pharv, by = c("PORT", "YEAR")) %>% 
 # Calculate HijC, vHijC, SEHijC, HijP, vHijP, SEHijP, Hij, SEHij, pij, vpij, SEpij for specific conditions
-comp4 <- comp4 %>%
   mutate(n = ifelse(PORT %in% c("Homer", "Valdez", "Whittier", "Kodiak") | (PORT == "Seward" & YEAR >= 2001),
                     niC + niP,
                     niC + niP + niU + niM),
@@ -137,9 +132,7 @@ comp4 <- comp4 %>%
                        0),
          SEpij = ifelse(PORT %in% c("Homer", "Valdez", "Whittier", "Kodiak") | (PORT == "Seward" & YEAR >= 2001),
                         sqrt(vpij),
-                        0))
-# Calculate additional variables for Seward 1996-2000
-comp4 <- comp4 %>%
+                        0)) %>%
   mutate(
     n = ifelse(PORT == "Seward" & YEAR >= 1996 & YEAR <= 2000, niC + niP + niU + niM, n),
     pij = ifelse(PORT == "Seward" & YEAR >= 1996 & YEAR <= 2000,
@@ -160,11 +153,7 @@ comp4 <- comp4 %>%
     SEHij = ifelse(PORT == "Seward" & YEAR >= 1996 & YEAR <= 2000,
                    sqrt(vHij),
                    SEHij)
-  )
-
-
-# Format colu,ms
-comp4 %>%
+  ) %>%
   select(PORT, YEAR, AGE, n, nijC, nijP, nijU, nijM, pijC, vpijC, pijP, vpijP, HijC, HijP, Hij, SEHij, pij, SEpij) %>%
   mutate(
     pijC = format(pijC, digits = 3),
@@ -186,10 +175,14 @@ plotages <- comp4 %>%
 
 ##sgplot bubble plots for publication
 
+scale <- max(plotages$n) / max(plotages$AGE)
+
 ggplot(data = comp4) +
-  geom_point(aes(x = YEAR, y = AGE, size = pij), fill = "lightgray", shape = 21, color = "black") +
-  geom_line(aes(x = YEAR, y = n), color = "gray", size = 3, alpha = 0.7) +
-  scale_size_continuous(range = c(0.1, 2)) +
+  geom_point(aes(x = YEAR, y = AGE, size = as.numeric(pij)), fill = "lightgray", shape = 21, color = "black") +
+  geom_line(aes(x = YEAR, y = n / scale), color = "gray", size = 1.4, alpha = 0.7) +
+ # scale_size_continuous(range = c(0.1, 2)) +
+  scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
+                     sec.axis = sec_axis(~ . * scale, name = 'Sample Size', breaks = seq(0, 700, 100))) +
   facet_wrap(~PORT, nrow = 1) +
   theme_minimal() +
   labs(title = "Lingcod Age Compositions",
@@ -197,5 +190,5 @@ ggplot(data = comp4) +
        y = "Age",
        y2 = "Sample Size") +
   scale_x_continuous(breaks = seq(1995, 2020, 5)) +
-  scale_y_continuous(breaks = seq(0, 30, 5)) +
-  theme(panel.grid = element_blank())
+  theme()
+

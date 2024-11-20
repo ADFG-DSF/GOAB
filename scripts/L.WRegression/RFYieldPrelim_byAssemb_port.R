@@ -34,8 +34,9 @@
 # Translated from SAS to R by CWM 06/19/23
 ##########################################################################
 
-
+library(readxl)
 library(tidyverse)
+library(gt)
 
 
 source("functions.R")
@@ -52,9 +53,6 @@ rf <- do.call(rbind.fill, list(rock9195, rock9600, rock2001, rock2002, rock2003,
                                      rock2009, rock2010, rock2011, rock2012, rock2013, 
                                      rock2014, rock2015, rock2016, rock2017, rock2018, 
                                      rock2019, rock2020, rock2021, rock2022))
-species <- character()
-abbrev <- character()
-
 detach(package:plyr)
 
 
@@ -232,8 +230,8 @@ meanWtcombi <- full_join(meanWtcombi, Kod1991meanwt, by = c('PORT', 'YEAR', 'SP'
 meanWtcombi <- meanWtcombi %>%
   arrange(SP, PORT, YEAR)
 
-print(meanWtcombi %>% filter(SP == 142), nrow = Inf)
-print(meanWtcombi %>% filter(SP == 145), nrow = Inf)
+gt(meanWtcombi %>% filter(SP == 142))
+gt(meanWtcombi %>% filter(SP == 145))
 
 ##Get species composition from AWL data (okay if length data missing)
 # Sort the data by port and year
@@ -271,9 +269,8 @@ Spcomp <- Spcomp %>%
   arrange(PORT, YEAR, SP)
 
 
-library(readxl)
 
-R2SWHS <- read_xlsx('O:/DSF/GOAB/Harvest/Prelim RF yield/R2_SWHS91-17.xlsx', sheet = 'R2_SWHS91-15')
+R2SWHS <- read_xlsx('data/Harvest/R2_SWHS91-17.xlsx', sheet = 'R2_SWHS91-15')
 
 R2SWHS <- R2SWHS %>%
   filter(!(Port == 'PWS' & Year >= 1999)) %>% 

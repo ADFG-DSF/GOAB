@@ -16,7 +16,7 @@ get_data("data/RF/")
 
 #Combine data
 library(plyr)
-rock <- do.call(rbind.fill, list(rock9195, rock9600, rock2001, rock2002, rock2003, 
+rf <- do.call(rbind.fill, list(rock9195, rock9600, rock2001, rock2002, rock2003, 
                                      rock2004, rock2005, rock2006, rock2007, rock2008, 
                                      rock2009, rock2010, rock2011, rock2012, rock2013, 
                                      rock2014, rock2015, rock2016, rock2017, rock2018, 
@@ -24,7 +24,7 @@ rock <- do.call(rbind.fill, list(rock9195, rock9600, rock2001, rock2002, rock200
 detach(package:plyr)
 
 #
-rock <- rock %>%
+rock <- rf %>%
   filter(ASSEMB != '') %>%
   mutate(USER = if_else(USER == '', 'Unknown', USER)) %>%
   filter(STATAREA != '') %>%

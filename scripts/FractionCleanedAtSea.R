@@ -71,8 +71,8 @@ boxplot <- int %>%
   theme(legend.position = "bottom",
         axis.text.x = element_text(angle = 45, hjust = 1))
 
-# Print the boxplot
-gt(boxplot)
+
+boxplot
 
 #Percent rockfish cleaned at sea by port and user
 

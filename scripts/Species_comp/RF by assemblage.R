@@ -1,4 +1,9 @@
-
+#################################################################
+# Looking at species composition and average weights for rockfish
+#
+# Using predicted weight calculations derived by Scott Meyer when weight is not 
+# available in biological data
+#################################################################
 library(tidyverse)
 library(gt)
 
@@ -33,7 +38,7 @@ rf_dat <- rock %>%
     # else if assemb = 'Slope' then predwt = (10**-4.58089)*length**2.80292;
     # 
     predwt = case_when(
-      #is.na(WEIGHT) ~ case_when(
+      is.na(WEIGHT) ~ case_when(
         SP == 142 ~ (10^-4.61487)*LENGTH^2.90447,
         SP == 145 ~ (10^-4.76557)*LENGTH^3.01526,
         SP %in% c(154, 172, 173) ~ (10^-4.19360)*LENGTH^2.64867,
@@ -42,8 +47,8 @@ rf_dat <- rock %>%
           ASSEMB == 'Demersal' ~ (10^-4.74572)*LENGTH^3.00420,
           ASSEMB == 'Slope' ~ (10^-4.58089)*LENGTH^2.80292
         )
-      # ),
-      # TRUE ~ WEIGHT
+      ),
+      TRUE ~ WEIGHT
     ),
     predwt2 = case_when(
       !is.na(WEIGHT) ~ WEIGHT,

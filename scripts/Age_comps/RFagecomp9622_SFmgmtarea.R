@@ -36,14 +36,10 @@ agecomp <- do.call(rbind.fill, list(rock9195, rock9600, rock2001, rock2002, rock
 detach(package:plyr)
 # Filter rows with non-missing age
 agecomp <- agecomp %>%
-  filter(!is.na(AGE))
-
-# Filter out specific species
-agecomp <- agecomp %>%
-  filter(!(SP %in% c(144, 168, 169)))
-
+  filter(!is.na(AGE)) %>%
+  # Filter species without ages
+  filter(!(SP %in% c(144, 168, 169))) %>% 
 # Rename specific species
-agecomp <- agecomp %>%
   mutate(SPECIES = case_when(
     SPECIES == 'Blackgll' ~ 'Blackgill',
     SPECIES == 'Quill' ~ 'Quillback',
@@ -60,7 +56,8 @@ agecomp <- agecomp %>%
     TRUE ~ SPECIES
   )) %>%
   area_split_sf() %>% 
-  filter (YEAR >= 1996)
+  filter (YEAR >= 1996) %>%
+  arrange(SFmgmtarea, USER, YEAR, SPECIES, AGE)
 
 ##Boxplot showing range of ages by sex
 
@@ -76,34 +73,25 @@ boxplot <- ggplot(data = bysex) +
   theme_bw()
 
 # Save the plot as PDF file
-pdf("O:/DSF/GOAB/R Code/Figures/rfbysex_boxplot_mgmtarea.pdf")
+# pdf("O:/DSF/GOAB/R Code/Figures/rfbysex_boxplot_mgmtarea.pdf")
 boxplot
-dev.off()
+# dev.off()
 
 ##Start with raw age freq of each species by port, user, year
-# Sort the dataframe
-agecomp <- agecomp %>%
-  arrange(SFmgmtarea, USER, YEAR, SPECIES, AGE)
 
 # Calculate frequency of age by port, user, year, species
 comp <- agecomp %>%
   group_by(SFmgmtarea, USER, YEAR, SPECIES, AGE) %>%
   summarise(COUNT = n()) %>%
-  ungroup()
-
+  ungroup() %>% 
 ##restructure data file so sample size (nj) by each user group is a separate variable,
 ##all on one line for each species
-
 # Assign values to respective variables based on user value
-comp <- comp %>%
   mutate(nijC = if_else(USER == 'Charter', COUNT, 0),
          nijP = if_else(USER == 'Private', COUNT, 0),
          nijU = if_else(USER == 'Unknown', COUNT, 0),
          nijM = if_else(USER == 'SewMilC', COUNT, 0)) %>%
-  select(-COUNT)
-
-# Sort the dataframe
-comp <- comp %>%
+  select(-COUNT) %>%
   arrange(SFmgmtarea, YEAR, SPECIES, AGE)
 
 # Calculate sums of nijC, nijP, nijU, nijM
@@ -126,11 +114,7 @@ totaln <- comp2 %>%
   ungroup()
 
 # Merge comp2 and totaln data frames
-comp3 <- merge(comp2, totaln, by = c("SFmgmtarea", "YEAR", "SPECIES"))
-
-
-# Calculate pijC, vpijC, pijP, vpijP
-comp3 <- comp3 %>%
+comp3 <- merge(comp2, totaln, by = c("SFmgmtarea", "YEAR", "SPECIES")) %>%
   mutate(pijC = nijC / niC,
          vpijC = pijC * (1 - pijC) / (niC - 1),
          pijP = nijP / niP,
@@ -138,14 +122,12 @@ comp3 <- comp3 %>%
 
 
 ##obtain proportion of harvest by species externally, file created by RFspcomp9616
-get_data("O:/DSF/GOAB/R data/Harvest/RF/")
+get_data("data/Harvest/RF/")
 #####
 
 
 
-pharv <- harvbyspecies
-# Replace species values with full names
-pharv <- pharv %>% 
+pharv <- harvbyspecies %>% 
   mutate(SPECIES = case_when(
     species == "Blackgll" ~ "Blackgill",
     species == "Quill" ~ "Quillback",
@@ -160,10 +142,8 @@ pharv <- pharv %>%
     species == "Yelltail" ~ "Yellowtail",
     species == "DuskyDark" ~ "DuskyDark",
     TRUE ~ species
-  ))
-
+  )) %>% 
 # Calculate vHiC, vHi, vHiP
-pharv <- pharv %>% 
   mutate(vHiC = SEHiC^2,
          vHi = SEHi^2,
          vHiP = SEHiP^2,
@@ -172,20 +152,15 @@ pharv <- pharv %>%
            PORT %in% c('Whittier', 'Valdez', 'Cordova') ~ 'PWS',
            PORT == 'Seward' ~ 'NG',
            PORT %in% c('Homer', 'CI', 'CCI') ~ 'CI'
-         ))
-
-
-pharv <- pharv %>% 
+         )) %>% 
   arrange(SFmgmtarea, YEAR, SPECIES)
 
 ##Merge harvest by species and estimate age comp
-comp4 <- merge(comp3, pharv, by = c("SFmgmtarea", "YEAR", "SPECIES"))
-
-comp4 <- comp4 %>%
+comp4 <- merge(comp3, pharv, by = c("SFmgmtarea", "YEAR", "SPECIES")) %>%
   mutate(
     n = ifelse(SFmgmtarea == 'CI' | SFmgmtarea == 'PWS' |
                  (SFmgmtarea == 'NG' & YEAR >= 2001) |
-                 (SFmgmtarea == 'KOD' & YEAR != 2013), sum(niC, niP), NA),
+                 (SFmgmtarea == 'KOD' & YEAR != 2013), niC + niP, NA),
     HijC = ifelse(SFmgmtarea == 'CI' | SFmgmtarea == 'PWS' |
                     (SFmgmtarea == 'NG' & YEAR >= 2001) |
                     (SFmgmtarea == 'KOD' & YEAR != 2013), pijC * HiC, NA),
@@ -208,10 +183,10 @@ comp4 <- comp4 %>%
                       (SFmgmtarea == 'KOD' & YEAR != 2013), sqrt(vHijP), NA),
     Hij = ifelse(SFmgmtarea == 'CI' | SFmgmtarea == 'PWS' |
                    (SFmgmtarea == 'NG' & YEAR >= 2001) |
-                   (SFmgmtarea == 'KOD' & YEAR != 2013), sum(HijC, HijP), NA),
+                   (SFmgmtarea == 'KOD' & YEAR != 2013), HijC + HijP, NA),
     SEHij = ifelse(SFmgmtarea == 'CI' | SFmgmtarea == 'PWS' |
                      (SFmgmtarea == 'NG' & YEAR >= 2001) |
-                     (SFmgmtarea == 'KOD' & YEAR != 2013), sqrt(sum(vHijC, vHijP)), NA),
+                     (SFmgmtarea == 'KOD' & YEAR != 2013), sqrt(vHijC + vHijP), NA),
     pij = ifelse(SFmgmtarea == 'CI' | SFmgmtarea == 'PWS' |
                    (SFmgmtarea == 'NG' & YEAR >= 2001) |
                    (SFmgmtarea == 'KOD' & YEAR != 2013), Hij / Hi, NA),
@@ -224,18 +199,17 @@ comp4 <- comp4 %>%
     SEpij = ifelse(SFmgmtarea == 'CI' | SFmgmtarea == 'PWS' |
                      (SFmgmtarea == 'NG' & YEAR >= 2001) |
                      (SFmgmtarea == 'KOD' & YEAR != 2013), sqrt(vpij), NA)
-  )
-comp4 <- comp4 %>%
+  )  %>%
   mutate(
     n = ifelse((SFmgmtarea == 'NG' & YEAR >= 1996 & YEAR <= 2000) |
                  (SFmgmtarea == 'KOD' & YEAR == 2013),
-               sum(niC, niP, niU, niM), n),
+               niC + niP + niU + niM, n),
     pij = ifelse((SFmgmtarea == 'NG' & YEAR >= 1996 & YEAR <= 2000) |
                    (SFmgmtarea == 'KOD' & YEAR == 2013),
-                 sum(nijC, nijP, nijU, nijM) / sum(niC, niP, niU, niM), pij),
+                 (nijC + nijP + nijU + nijM) / (niC + niP + niU + niM), pij),
     vpij = ifelse((SFmgmtarea == 'NG' & YEAR >= 1996 & YEAR <= 2000) |
                     (SFmgmtarea == 'KOD' & YEAR == 2013),
-                  pij * (1 - pij) / (sum(niC, niP, niU, niM) - 1), vpij),
+                  pij * (1 - pij) / ((niC + niP + niU + niM) - 1), vpij),
     SEpij = ifelse((SFmgmtarea == 'NG' & YEAR >= 1996 & YEAR <= 2000) |
                      (SFmgmtarea == 'KOD' & YEAR == 2013), sqrt(vpij), SEpij),
     Hij = ifelse((SFmgmtarea == 'NG' & YEAR >= 1996 & YEAR <= 2000) |
@@ -245,9 +219,7 @@ comp4 <- comp4 %>%
                   (pij^2 * vHi) + (vpij * Hi^2) - (vpij * vHi), 0),
     SEHij = ifelse((SFmgmtarea == 'NG' & YEAR >= 1996 & YEAR <= 2000) |
                      (SFmgmtarea == 'KOD' & YEAR == 2013), sqrt(vHij), SEHij)
-  )
-
-comp4 <- comp4 %>%
+  ) %>%
   filter(!(SFmgmtarea == "Whittier" & YEAR >= 1996 & YEAR <= 1998)) %>%
   select(-c(vHijC, vHijP, vpij, vHij))
 
@@ -275,13 +247,16 @@ plotages <- primarycomp %>%
 black <- plotages %>%
   filter(species == 'Black')
 
+scale_b <- max(black$n) / max(black$AGE)
 
-ggplot(data = black, aes(x = YEAR, y = AGE, linewidth = pij, fill = pij)) +
-  geom_point(shape = 21, color = 'gray', stroke = 0.01, alpha = 0.7) +
-  #geom_line(aes(y = n), color = 'red', size = 3, linetype = 'solid', alpha = 0.7) +
+ggplot(data = black) +
+  geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = 'gray', stroke = 0.01, alpha = 0.7) +
+  geom_line(aes(x = YEAR, y = n / scale_b), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
+                     sec.axis = sec_axis(~ . * scale_b, name = 'Sample Size', breaks = seq(0, 1500, 250))) +  # Add a second Y-axis for 'n'
   facet_wrap(~ SFmgmtarea) +
   scale_x_continuous(breaks = seq(1995, 2020, 5), labels = as.character(seq(1995, 2020, 5)), name = 'Year') +
-  scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age') +
+ # scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age') +
   scale_size_continuous(range = c(0.1, 2), guide = FALSE) +
   scale_fill_continuous(guide = FALSE) +
   theme_bw() +
@@ -291,10 +266,13 @@ ggplot(data = black, aes(x = YEAR, y = AGE, linewidth = pij, fill = pij)) +
 ye <- plotages %>%
   filter(species == 'Yelloweye')
 
+scale_y <- max(ye$n) / max(ye$AGE)
 
-ggplot(data = ye, aes(x = YEAR, y = AGE, linewidth = pij, fill = pij)) +
-  geom_point(shape = 21, color = 'gray', stroke = 0.01, alpha = 0.7) +
-  #geom_line(aes(y = n), color = 'red', size = 3, linetype = 'solid', alpha = 0.7) +
+ggplot(data = ye) +
+  geom_point(aes(x = YEAR, y = AGE, linewidth = pij, fill = pij), shape = 21, color = 'gray', stroke = 0.01, alpha = 0.7) +
+  geom_line(aes(x = YEAR, y = n / scale_y), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
+                     sec.axis = sec_axis(~ . * scale_y, name = 'Sample Size', breaks = seq(0, 1500, 250))) +  # Add a second Y-axis for 'n'
   facet_wrap(~ SFmgmtarea) +
   scale_x_continuous(breaks = seq(1995, 2020, 5), labels = as.character(seq(1995, 2020, 5)), name = 'Year') +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age') +
@@ -307,10 +285,13 @@ ggplot(data = ye, aes(x = YEAR, y = AGE, linewidth = pij, fill = pij)) +
 Dark <- plotages %>%
   filter(species == 'Dark')
 
+scale_d <- max(Dark$n) / max(Dark$AGE)
 
-ggplot(data = Dark, aes(x = YEAR, y = AGE, linewidth = pij, fill = pij)) +
-  geom_point(shape = 21, color = 'gray', stroke = 0.01, alpha = 0.7) +
-  #geom_line(aes(y = n), color = 'red', size = 3, linetype = 'solid', alpha = 0.7) +
+ggplot(data = Dark) +
+  geom_point(aes(x = YEAR, y = AGE, linewidth = pij, fill = pij), shape = 21, color = 'gray', stroke = 0.01, alpha = 0.7) +
+  geom_line(aes(x = YEAR, y = n / scale_d), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
+                     sec.axis = sec_axis(~ . * scale_d, name = 'Sample Size', breaks = seq(0, 1500, 250))) +  # Add a second Y-axis for 'n'
   facet_wrap(~ SFmgmtarea) +
   scale_x_continuous(breaks = seq(1995, 2020, 5), labels = as.character(seq(1995, 2020, 5)), name = 'Year') +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age') +
@@ -323,10 +304,13 @@ ggplot(data = Dark, aes(x = YEAR, y = AGE, linewidth = pij, fill = pij)) +
 Dusky <- plotages %>%
   filter(species == 'Dusky')
 
+scale_du <- max(Dusky$n) / max(Dusky$AGE)
 
-ggplot(data = Dusky, aes(x = YEAR, y = AGE, linewidth = pij, fill = pij)) +
-  geom_point(shape = 21, color = 'gray', stroke = 0.01, alpha = 0.7) +
-  #geom_line(aes(y = n), color = 'red', size = 3, linetype = 'solid', alpha = 0.7) +
+ggplot(data = Dusky) +
+  geom_point(aes(x = YEAR, y = AGE, linewidth = pij, fill = pij), shape = 21, color = 'gray', stroke = 0.01, alpha = 0.7) +
+  geom_line(aes(x = YEAR, y = n / scale_du), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
+                     sec.axis = sec_axis(~ . * scale_du, name = 'Sample Size', breaks = seq(0, 1500, 250))) +  # Add a second Y-axis for 'n'
   facet_wrap(~ SFmgmtarea) +
   scale_x_continuous(breaks = seq(1995, 2020, 5), labels = as.character(seq(1995, 2020, 5)), name = 'Year') +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age') +
@@ -339,10 +323,13 @@ ggplot(data = Dusky, aes(x = YEAR, y = AGE, linewidth = pij, fill = pij)) +
 Copper <- plotages %>%
   filter(species == 'Copper')
 
+scale_c <- max(Copper$n) / max(Copper$AGE)
 
-ggplot(data = Copper, aes(x = YEAR, y = AGE, linewidth = pij, fill = pij)) +
-  geom_point(shape = 21, color = 'gray', stroke = 0.01, alpha = 0.7) +
-  #geom_line(aes(y = n), color = 'red', size = 3, linetype = 'solid', alpha = 0.7) +
+ggplot(data = Copper) +
+  geom_point(aes(x = YEAR, y = AGE, linewidth = pij, fill = pij), shape = 21, color = 'gray', stroke = 0.01, alpha = 0.7) +
+  geom_line(aes(x = YEAR, y = n / scale_c), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
+                     sec.axis = sec_axis(~ . * scale_c, name = 'Sample Size', breaks = seq(0, 1500, 250))) +  # Add a second Y-axis for 'n'
   facet_wrap(~ SFmgmtarea) +
   scale_x_continuous(breaks = seq(1995, 2020, 5), labels = as.character(seq(1995, 2020, 5)), name = 'Year') +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age') +
@@ -355,10 +342,13 @@ ggplot(data = Copper, aes(x = YEAR, y = AGE, linewidth = pij, fill = pij)) +
 Quillback <- plotages %>%
   filter(species == 'Quillback')
 
+scale_q <- max(Quillback$n) / max(Quillback$AGE)
 
-ggplot(data = Quillback, aes(x = YEAR, y = AGE, linewidth = pij, fill = pij)) +
-  geom_point(shape = 21, color = 'gray', stroke = 0.01, alpha = 0.7) +
-  #geom_line(aes(y = n), color = 'red', size = 3, linetype = 'solid', alpha = 0.7) +
+ggplot(data = Quillback) +
+  geom_point(aes(x = YEAR, y = AGE, linewidth = pij, fill = pij), shape = 21, color = 'gray', stroke = 0.01, alpha = 0.7) +
+  geom_line(aes(x = YEAR, y = n / scale_q), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
+                     sec.axis = sec_axis(~ . * scale_q, name = 'Sample Size', breaks = seq(0, 1500, 250))) +  # Add a second Y-axis for 'n'
   facet_wrap(~ SFmgmtarea) +
   scale_x_continuous(breaks = seq(1995, 2020, 5), labels = as.character(seq(1995, 2020, 5)), name = 'Year') +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age') +
@@ -373,7 +363,7 @@ ggplot(data = Quillback, aes(x = YEAR, y = AGE, linewidth = pij, fill = pij)) +
 BlackAge <- primarycomp %>%
   filter(SPECIES == 'Black')
 
-YEage <- primarycomp %>%
+YEAge <- primarycomp %>%
   filter(SPECIES == 'Yelloweye')
 
 DuskyAge <- primarycomp %>%
@@ -404,10 +394,7 @@ CopperAge <- primarycomp %>%
   ##age frequency of each species by port, sex, year (pooled by user)
   # Filter the data for Black species
   black <- agecomp %>%
-    filter(SP == 142 & SEX != '' & !is.na(AGE))
-  
-  # Sort the data by port, year, and sex
-  black <- black %>%
+    filter(SP == 142 & SEX != '' & !is.na(AGE)) %>%
     arrange(SFmgmtarea, YEAR, SEX)
   
   # Calculate sample size by port and year
@@ -434,7 +421,7 @@ CopperAge <- primarycomp %>%
     geom_point(shape = 21, color = "black") +
     scale_size_continuous(range = c(1, 6)) +
     scale_fill_manual(values = c("F" = "lightgray", "M" = "lightblue")) +
-    facet_wrap(~ PORT, ncol = 1) +
+    facet_wrap(~ SFmgmtarea, ncol = 1) +
     labs(x = "Year", y = "Age") +
     theme_bw() +
     theme(panel.spacing = unit(0.5, "lines"),
@@ -447,3 +434,4 @@ CopperAge <- primarycomp %>%
     scale_y_continuous(breaks = seq(0, 60, 5), minor_breaks = NULL) +
     geom_hline(yintercept = seq(0, 60, 5), color = "gray", linetype = "dashed") +
     geom_vline(xintercept = seq(1996, 2016, 1), color = "gray", linetype = "dashed")
+  

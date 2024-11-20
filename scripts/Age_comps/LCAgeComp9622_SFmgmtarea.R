@@ -29,10 +29,12 @@ agecomp <- age %>%
   filter(
     !(PORT %in% c('CCI', 'Cordova')), 
     YEAR >= 1996, 
-    !is.na(AGE)
+    !is.na(AGE),
+    !(AGE %in% c("I", "")) # Not sure what is up with these values for age
     ) %>% 
-  area_split_sf() %>% 
-  filter (YEAR >= 1996)
+  area_split_sf() 
+
+agecomp$AGE <- as.numeric(agecomp$AGE) # Weird values for age made them characters
 
 # Sort the data by port, year, and user 
 agecomp <- agecomp %>% 
@@ -40,6 +42,14 @@ agecomp <- agecomp %>%
 
 # Perform frequency analysis
 comp <- agecomp %>%
+  mutate(
+    USER = case_when(
+      USER == "P" ~ "Private",
+      USER == "C" ~ "Charter",
+      USER == "" ~ "Unknown",
+      TRUE ~ USER
+    )
+  ) %>% 
   group_by(SFmgmtarea, USER, YEAR, AGE) %>%
   summarise(COUNT = n()) %>%
   mutate(PERCENT = COUNT / sum(COUNT) * 100)
@@ -86,23 +96,18 @@ totaln <- comp2 %>%
             niM = sum(nijM))
 
 # Merge comp2 and totaln data frames by port and year
-comp3 <- merge(comp2, totaln, by = c("SFmgmtarea", "YEAR"))
-
-
+comp3 <- merge(comp2, totaln, by = c("SFmgmtarea", "YEAR")) %>% 
 # Calculate pijC, vpijC, pijP, vpijP
-comp3 <- comp3 %>%
   mutate(pijC = nijC / niC,
          vpijC = pijC * (1 - pijC) / (niC - 1),
          pijP = nijP / niP,
          vpijP = pijP * (1 - pijP) / (niP - 1))
 
 ##obtain proportion of harvest by species externally
-get_data("O:/DSF/GOAB/R data/Harvest/LC/")
+get_data("data/Harvest/LC/")
 
-pharv <- harvbyport
-
-
-pharv <- pharv %>% mutate(
+pharv <- harvbyport %>%
+  mutate(
   SFmgmtarea = case_when(
     Port == 'Homer' ~ 'CI',
     Port == ' Kodiak' ~ 'KOD',
@@ -113,15 +118,13 @@ pharv <- pharv %>% mutate(
 #Estimate age comp
 # Merge comp3 and pharv data frames by Mgmtarea and year
 
-comp4 <- merge(comp3, pharv, by = c("SFmgmtarea", "YEAR"))
-
+comp4 <- merge(comp3, pharv, by = c("SFmgmtarea", "YEAR")) %>% 
 # Calculate HijC, vHijC, SEHijC, HijP, vHijP, SEHijP, Hij, SEHij, pij, vpij, SEpij for specific conditions
-comp4 <- comp4 %>%
   mutate(
     n = case_when(
-      SFmgmtarea %in% c("CI", "PWS") |
-        (SFmgmtarea == "NG" & YEAR >= 2001) |
-        SFmgmtarea == "KOD" ~ sum(niC, niP)
+      SFmgmtarea %in% c("CI", "PWS") ~ niC + niP,
+      (SFmgmtarea == "NG" & YEAR >= 2001) ~ niC + niP,
+      SFmgmtarea == "KOD" ~ niC + niP
     ),
     HijC = case_when(
       SFmgmtarea %in% c("CI", "PWS") |
@@ -179,34 +182,34 @@ comp4 <- comp4 %>%
         SFmgmtarea == "KOD" ~ sqrt(vpij)
     ), #Calculations for Seward 1996-2000
     n = case_when(
-      SFmgmtarea == "NG" & YEAR >= 1996 & YEAR <= 2000 ~ sum(niC, niP, niU, niM)
+      SFmgmtarea == "NG" & YEAR >= 1996 & YEAR <= 2000 ~ niC + niP + niU + niM,
+      TRUE ~ n
     ),
     pij = case_when(
-      SFmgmtarea == "NG" & YEAR >= 1996 & YEAR <= 2000 ~ sum(nijC, nijP, nijU, nijM) / sum(niC, niP, niU, niM)
+      SFmgmtarea == "NG" & YEAR >= 1996 & YEAR <= 2000 ~ (nijC + nijP + nijU + nijM) / (niC + niP + niU + niM),
+      TRUE ~ pij
     ),
     vpij = case_when(
-      SFmgmtarea == "NG" & YEAR >= 1996 & YEAR <= 2000 ~ pij * (1 - pij) / (sum(niC, niP, niU, niM) - 1)
+      SFmgmtarea == "NG" & YEAR >= 1996 & YEAR <= 2000 ~ pij * (1 - pij) / ((niC + niP + niU + niM) - 1),
+      TRUE ~ vpij
     ),
     SEpij = case_when(
-      SFmgmtarea == "NG" & YEAR >= 1996 & YEAR <= 2000 ~ sqrt(vpij)
+      SFmgmtarea == "NG" & YEAR >= 1996 & YEAR <= 2000 ~ sqrt(vpij),
+      TRUE ~ SEpij
     ),
     Hij = case_when(
-      SFmgmtarea == "NG" & YEAR >= 1996 & YEAR <= 2000 ~ pij * H
+      SFmgmtarea == "NG" & YEAR >= 1996 & YEAR <= 2000 ~ pij * H,
+      TRUE ~ Hij
     ),
     vHij = case_when(
       SFmgmtarea == "NG" & YEAR >= 1996 & YEAR <= 2000 ~ (pij^2 * vH) + (vpij * H^2) - (vpij * vH)
     ),
     SEHij = case_when(
-      SFmgmtarea == "NG" & YEAR >= 1996 & YEAR <= 2000 ~ sqrt(vHij)
+      SFmgmtarea == "NG" & YEAR >= 1996 & YEAR <= 2000 ~ sqrt(vHij),
+      TRUE ~ SEHij
     )
   ) %>%
-  select(-vHijC, -vHijP, -vpij, -vHij)
-
-
-
-
-# Format columns
-comp4 %>%
+  select(-vHijC, -vHijP, -vpij, -vHij) %>%
   select(SFmgmtarea, YEAR, AGE, n, nijC, nijP, nijU, nijM, pijC, vpijC, pijP, vpijP, HijC, HijP, Hij, SEHij, pij, SEpij) %>%
   mutate(
     pijC = format(pijC, digits = 3),
@@ -227,11 +230,14 @@ plotages <- comp4 %>%
   mutate(Cohort = if_else(Cohort %in% c(1979, 1991, 1996, 2002), NA_real_, Cohort))
 
 ##sgplot bubble plots for publication
+scale <- max(plotages$n) / max(plotages$AGE)
 
 ggplot(data = comp4) +
-  geom_point(aes(x = YEAR, y = AGE, size = pij), fill = "lightgray", shape = 21, color = "black") +
-  #geom_line(aes(x = YEAR, y = n), color = "gray", size = 3, alpha = 0.7) +
-  scale_size_continuous(range = c(0.1, 2)) +
+  geom_point(aes(x = YEAR, y = AGE, size = as.numeric(pij)), fill = "lightgray", shape = 21, color = "black") +
+  geom_line(aes(x = YEAR, y = n / scale), color = "gray", size = 1.4, alpha = 0.7) +
+ # scale_size_continuous(range = c(0.1, 2)) +
+  scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
+                     sec.axis = sec_axis(~ . * scale, name = 'Sample Size', breaks = seq(0, 700, 100))) +
   facet_wrap(~SFmgmtarea, nrow = 1) +
   theme_minimal() +
   labs(title = "Lingcod Age Compositions",
@@ -239,5 +245,4 @@ ggplot(data = comp4) +
        y = "Age",
        y2 = "Sample Size") +
   scale_x_continuous(breaks = seq(1995, 2020, 5)) +
-  scale_y_continuous(breaks = seq(0, 30, 5)) +
-  theme(panel.grid = element_blank())
+  theme()

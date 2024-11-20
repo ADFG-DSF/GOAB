@@ -5,7 +5,7 @@
 ################################################################################
 
 library(tidyverse)
-
+library(readxl)
 
 source("functions.R")
 
@@ -22,36 +22,31 @@ int21$YEAR <- 2021
 int22$YEAR <- 2022
 
 library(plyr)
-LCKEPT0322 <- do.call(rbind.fill, list(int05, int06, int07, int08, int09, int10,
-                                     int11, int12, int13, int14, int15, int16, 
-                                     int16prelim, int17, int18, int19, int20, 
-                                     int21, int22, int9204, intervw9219 ))
+int <- do.call(rbind.fill, list(intervw9219, int9204, int05, int06, int07, 
+                                       int08, int09, int10, int11, int12, int13, 
+                                       int14, int15, int16, int16prelim, int17, 
+                                       int18, int19, int20, int21, int22))
 detach(package:plyr)
 
 #Add subareas
-LCKEPT0322 <- LCKEPT0322 %>%
+LCKEPT0322 <- int %>%
   mutate(
-    SFmgmtarea = case_when(
-      ADFGSTAT > 440000 & ADFGSTAT < 480000 |
-        ADFGSTAT %in% c(485430, 485500, 485530, 485600, 485630, 485700, 485730, 485800, 485831, 485901, 485931, 485932, 485935, 486001, 486002, 486003, 486004, 486005, 486031, 486032, 486033, 486034, 486100) ~ 'PWS',
-      ADFGSTAT %in% c(485832, 485902, 485933, 485934, 485935, 486002, 495831, 495901, 495902, 495931, 495932, 495933, 495934, 495935, 495936, 495937, 495938, 495939, 496001, 496002, 505831, 505901, 505902, 505903, 505904, 505905, 505906, 505907, 505908, 505909, 505931, 505932, 505933, 505934) ~ 'NG',
-      ADFGSTAT %in% c(495800, 495832, 505700, 505730, 505800, 505832, 515630, 515700, 515730, 515801, 515802, 515833, 525600, 525630, 525701, 525702, 525703, 525731, 525732, 525733, 525801, 525802, 525803, 525804, 525805, 525806, 525807, 525832, 525833, 525834, 535601, 535602, 535631, 535632, 535633, 535634, 535701, 535702, 535703, 535704, 535705, 535706, 535707, 535731, 535732, 535733, 535734, 535802, 535803, 535831, 545601, 545602, 545631, 545632, 545633, 545701, 545702, 545703, 545704, 545732, 545733, 545734, 545804, 555630, 555701, 555733) ~ 'Kod',
-      ADFGSTAT %in% c(555731, 555732, 545731, 545801, 545802, 545803, 535801, 535832) ~ 'AKPen',
-      ADFGSTAT %in% c(515831, 515832, 515901, 515902, 515903, 515904, 515905, 515906, 515907, 515908, 515931, 515932, 515933, 515934, 515935, 515936, 515937, 515938, 515939, 516001, 516002, 525831, 525835, 525836, 525837, 525901, 525902, 525931, 525932, 526002, 526003, 535833, 535834, 535901, 535902, 535903, 535904, 535905, 535906, 535931, 535932, 535933, 545900) ~ 'CI',
-      TRUE ~ SFmgmtarea  # To retain existing values for SFmgmtarea
-    ),
-    SFmgmtarea = case_when(
-      is.na(ADFGSTAT) & PORT == 'Homer' ~ 'CI',
-      is.na(ADFGSTAT) & PORT == 'Kodiak' ~ 'Kod',
-      is.na(ADFGSTAT) & PORT == 'Whittier' ~ 'PWS',
-      is.na(ADFGSTAT) & PORT == 'Valdez' ~ 'PWS',
-      TRUE ~ SFmgmtarea  # To retain existing values for SFmgmtarea
-    ),
+    STATAREA = case_when(
+      YEAR >= 2021 ~ case_when(
+        !is.na(ADFGSTATLING) ~ ADFGSTATLING,
+        is.na(ADFGSTATLING) & !is.na(ADFGSTATCOMBI) ~ ADFGSTATCOMBI,
+        is.na(ADFGSTATLING) & !is.na(ADFGSTATOTH) ~ ADFGSTATOTH
+      ),
+      TRUE ~ ADFGSTAT
+    )
+  ) %>% 
+  area_split_sf() %>% 
+  mutate(
     subset = case_when(
-      SFmgmtarea == 'CI' & ADFGSTAT %in% c(515908, 515934, 515935, 515933, 515932, 515931) ~ 'KBay',
-      SFmgmtarea == 'CI' & ADFGSTAT %in% c(515936, 515937, 525931, 525932, 515939, 515938, 516002, 526002, 526003, 516001) ~ 'UCI',
-      SFmgmtarea == 'CI' & ADFGSTAT %in% c(525902, 525901, 515907, 515906, 515905, 515903, 515901, 515902, 515904, 515831, 515832, 525837, 525936, 525835, 525831, 525836) ~ 'WGore',
-      SFmgmtarea == 'CI' & ADFGSTAT %in% c(525831, 525835, 525836, 525837, 515832, 515831) ~ 'Barrens',
+      SFmgmtarea == 'CI' & STATAREA %in% c(515908, 515934, 515935, 515933, 515932, 515931) ~ 'KBay',
+      SFmgmtarea == 'CI' & STATAREA %in% c(515936, 515937, 525931, 525932, 515939, 515938, 516002, 526002, 526003, 516001) ~ 'UCI',
+      SFmgmtarea == 'CI' & STATAREA %in% c(525902, 525901, 515907, 515906, 515905, 515903, 515901, 515902, 515904, 515831, 515832, 525837, 525936, 525835, 525831, 525836) ~ 'WGore',
+      SFmgmtarea == 'CI' & STATAREA %in% c(525831, 525835, 525836, 525837, 515832, 515831) ~ 'Barrens',
       TRUE ~ 'Corner'
     ),
     subset = case_when(
@@ -59,20 +54,20 @@ LCKEPT0322 <- LCKEPT0322 %>%
       TRUE ~ subset  # To retain existing values for subset
     )
   ) %>%
-  filter(YEAR >= 2003 & !is.na(ADFGSTAT))  # Filter conditions for year and non-missing ADFGSTAT
+  filter(YEAR >= 2003 & !is.na(STATAREA))  # Filter conditions for year and non-missing STATAREA
 
 # Set default values for NA user
 LCKEPT0322$USER[is.na(LCKEPT0322$USER)] <- 'Unknown'
 
-# Drop rows with missing ADFGSTAT
-LCKEPT0322 <- LCKEPT0322[!is.na(LCKEPT0322$ADFGSTAT), ]
+# Drop rows with missing STATAREA
+LCKEPT0322 <- LCKEPT0322[!is.na(LCKEPT0322$STATAREA), ]
 
 # Sort the dataset
 LCKEPT0322_sorted <- arrange(LCKEPT0322, USER, YEAR, subset)
 
 # Calculate the sum of LCKEPT variable by user, year, and subset
 CRAP <- LCKEPT0322_sorted %>%
-  group_by(USER, YEAR, subset) %>%
+  group_by(USER, YEAR, STATAREA) %>%
   summarize(LCKEPT = sum(LCKEPT, na.rm = TRUE))
 
 # Calculate the sum of LCKEPT variable by user and year
@@ -100,15 +95,14 @@ write.csv(CRAP2, file = "O:/DSF/GOAB/MAPS/GIS/lcharvestbystat0322.csv")
 ##################
 #CI
 ##################
-library(readxl)
-stats <- read_xlsx('O:/DSF/GOAB/MAPS/GIS/lingcod_harvest_by_port/PVG_2001_Alaska_Attributes_AlbersAreas.xlsx')
+stat <- read_xlsx('O:/DSF/GOAB/MAPS/GIS/lingcod_harvest_by_port/PVG_2001_Alaska_Attributes_AlbersAreas.xlsx')
 lcbystatarea <- CRAP2
-#lcstatbyarea <- read.csv("O:/DSF/GOAB/MAPS/GIS/lcharvestbystat0322.csv")
+#lcbystatarea <- read.csv("O:/DSF/GOAB/MAPS/GIS/lcharvestbystat0322.csv")
 
-stats <- stats %>%
-  mutate(ADFGSTAT = STAT_AREA,
-         deglong = as.integer(ADFGSTAT / 10000),
-         deglat = as.integer((ADFGSTAT - (deglong * 10000)) / 100),
+stats <- stat %>%
+  mutate(STATAREA = STAT_AREA,
+         deglong = as.integer(STATAREA / 10000),
+         deglat = as.integer((STATAREA - (deglong * 10000)) / 100),
          Shape_Area_km2 = Shape_Area_m/1000) %>%
   filter(deglong >= 50 & deglong <= 54 & deglat >= 58 & deglat <= 60) %>%
   select(-STAT_AREA)
@@ -119,7 +113,7 @@ stats <- stats %>%
 ##region that repeats for each YEAR 2003-2016
 # Create a new data frame "list" from the existing "stats" data frame
 list <- stats %>%
-  select(ADFGSTAT, Shape_Area_km2)
+  select(STATAREA, Shape_Area_km2)
 
 
 # Create a new data frame "statlist" to store the repeated list for each YEAR
@@ -138,16 +132,16 @@ freq_table <- statlist %>%
   summarise(count = n())
 
 ##Now merge harvest and spatial data
-# Sort the "lcbystatarea" data frame by YEAR and adfgstat
+# Sort the "lcbystatarea" data frame by YEAR and STATAREA
 lcbystatarea <- lcbystatarea %>%
-  arrange(YEAR, ADFGSTAT)
+  arrange(YEAR, STATAREA)
 
-# Sort the "statlist" data frame by YEAR and adfgstat
+# Sort the "statlist" data frame by YEAR and STATAREA
 statlist <- statlist %>%
-  arrange(YEAR, ADFGSTAT)
+  arrange(YEAR, STATAREA)
 
-# Merge the "lcbystatarea" and "statlist" data frames by YEAR and adfgstat
-lcbystatarea <- merge(lcbystatarea, statlist, by = c("YEAR", "ADFGSTAT"))
+# Merge the "lcbystatarea" and "statlist" data frames by YEAR and STATAREA
+lcbystatarea <- merge(lcbystatarea, statlist, by = c("YEAR", "STATAREA"))
 
 # Format the column P to have 4 digits with 2 decimal places
 lcbystatarea$P <- format(lcbystatarea$P, nsmall = 2)
