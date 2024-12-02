@@ -3,7 +3,7 @@
 
 **Author:** Clay McKean (<clay.mckean@alaska.gov>)  
   
-**Last updated:** November 2024  
+**Last updated:** December 2024  
   
 **Local Directory**  
 There are 2 local directories associated with this project:  
@@ -85,94 +85,92 @@ The operational plan for this project can be found here:
 ## Repository Directory
 
 - 1.`data/`: Data folder  
-  - 1.  `HAL/`: Halibut AWL data. Data is compiled each year from port
-        sampling biological samples  
-
-  - 2.  `Harvest/`: Rockfish and Lingcod harvest data, calculated by
-        combining SWHS and logbook estimates  
-
-    - 1.  `LC/`: Lingcod harvest data by port and sport fish management
-          area  
-    - 2.  `RF/`: Rockfish harvest data by port, sport fish management
-          area, and species  
-
-  - 3.  `Intervw/`: Port sampling interview data. Data is compiled each
-        year from interview samples  
-
-  - 4.  `LC/`: Lingcod AWL data. Data is compiled each year from port
-        sampling biological samples  
-
-  - 22. `RF/`: Rockfish AWL data. Data is compiled each year from port
-        sampling biological samples  
+  - i.`HAL/`: Halibut AWL data. Data is compiled each year from port
+    sampling biological samples  
+  - ii.`Harvest/`: Rockfish and Lingcod harvest data, calculated by
+    combining SWHS and logbook estimates  
+    - a.`LC/`: Lingcod harvest data by port and sport fish management
+      area  
+    - b.`RF/`: Rockfish harvest data by port, sport fish management
+      area, and species  
+  - iii.`Intervw/`: Port sampling interview data. Data is compiled each
+    year from interview samples  
+  - iv.`LC/`: Lingcod AWL data. Data is compiled each year from port
+    sampling biological samples  
+  - v.`RF/`: Rockfish AWL data. Data is compiled each year from port
+    sampling biological samples  
+  - vi.`RF_Harvest_Reconstruction/`: Statewide rockfish harvest and
+    release estimates using the Howard et al. method. This data is used
+    for the annual rockfish harvest reconstruction. 
+    - This data comes from Phil Joy, and can be found at
+      <https://github.com/ADFG-DSF/RockfishSportMort/output/>  
 - 2.`Figures/`: Output figures  
     
 - 3.`reports/`: Reports associated with this repository  
-  - 1.  Currently empty
+  - i.`RF_Harvest_Reconstruction.R`: This file contains the output file
+    of the rockfish harvest reconstruction, titled
+    `RF_Removals_thruXX.xlsx`. This file is sent out to the members of
+    the Statewide Rockfish Initiative in early October, once the harvest
+    and release estimates are recieved from Phil Joy.  
 - 4.`scripts/`: Scripts for running analyses  
-  - 1.  `Age_comps/`: Age composition data for Rockfish and Lingcod  
-
-    - 1.  `LC Age Comp bubble.R`: Lingcod age composition bubble plot  
-    - 2.  `LCAgeComp9622_port.R`: Lingcod age composition by port  
-    - 3.  `LCAgeComp9622_SFmgmtarea.R`: Lingcod age composition by sport
-          fish management area  
-    - 4.  `RF Age Comp bubble.R`: Rockfish age composition bubble plot  
-    - 2.  `RFAgeComp9622_port.R`: Rockfish age composition by port  
-    - 3.  `RFAgeComp9622_SFmgmtarea.R`: Rockfish age composition by
-          sport fish management area  
-
-  - 2.  `Apportionment/`: Apportioning groundfish to sport fish
-        management areas to assess proportion of harvest by port and
-        management area  
-
-    - 1.  `Apportion halibut to mgmtareas.R`: Halibut apportionment  
-    - 2.  `Apportion lingcod to mgmtareas.R`: Lingcod apportionment  
-    - 3.  `Apportion rockfish to mgmtareas.R`: Rockfish apportionment  
-
-  - 3.  `L.WRegression/`: Calculate yield of groundfish in kg, using
-        length-weight regressions to estimate weights of fish when no
-        weight is available in the data.  Computation is based on the
-        basic formula: Yield(s) = Harvest(all s) \* SpeciesComp(s) \*
-        MeanWt(s).  
-        Estimates are preliminary because they are based on L-W
-        regressions that haven’t yet been tested for differences between
-        years, ports, sexes, etc.  
-
-    - 1.  `LCYieldPrelim_SFmgmtarea.R`: Estimate of lingcod yield by
-          sport fish management area by year  
-    - 2.  `RFYieldPrelim_byAssemb_port.R`: Estimate of rockfish yield by
-          port and assemblage by year  
-    - 3.  `RFYieldPrelim_byAssemb_SFmgmtarea.R`: Estimate of rockfish
-          yield by sport fish management area and assemblage by year  
-
-  - 4.  `Spatial harvest and effort/` Total harvest by port, user, and
-        year from port sampling interview data. Used for providing
-        harvest trends in managemnet reports/
-
-    - 1.  `LC/`: Lingcod data/
-
-      - (i). `LC_report_spatial_subset.R`: Lingcod interview harvest
-        data for lingcod report/
-
-    - 2.  `RF/`: Rockfish data. currently empty/
-
-  - 22. `Species_comp/`: Rockfish species composition data from port
-        sampling biological sampling/
-
-    - 1.  `RF by assemblage.R`: Species compositon and average weights
-          per year at the assemblage level. Predicted weights based on
-          length used when weight is not available for a sample/
-    - 2.  `RF_simple_spcomp.R`: Simple species composition by sport fish
-          management area. Useful for providing species comps to area
-          managers  
-          -c. `RFspcomp9622.R`: Rockfish species composition in
-          biological data. Uses Steve Fleischman version of composition
-          equations  
-
-  - 6.  `AWLsummaries.R`: Summary statistics of rockfish data. For
-        rockfish report  
-
-  - 7.  `FractionCleanedAtSea.R`: Calculates the fraction of harvest
-        cleaned at sea by port for halibut, rockfish, and lingcod. Used
-        in writing Op plan.  
-- 5.  `functions.R`: Functions used in R scripts. Accessed with
-      `source("functions.R")`  
+  - i.`Age_comps/`: Age composition data for Rockfish and Lingcod  
+    - a.`LC Age Comp bubble.R`: Lingcod age composition bubble plot  
+    - b.`LCAgeComp9622_port.R`: Lingcod age composition by port  
+    - c.`LCAgeComp9622_SFmgmtarea.R`: Lingcod age composition by sport
+      fish management area  
+    - d.`RF Age Comp bubble.R`: Rockfish age composition bubble plot  
+    - b.`RFAgeComp9622_port.R`: Rockfish age composition by port  
+    - c.`RFAgeComp9622_SFmgmtarea.R`: Rockfish age composition by sport
+      fish management area  
+  - ii.`Apportionment/`: Apportioning groundfish to sport fish
+    management areas to assess proportion of harvest by port and
+    management area  
+    - a.`Apportion halibut to mgmtareas.R`: Halibut apportionment  
+    - b.`Apportion lingcod to mgmtareas.R`: Lingcod apportionment  
+    - c.`Apportion rockfish to mgmtareas.R`: Rockfish apportionment  
+  - iii.`L.WRegression/`: Calculate yield of groundfish in kg, using
+    length-weight regressions to estimate weights of fish when no weight
+    is available in the data.  Computation is based on the basic
+    formula: Yield(s) = Harvest(all s) \* SpeciesComp(s) \* MeanWt(s).  
+    Estimates are preliminary because they are based on L-W regressions
+    that haven’t yet been tested for differences between years, ports,
+    sexes, etc.  
+    - a.`LCYieldPrelim_SFmgmtarea.R`: Estimate of lingcod yield by sport
+      fish management area by year  
+    - b.`RFYieldPrelim_byAssemb_port.R`: Estimate of rockfish yield by
+      port and assemblage by year  
+    - c.`RFYieldPrelim_byAssemb_SFmgmtarea.R`: Estimate of rockfish
+      yield by sport fish management area and assemblage by year  
+  - iv.`RF_Reconstruction`: Rockfish harvest reconstruction using
+    harvest and release estimates from RTS.  
+    - a.`RF_removals`: Estimates the total removals in lbs. for Black
+      and Yelloweye rockfish using harvest and release estimates from
+      Phil Joy, using the Howard et al. method. This script should be
+      run in early October after recieving the updated harvest and
+      release estimates. Be sure to update the script to add the port
+      sampling data for the current year and update the ouput file to
+      state the current year.  
+  - v.`Spatial harvest and effort/`: Total harvest by port, user, and
+    year from port sampling interview data. Used for providing harvest
+    trends in managemnet reports/
+    - a.`LC/`: Lingcod data/
+      - (i).`LC_report_spatial_subset.R`: Lingcod interview harvest data
+        for lingcod report/
+    - b.`RF/`: Rockfish data. currently empty/
+  - vi.`Species_comp/`: Rockfish species composition data from port
+    sampling biological sampling/
+    - a.`RF by assemblage.R`: Species compositon and average weights per
+      year at the assemblage level. Predicted weights based on length
+      used when weight is not available for a sample/
+    - b.`RF_simple_spcomp.R`: Simple species composition by sport fish
+      management area. Useful for providing species comps to area
+      managers  
+    - c.`RFspcomp9622.R`: Rockfish species composition in biological
+      data. Uses Steve Fleischman version of composition equations  
+  - vii.`AWLsummaries.R`: Summary statistics of rockfish data. For
+    rockfish report  
+  - viii.`FractionCleanedAtSea.R`: Calculates the fraction of harvest
+    cleaned at sea by port for halibut, rockfish, and lingcod. Used in
+    writing Op plan.  
+- 5.`functions.R`: Functions used in R scripts. Accessed with
+  `source("functions.R")`  
