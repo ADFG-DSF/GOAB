@@ -3,7 +3,7 @@
 
 **Author:** Clay McKean (<clay.mckean@alaska.gov>)  
   
-**Last updated:** December 2024  
+**Last updated:** February 2025  
   
 **Local Directory**  
 There are 2 local directories associated with this project:  
@@ -122,12 +122,14 @@ The operational plan for this project can be found here:
     - b.`RFAgeComp9622_port.R`: Rockfish age composition by port  
     - c.`RFAgeComp9622_SFmgmtarea.R`: Rockfish age composition by sport
       fish management area  
+
   - ii.`Apportionment/`: Apportioning groundfish to sport fish
     management areas to assess proportion of harvest by port and
     management area  
     - a.`Apportion halibut to mgmtareas.R`: Halibut apportionment  
     - b.`Apportion lingcod to mgmtareas.R`: Lingcod apportionment  
     - c.`Apportion rockfish to mgmtareas.R`: Rockfish apportionment  
+
   - iii.`L.WRegression/`: Calculate yield of groundfish in kg, using
     length-weight regressions to estimate weights of fish when no weight
     is available in the data.  Computation is based on the basic
@@ -141,8 +143,34 @@ The operational plan for this project can be found here:
       port and assemblage by year  
     - c.`RFYieldPrelim_byAssemb_SFmgmtarea.R`: Estimate of rockfish
       yield by sport fish management area and assemblage by year  
-  - iv.`RF_Reconstruction`: Rockfish harvest reconstruction using
-    harvest and release estimates from RTS.  
+
+  - 4.  `Objectives`: Analyzing primary and secondary objectives of the
+        port sampling program  
+
+    - 1.  `Objectives 1 & 2`: Estimate mean weight and length of Pacific
+          halibut by user group and sport fish area  
+    - 2.  `Objective 3`: Estimate species compe of rockfish by port  
+    - 3.  `Objective 4`: Estimate age, length, and sex composition of
+          rockfish by port for principal rockfish species
+          (black/yelloweye)  
+    - 4.  `Objective 5`: EStimate age, length, and sex composition of
+          lingcod by port  
+    - 5.  `Secondary Objective 1`: Identify differences in geographic
+          distribution of groundfish harvest and effort by user group
+          and year  
+    - 6.  `Secondary Objective 2`: Estimate proportion of Pacific
+          halibut harvest cleaned at sea in each port  
+    - 7.  `Secondary Objective 3`: Estimate proportion of Pacific
+          halibut caught on circle hooks vs. other hook types at each
+          port  
+    - 8.  `Secondary Objective 4`: Evaluated data on discarded rockfish
+          depth of capture for pelagic, yelloweye, and non-pelagic
+          assemblages  
+    - 1.  `Secondary Objective 5`: Estimate proportions of released
+          lingcod of sublegal size by port  
+
+  - v.`RF_Reconstruction`: Rockfish harvest reconstruction using harvest
+    and release estimates from RTS.  
     - a.`RF_removals`: Estimates the total removals in lbs. for Black
       and Yelloweye rockfish using harvest and release estimates from
       Phil Joy, using the Howard et al. method. This script should be
@@ -150,14 +178,16 @@ The operational plan for this project can be found here:
       release estimates. Be sure to update the script to add the port
       sampling data for the current year and update the ouput file to
       state the current year.  
-  - v.`Spatial harvest and effort/`: Total harvest by port, user, and
+
+  - vi.`Spatial harvest and effort/`: Total harvest by port, user, and
     year from port sampling interview data. Used for providing harvest
     trends in managemnet reports/
     - a.`LC/`: Lingcod data/
       - (i).`LC_report_spatial_subset.R`: Lingcod interview harvest data
         for lingcod report/
     - b.`RF/`: Rockfish data. currently empty/
-  - vi.`Species_comp/`: Rockfish species composition data from port
+
+  - vii.`Species_comp/`: Rockfish species composition data from port
     sampling biological sampling/
     - a.`RF by assemblage.R`: Species compositon and average weights per
       year at the assemblage level. Predicted weights based on length
@@ -167,9 +197,11 @@ The operational plan for this project can be found here:
       managers  
     - c.`RFspcomp9622.R`: Rockfish species composition in biological
       data. Uses Steve Fleischman version of composition equations  
-  - vii.`AWLsummaries.R`: Summary statistics of rockfish data. For
+
+  - viii.`AWLsummaries.R`: Summary statistics of rockfish data. For
     rockfish report  
-  - viii.`FractionCleanedAtSea.R`: Calculates the fraction of harvest
+
+  - viv.`FractionCleanedAtSea.R`: Calculates the fraction of harvest
     cleaned at sea by port for halibut, rockfish, and lingcod. Used in
     writing Op plan.  
 - 5.`functions.R`: Functions used in R scripts. Accessed with
