@@ -523,3 +523,8 @@ area_split_sf <- function(a) {
       )
     )
 }
+
+# Standard Error calculation
+stderr <- function(values){ # Standard Error calculation
+  sd(values, na.rm = TRUE) / sqrt(length(values))
+}
