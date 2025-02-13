@@ -528,3 +528,10 @@ area_split_sf <- function(a) {
 stderr <- function(values){ # Standard Error calculation
   sd(values, na.rm = TRUE) / sqrt(length(values))
 }
+
+# Find mode of a variable. Used mainly for rockfish common year classes
+mode <- function(x) {
+  x <- x[!is.na(x)]  # Remove NAs
+  unique_x <- unique(x)
+  unique_x[which.max(tabulate(match(x, unique_x)))]
+}

@@ -123,6 +123,7 @@ Estimates are preliminary because they are based on L-W regressions that haven't
     * c.`RFspcomp9622.R`: Rockfish species composition in biological data. Uses Steve Fleischman version of composition equations\
   - viii.`AWLsummaries.R`: Summary statistics of rockfish data. For rockfish report\
   - viv.`FractionCleanedAtSea.R`: Calculates the fraction of harvest cleaned at sea by port for halibut, rockfish, and lingcod. Used in writing Op plan.\
+  - x. `RFLW.R`: Estimates length- weight parameters for rockfish using a log-log model of logWeight estimated from logLength. The predicted weight parameters produced by this file are used to derive predicted weight for rockfish with no weight estimate in the rockfish harvest reconstruction file and elsewhere.
 - 5.`functions.R`: Functions used in R scripts. Accessed with `source("functions.R")`\
     
   

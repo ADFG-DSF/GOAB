@@ -204,5 +204,11 @@ The operational plan for this project can be found here:
   - viv.`FractionCleanedAtSea.R`: Calculates the fraction of harvest
     cleaned at sea by port for halibut, rockfish, and lingcod. Used in
     writing Op plan.  
+
+  - 24. `RFLW.R`: Estimates length- weight parameters for rockfish using
+        a log-log model of logWeight estimated from logLength. The
+        predicted weight parameters produced by this file are used to
+        derive predicted weight for rockfish with no weight estimate in
+        the rockfish harvest reconstruction file and elsewhere.
 - 5.`functions.R`: Functions used in R scripts. Accessed with
   `source("functions.R")`  
