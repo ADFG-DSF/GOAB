@@ -191,7 +191,7 @@ ye_age_PWS <- ggplot(data = Yelloweye_PWS) +
 ye_age_PWS
 
 #### Cook Inlet
-#### Prince William Sound
+
 # Black rockfish
 black_CI <- black %>% 
   filter(
