@@ -21,11 +21,12 @@ rf_all <- do.call(rbind.fill, list(rock9195, rock9600, rock2001, rock2002, rock2
                                    rock2004, rock2005, rock2006, rock2007, rock2008, 
                                    rock2009, rock2010, rock2011, rock2012, rock2013, 
                                    rock2014, rock2015, rock2016, rock2017, rock2018, 
-                                   rock2019, rock2020, rock2021, rock2022, rock2023))
+                                   rock2019, rock2020, rock2021, rock2022, rock2023,
+                                   rock2024))
 detach(package:plyr)
 
 ##########
-# Separate into
+# Separate into sport fish areas
 ########
 rf_split <- area_split_sf(rf_all) 
 
@@ -126,8 +127,8 @@ scale_b_PWS <- max(black_PWS$n) / max(black_PWS$AGE)
 brf_age_PWS <- ggplot(data = black_PWS) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_b_PWS), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, 2023, 3), labels = as.character(seq(1995, 2023, 3)), name = 'Year',
-                     limit = c(1995, max(black_PWS$YEAR))) +
+  scale_x_continuous(breaks = seq(1996,max(black_PWS$YEAR), 3), labels = as.character(seq(1996,max(black_PWS$YEAR), 3)), name = 'Year',
+                     limit = c(1996, max(black_PWS$YEAR))) +
   scale_y_continuous(breaks = seq(0, 65, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_b_PWS, name = 'Sample Size', breaks = seq(0, 1500, 250))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(range = c(2, 15), guide = FALSE) +
@@ -143,7 +144,7 @@ brf_age_PWS <- ggplot(data = black_PWS) +
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1991, slope = 1, color = 'red') +
-  annotate("text", x = 1995, y = 5, label = "1991", color = "red") +
+  annotate("text", x = 1996, y = 3, label = "1991", color = "red") +
   geom_abline(intercept = -2002, slope = 1, color = 'red') +
   annotate("text", x = 2002, y = 1, label = "2002", color = "red") +
   geom_abline(intercept = -2007, slope = 1, color = 'red') +
@@ -165,8 +166,8 @@ scale_y_PWS <- max(Yelloweye_PWS$n) / max(Yelloweye_PWS$AGE)
 ye_age_PWS <- ggplot(data = Yelloweye_PWS) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_y_PWS), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, 2023, 3), labels = as.character(seq(1995, 2023, 3)), name = 'Year',
-                     limit = c(1995, max(Yelloweye_PWS$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+                     limit = c(1996, max(Yelloweye_PWS$YEAR))) +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_y_PWS, name = 'Sample Size', breaks = seq(0, 800, 200))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(range = c(2, 15), guide = FALSE) +
@@ -182,11 +183,14 @@ ye_age_PWS <- ggplot(data = Yelloweye_PWS) +
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1968, slope = 1, color = 'red') +
-  annotate("text", x = 1995, y = 28, label = "1968", color = "red") +
+  annotate("text", x = 1996, y = 30, label = "1968", color = "red") +
   geom_abline(intercept = -1986, slope = 1, color = 'red') +
-  annotate("text", x = 1995, y = 10, label = "1986", color = "red") +
+  annotate("text", x = 1996, y = 12, label = "1986", color = "red") +
   geom_abline(intercept = -1998, slope = 1, color = 'red') +
-  annotate("text", x = 1998, y = 1, label = "1998", color = "red") 
+  annotate("text", x = 1998, y = 1, label = "1998", color = "red") +
+  geom_abline(intercept = -2010, slope = 1, color = 'red') +
+  annotate("text", x = 2010, y = 2, label = "2010", color = "red") 
+
 
 ye_age_PWS
 
@@ -203,8 +207,8 @@ scale_b_CI <- max(black_CI$n) / max(black_CI$AGE)
 brf_age_CI <- ggplot(data = black_CI) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_b_CI), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, 2023, 3), labels = as.character(seq(1995, 2023, 3)), name = 'Year',
-                     limit = c(1995, max(black_CI$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+                     limit = c(1996, max(black_CI$YEAR))) +
   scale_y_continuous(breaks = seq(0, 65, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_b_CI, name = 'Sample Size', breaks = seq(0, 550, 150))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(range = c(2, 15), guide = FALSE) +
@@ -220,9 +224,9 @@ brf_age_CI <- ggplot(data = black_CI) +
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1979, slope = 1, color = 'red') +
-  annotate("text", x = 1995, y = 17, label = "1979", color = "red") +
+  annotate("text", x = 1996, y = 19, label = "1979", color = "red") +
   geom_abline(intercept = -1991, slope = 1, color = 'red') +
-  annotate("text", x = 1995, y = 5, label = "1991", color = "red") +
+  annotate("text", x = 1996, y = 7, label = "1991", color = "red") +
   geom_abline(intercept = -1996, slope = 1, color = 'red') +
   annotate("text", x = 1996, y = 1, label = "1996", color = "red") +
   geom_abline(intercept = -2002, slope = 1, color = 'red') +
@@ -246,8 +250,8 @@ scale_y_CI <- max(Yelloweye_CI$n) / max(Yelloweye_CI$AGE)
 ye_age_CI <- ggplot(data = Yelloweye_CI) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_y_CI), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, 2023, 3), labels = as.character(seq(1995, 2023, 3)), name = 'Year',
-                     limit = c(1995, max(Yelloweye_CI$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+                     limit = c(1996, max(Yelloweye_CI$YEAR))) +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_y_CI, name = 'Sample Size', breaks = seq(0, 120, 40))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(range = c(2, 15), guide = FALSE) +
@@ -277,8 +281,8 @@ scale_b_KOD <- max(black_KOD$n) / max(black_KOD$AGE)
 brf_age_KOD <- ggplot(data = black_KOD) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_b_KOD), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, 2023, 3), labels = as.character(seq(1995, 2023, 3)), name = 'Year',
-                     limit = c(1995, max(black_KOD$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+                     limit = c(1996, max(black_KOD$YEAR))) +
   scale_y_continuous(breaks = seq(0, 65, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_b_KOD, name = 'Sample Size', breaks = seq(0, 600, 150))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(range = c(2, 15), guide = FALSE) +
@@ -294,11 +298,11 @@ brf_age_KOD <- ggplot(data = black_KOD) +
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1979, slope = 1, color = 'red') +
-  annotate("text", x = 1995, y = 17, label = "1979", color = "red") +
+  annotate("text", x = 1996, y = 19, label = "1979", color = "red") +
   geom_abline(intercept = -1990, slope = 1, color = 'red') +
-  annotate("text", x = 1995, y = 3, label = "1990", color = "red") +
+  annotate("text", x = 1996, y = 4, label = "1990", color = "red") +
   geom_abline(intercept = -1991, slope = 1, color = 'red') +
-  annotate("text", x = 1995, y = 5, label = "1991", color = "red") +
+  annotate("text", x = 1996, y = 7, label = "1991", color = "red") +
   geom_abline(intercept = -1996, slope = 1, color = 'red') +
   annotate("text", x = 1996, y = 1, label = "1996", color = "red") +
   geom_abline(intercept = -2002, slope = 1, color = 'red') +
@@ -322,8 +326,8 @@ scale_y_KOD <- max(Yelloweye_KOD$n) / max(Yelloweye_KOD$AGE)
 ye_age_KOD <- ggplot(data = Yelloweye_KOD) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_y_KOD), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, 2023, 3), labels = as.character(seq(1995, 2023, 3)), name = 'Year',
-                     limit = c(1995, max(Yelloweye_KOD$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+                     limit = c(1996, max(Yelloweye_KOD$YEAR))) +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_y_KOD, name = 'Sample Size', breaks = seq(0, 50, 15))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(range = c(2, 15), guide = FALSE) +
@@ -354,8 +358,8 @@ scale_b_NG <- max(black_NG$n) / max(black_NG$AGE)
 brf_age_NG <- ggplot(data = black_NG) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_b_NG), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, 2023, 3), labels = as.character(seq(1995, 2023, 3)), name = 'Year',
-                     limit = c(1995, max(black_NG$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+                     limit = c(1996, max(black_NG$YEAR))) +
   scale_y_continuous(breaks = seq(0, 65, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_b_NG, name = 'Sample Size', breaks = seq(0, 600, 150))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(range = c(2, 15), guide = FALSE) +
@@ -371,7 +375,7 @@ brf_age_NG <- ggplot(data = black_NG) +
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1991, slope = 1, color = 'red') +
-  annotate("text", x = 1995, y = 5, label = "1991", color = "red") +
+  annotate("text", x = 1996, y = 7, label = "1991", color = "red") +
   geom_abline(intercept = -1997, slope = 1, color = 'red') +
   annotate("text", x = 1997, y = 1, label = "1997", color = "red") +
   geom_abline(intercept = -2002, slope = 1, color = 'red') +
@@ -395,8 +399,8 @@ scale_y_NG <- max(Yelloweye_NG$n) / max(Yelloweye_NG$AGE)
 ye_age_NG <- ggplot(data = Yelloweye_NG) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_y_NG), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, 2023, 3), labels = as.character(seq(1995, 2023, 3)), name = 'Year',
-                     limit = c(1995, max(Yelloweye_KOD$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+                     limit = c(1996, max(Yelloweye_KOD$YEAR))) +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_y_NG, name = 'Sample Size', breaks = seq(0, 200, 50))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(range = c(2, 15), guide = FALSE) +
@@ -471,8 +475,8 @@ scale_b_all <- max(black_all$n) / max(black_all$AGE)
 brf_age_all <- ggplot(data = black_all) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_b_all), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, 2023, 3), labels = as.character(seq(1995, 2023, 3)), name = 'Year',
-                     limit = c(1995, max(black_all$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+                     limit = c(1996, max(black_all$YEAR))) +
   scale_y_continuous(breaks = seq(0, 65, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_b_all, name = 'Sample Size', breaks = seq(0, 2650, 650))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(range = c(2, 15), guide = FALSE) +
@@ -488,9 +492,9 @@ brf_age_all <- ggplot(data = black_all) +
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1991, slope = 1, color = 'red') +
-  annotate("text", x = 1995, y = 5, label = "1991", color = "red") +
+  annotate("text", x = 1996, y = 3, label = "1991", color = "red") +
   geom_abline(intercept = -1996, slope = 1, color = 'red') +
-  annotate("text", x = 1996, y = 1, label = "1996", color = "red") +
+  annotate("text", x = 1996, y = -1, label = "1996", color = "red") +
   geom_abline(intercept = -2002, slope = 1, color = 'red') +
   annotate("text", x = 2002, y = 1, label = "2002", color = "red") +
   geom_abline(intercept = -2007, slope = 1, color = 'red') +
@@ -510,8 +514,8 @@ scale_y_all <- max(Yelloweye_all$n) / max(Yelloweye_all$AGE)
 ye_age_all <- ggplot(data = Yelloweye_all) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_y_all), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, 2023, 3), labels = as.character(seq(1995, 2023, 3)), name = 'Year',
-                     limit = c(1995, max(Yelloweye_KOD$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+                     limit = c(1996, max(Yelloweye_all$YEAR))) +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_y_all, name = 'Sample Size', breaks = seq(0, 950, 250))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(range = c(2, 15), guide = FALSE) +
@@ -527,12 +531,12 @@ ye_age_all <- ggplot(data = Yelloweye_all) +
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1968, slope = 1, color = 'red') +
-  annotate("text", x = 1995, y = 28.7, label = "1968", color = "red") +
+  annotate("text", x = 1996, y = 30, label = "1968", color = "red", fontface = "bold") +
   geom_abline(intercept = -1986, slope = 1, color = 'red') +
-  annotate("text", x = 1995, y = 10.7, label = "1986", color = "red") +
+  annotate("text", x = 1996, y = 12, label = "1986", color = "red", fontface = "bold") +
   geom_abline(intercept = -1998, slope = 1, color = 'red') +
-  annotate("text", x = 1998, y = 1.7, label = "1998", color = "red") +
+  annotate("text", x = 1998, y = 2, label = "1998", color = "red") +
   geom_abline(intercept = -2010, slope = 1, color = 'red') +
-  annotate("text", x = 2010, y = 1.7, label = "2010?", color = "red")
+  annotate("text", x = 2010, y = 2, label = "2010", color = "red")
 
 ye_age_all

@@ -18,9 +18,10 @@ get_data("data/LC/")
 library(plyr)
 
 lc <- do.call(rbind.fill, list(ling9104, ling2005, ling2006, ling2007, ling2008, 
-                                   ling2009, ling2010, ling2011, ling2012, ling2013, 
-                                   ling2014, ling2015, ling2016, ling2017, ling2018, 
-                                   ling2019, ling2020, ling2021, ling2022, ling2023))
+                               ling2009, ling2010, ling2011, ling2012, ling2013, 
+                               ling2014, ling2015, ling2016, ling2017, ling2018, 
+                               ling2019, ling2020, ling2021, ling2022, ling2023,
+                               ling2024))
 detach(package:plyr)
 
 lc$AGE <- as.integer(lc$AGE)
@@ -115,8 +116,8 @@ scale_PWS <- max(lc_PWS$n) / max(lc_PWS$AGE)
 lc_age_PWS <- ggplot(data = lc_PWS) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_PWS), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, max(lc_PWS$YEAR), 3), labels = as.character(seq(1995, max(lc_PWS$YEAR), 3)), name = 'Year',
-                     limit = c(1995, max(lc_PWS$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, max(lc_PWS$YEAR), 3), labels = as.character(seq(1996, max(lc_PWS$YEAR), 3)), name = 'Year',
+                     limit = c(1996, max(lc_PWS$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_PWS, name = 'Sample Size', breaks = seq(0, 700, 100))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(guide = FALSE) +
@@ -149,8 +150,8 @@ scale_PWS <- max(lc_PWS$n) / max(lc_PWS$AGE)
 lc_age_PWS <- ggplot(data = lc_PWS) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_PWS), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, max(lc_PWS$YEAR), 3), labels = as.character(seq(1995, max(lc_PWS$YEAR), 3)), name = 'Year',
-                     limit = c(1995, max(lc_PWS$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, max(lc_PWS$YEAR), 3), labels = as.character(seq(1996, max(lc_PWS$YEAR), 3)), name = 'Year',
+                     limit = c(1996, max(lc_PWS$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_PWS, name = 'Sample Size', breaks = seq(0, 750, 100))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(guide = FALSE) +
@@ -180,8 +181,8 @@ scale_CI <- max(lc_CI$n) / max(lc_CI$AGE)
 lc_age_CI <- ggplot(data = lc_CI) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_CI), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, max(lc_CI$YEAR), 3), labels = as.character(seq(1995, max(lc_CI$YEAR), 3)), name = 'Year',
-                     limit = c(1995, max(lc_CI$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, max(lc_CI$YEAR), 3), labels = as.character(seq(1996, max(lc_CI$YEAR), 3)), name = 'Year',
+                     limit = c(1996, max(lc_CI$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_CI, name = 'Sample Size', breaks = seq(0, 250, 50))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(guide = FALSE) +
@@ -211,8 +212,8 @@ scale_KOD <- max(lc_KOD$n) / max(lc_KOD$AGE)
 lc_age_KOD <- ggplot(data = lc_KOD) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_KOD), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, max(lc_KOD$YEAR), 3), labels = as.character(seq(1995, max(lc_KOD$YEAR), 3)), name = 'Year',
-                     limit = c(1995, max(lc_KOD$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, max(lc_KOD$YEAR), 3), labels = as.character(seq(1996, max(lc_KOD$YEAR), 3)), name = 'Year',
+                     limit = c(1996, max(lc_KOD$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_KOD, name = 'Sample Size', breaks = seq(0, 250, 50))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(guide = FALSE) +
@@ -244,8 +245,8 @@ scale_NG <- max(lc_NG$n) / max(lc_NG$AGE)
 lc_age_NG <- ggplot(data = lc_NG) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_NG), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, max(lc_NG$YEAR), 3), labels = as.character(seq(1995, max(lc_NG$YEAR), 3)), name = 'Year',
-                     limit = c(1995, max(lc_NG$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, max(lc_NG$YEAR), 3), labels = as.character(seq(1996, max(lc_NG$YEAR), 3)), name = 'Year',
+                     limit = c(1996, max(lc_NG$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_NG, name = 'Sample Size', breaks = seq(0, 200, 50))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(guide = FALSE) +
@@ -315,8 +316,8 @@ scale_all <- max(plotages_all$n) / max(plotages_all$AGE)
 lc_age_all <- ggplot(data = plotages_all) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_all), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, max(plotages_all$YEAR), 3), labels = as.character(seq(1995, max(plotages_all$YEAR), 3)), name = 'Year',
-                     limit = c(1995, max(plotages_all$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, max(plotages_all$YEAR), 3), labels = as.character(seq(1996, max(plotages_all$YEAR), 3)), name = 'Year',
+                     limit = c(1996, max(plotages_all$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_all, name = 'Sample Size', breaks = seq(0, 1000, 200))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(guide = FALSE) +
@@ -330,7 +331,14 @@ lc_age_all <- ggplot(data = plotages_all) +
     axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
     axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
     axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
-  )
+  ) +
+  # Adding lines to indicate strong cohorts
+  geom_abline(intercept = -1989, slope = 1, color = 'red') +
+  annotate("text", x = 1996, y = 9, label = "1989", color = "red") +
+  geom_abline(intercept = -1995, slope = 1, color = 'red') +
+  annotate("text", x = 1996, y = 2, label = "1995", color = "red") +
+  geom_abline(intercept = -1999, slope = 1, color = 'red') +
+  annotate("text", x = 1999, y = 1, label = "1999", color = "red")
 
 lc_age_all
 
@@ -385,8 +393,8 @@ scale_nok <- max(plotages_nok$n) / max(plotages_nok$AGE)
 lc_age_nok <- ggplot(data = plotages_nok) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_nok), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1995, max(plotages_nok$YEAR), 3), labels = as.character(seq(1995, max(plotages_nok$YEAR), 3)), name = 'Year',
-                     limit = c(1995, max(plotages_nok$YEAR))) +
+  scale_x_continuous(breaks = seq(1996, max(plotages_nok$YEAR), 3), labels = as.character(seq(1996, max(plotages_nok$YEAR), 3)), name = 'Year',
+                     limit = c(1996, max(plotages_nok$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_nok, name = 'Sample Size', breaks = seq(0, 1000, 200))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(guide = FALSE) +
@@ -400,7 +408,15 @@ lc_age_nok <- ggplot(data = plotages_nok) +
     axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
     axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
     axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
-  )
+  ) +
+  # Adding lines to indicate strong cohorts
+  geom_abline(intercept = -1989, slope = 1, color = 'red') +
+  annotate("text", x = 1996, y = 9, label = "1989", color = "red") +
+  geom_abline(intercept = -1995, slope = 1, color = 'red') +
+  annotate("text", x = 1996, y = 2, label = "1995", color = "red") +
+  geom_abline(intercept = -1999, slope = 1, color = 'red') +
+  annotate("text", x = 1999, y = 1, label = "1999", color = "red")
+
 
 lc_age_nok
 
