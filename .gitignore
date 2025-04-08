@@ -4,3 +4,4 @@
 *.Ruserdata
 reports/Southcentral_port_sampling/
 .Rproj.user
+write-test-*
