@@ -2,12 +2,11 @@
 # Leave One Out Cross Validation
 ###############################################################################
 
-library(here)
 library(magrittr)
 library(ggplot2)
-source(here("functions.R"))
+source("./Lingcod_Report_0323/functions.R")
 
-int_boat <- readRDS("O:/DSF/GOAB/Ling_Reports/LingReport_03-23/Spatial Comps/int_boat.rds")
+int_boat <- readRDS("./Lingcod_Report_0323/Spatial Comps/int_boat.rds")
 
 int_area <- 
   int_boat %>%
@@ -65,7 +64,7 @@ ni <- 5E4; nb <- ni/2; nc <- 3; nt <- 100
                                      model.file = modfile_alpha_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_alpha_pred_Homer, here("Interview post/Hpost_alpha_pred_Homer.rds"))
+saveRDS(Hpost_alpha_pred_Homer, "./Lingcod_Report_0323/Interview post/Hpost_alpha_pred_Homer.rds")
 Hpost_alpha_pred_Kodiak <- 
   lapply(dat_Kodiak, 
          function(x){x2 <- x[names(x) != "pred_area"]
@@ -74,7 +73,7 @@ Hpost_alpha_pred_Kodiak <-
                                      model.file = modfile_alpha_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_alpha_pred_Kodiak, here("Interview post/Hpost_alpha_pred_Kodiak.rds"))
+saveRDS(Hpost_alpha_pred_Kodiak, "./Lingcod_Report_0323/Interview post/Hpost_alpha_pred_Kodiak.rds")
 
 Hpost_alpha_pred_Seward <- 
   lapply(dat_Seward, 
@@ -84,7 +83,7 @@ Hpost_alpha_pred_Seward <-
                                      model.file = modfile_alpha_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_alpha_pred_Seward, here("Interview post/Hpost_alpha_pred_Seward.rds"))
+saveRDS(Hpost_alpha_pred_Seward, "./Lingcod_Report_0323/Interview post/Hpost_alpha_pred_Seward.rds")
 
 Hpost_alpha_pred_Valdez <- 
   lapply(dat_Valdez, 
@@ -94,7 +93,7 @@ Hpost_alpha_pred_Valdez <-
                                      model.file = modfile_alpha_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_alpha_pred_Valdez, here("Interview post/Hpost_alpha_pred_Valdez.rds"))
+saveRDS(Hpost_alpha_pred_Valdez, "./Lingcod_Report_0323/Interview post/Hpost_alpha_pred_Valdez.rds")
 
 Hpost_alpha_pred_Whittier <- 
   lapply(dat_Whittier, 
@@ -104,7 +103,7 @@ Hpost_alpha_pred_Whittier <-
                                      model.file = modfile_alpha_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_alpha_pred_Whittier, here("Interview post/Hpost_alpha_pred_Whittier.rds"))
+saveRDS(Hpost_alpha_pred_Whittier, "./Lingcod_Report_0323/Interview post/Hpost_alpha_pred_Whittier.rds")
 
 
 
@@ -153,7 +152,7 @@ Hpost_beta_pred_Homer <-
                                      model.file = modfile_beta_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_beta_pred_Homer, here("Interview post/Hpost_beta_pred_Homer.rds"))
+saveRDS(Hpost_beta_pred_Homer, "./Lingcod_Report_0323/Interview post/Hpost_beta_pred_Homer.rds")
 
 Hpost_beta_pred_Kodiak <- 
   lapply(dat_Kodiak, 
@@ -163,7 +162,7 @@ Hpost_beta_pred_Kodiak <-
                                      model.file = modfile_beta_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_beta_pred_Kodiak, here("Interview post/Hpost_beta_pred_Kodiak.rds"))
+saveRDS(Hpost_beta_pred_Kodiak, "./Lingcod_Report_0323/Interview post/Hpost_beta_pred_Kodiak.rds")
 
 Hpost_beta_pred_Seward <- 
   lapply(dat_Seward, 
@@ -173,7 +172,7 @@ Hpost_beta_pred_Seward <-
                                      model.file = modfile_beta_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_beta_pred_Seward, here("Interview post/Hpost_beta_pred_Seward.rds"))
+saveRDS(Hpost_beta_pred_Seward, "./Lingcod_Report_0323/Interview post/Hpost_beta_pred_Seward.rds")
 
 Hpost_beta_pred_Valdez <- 
   lapply(dat_Valdez, 
@@ -183,7 +182,7 @@ Hpost_beta_pred_Valdez <-
                                      model.file = modfile_beta_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_beta_pred_Valdez, here("Interview post/Hpost_beta_pred_Valdez.rds"))
+saveRDS(Hpost_beta_pred_Valdez, "./Lingcod_Report_0323/Interview post/Hpost_beta_pred_Valdez.rds")
 
 Hpost_beta_pred_Whittier <- 
   lapply(dat_Whittier, 
@@ -193,7 +192,7 @@ Hpost_beta_pred_Whittier <-
                                      model.file = modfile_beta_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_beta_pred_Whittier, here("Interview post/Hpost_beta_pred_Whittier.rds"))
+saveRDS(Hpost_beta_pred_Whittier, "./Lingcod_Report_0323/Interview post/Hpost_beta_pred_Whittier.rds")
 
 
 
@@ -247,7 +246,7 @@ Hpost_epsilon_pred_Homer <-
                                      model.file = modfile_epsilon_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_epsilon_pred_Homer, here("Interview post/Hpost_epsilon_pred_Homer.rds"))
+saveRDS(Hpost_epsilon_pred_Homer, "./Lingcod_Report_0323/Interview post/Hpost_epsilon_pred_Homer.rds")
 
 Hpost_epsilon_pred_Kodiak <- 
   lapply(dat_Kodiak, 
@@ -257,7 +256,7 @@ Hpost_epsilon_pred_Kodiak <-
                                      model.file = modfile_epsilon_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_epsilon_pred_Kodiak, here("Interview post/Hpost_epsilon_pred_Kodiak.rds"))
+saveRDS(Hpost_epsilon_pred_Kodiak, "./Lingcod_Report_0323/Interview post/Hpost_epsilon_pred_Kodiak.rds")
 
 Hpost_epsilon_pred_Seward <- 
   lapply(dat_Seward, 
@@ -267,7 +266,7 @@ Hpost_epsilon_pred_Seward <-
                                      model.file = modfile_epsilon_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_epsilon_pred_Seward, here("Interview post/Hpost_epsilon_pred_Seward.rds"))
+saveRDS(Hpost_epsilon_pred_Seward, "./Lingcod_Report_0323/Interview post/Hpost_epsilon_pred_Seward.rds")
 
 Hpost_epsilon_pred_Valdez <- 
   lapply(dat_Valdez, 
@@ -277,7 +276,7 @@ Hpost_epsilon_pred_Valdez <-
                                      model.file = modfile_epsilon_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_epsilon_pred_Valdez, here("Interview post/Hpost_epsilon_pred_Valdez.rds"))
+saveRDS(Hpost_epsilon_pred_Valdez, "./Lingcod_Report_0323/Interview post/Hpost_epsilon_pred_Valdez.rds")
 
 Hpost_epsilon_pred_Whittier <- 
   lapply(dat_Whittier, 
@@ -287,7 +286,7 @@ Hpost_epsilon_pred_Whittier <-
                                      model.file = modfile_epsilon_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_epsilon_pred_Whittier, here("Interview post/Hpost_epsilon_pred_Whittier.rds"))
+saveRDS(Hpost_epsilon_pred_Whittier, "./Lingcod_Report_0323/Interview post/Hpost_epsilon_pred_Whittier.rds")
 
 
 
@@ -345,7 +344,7 @@ Hpost_gamma_pred_Homer <-
                                      model.file = modfile_gamma_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_gamma_pred_Homer, here("Interview post/Hpost_gamma_pred_Homer.rds"))
+saveRDS(Hpost_gamma_pred_Homer, "./Lingcod_Report_0323/Interview post/Hpost_gamma_pred_Homer.rds")
 
 Hpost_gamma_pred_Kodiak <- 
   lapply(dat_Kodiak, 
@@ -355,7 +354,7 @@ Hpost_gamma_pred_Kodiak <-
                                      model.file = modfile_gamma_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_gamma_pred_Kodiak, here("Interview post/Hpost_gamma_pred_Kodiak.rds"))
+saveRDS(Hpost_gamma_pred_Kodiak, "./Lingcod_Report_0323/Interview post/Hpost_gamma_pred_Kodiak.rds")
 
 Hpost_gamma_pred_Seward <- 
   lapply(dat_Seward, 
@@ -365,7 +364,7 @@ Hpost_gamma_pred_Seward <-
                                      model.file = modfile_gamma_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_gamma_pred_Seward, here("Interview post/Hpost_gamma_pred_Seward.rds"))
+saveRDS(Hpost_gamma_pred_Seward, "./Lingcod_Report_0323/Interview post/Hpost_gamma_pred_Seward.rds")
 
 Hpost_gamma_pred_Valdez <- 
   lapply(dat_Valdez, 
@@ -375,7 +374,7 @@ Hpost_gamma_pred_Valdez <-
                                      model.file = modfile_gamma_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_gamma_pred_Valdez, here("Interview post/Hpost_gamma_pred_Valdez.rds"))
+saveRDS(Hpost_gamma_pred_Valdez, "./Lingcod_Report_0323/Interview post/Hpost_gamma_pred_Valdez.rds")
 
 Hpost_gamma_pred_Whittier <- 
   lapply(dat_Whittier, 
@@ -385,33 +384,33 @@ Hpost_gamma_pred_Whittier <-
                                      model.file = modfile_gamma_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Hpost_gamma_pred_Whittier, here("Interview post/Hpost_gamma_pred_Whittier.rds"))
+saveRDS(Hpost_gamma_pred_Whittier, "./Lingcod_Report_0323/Interview post/Hpost_gamma_pred_Whittier.rds")
 
 
 
 
 ### 
 # Model Selection 
-Hpost_alpha_pred_Homer <- readRDS(here("Interview post/Hpost_alpha_pred_Homer.rds"))
-Hpost_alpha_pred_Kodiak <- readRDS(here("Interview post/Hpost_alpha_pred_Kodiak.rds"))
-Hpost_alpha_pred_Seward <- readRDS(here("Interview post/Hpost_alpha_pred_Seward.rds"))
-Hpost_alpha_pred_Valdez <- readRDS(here("Interview post/Hpost_alpha_pred_Valdez.rds"))
-Hpost_alpha_pred_Whittier <- readRDS(here("Interview post/Hpost_alpha_pred_Whittier.rds"))
-Hpost_beta_pred_Homer <- readRDS(here("Interview post/Hpost_beta_pred_Homer.rds"))
-Hpost_beta_pred_Kodiak <- readRDS(here("Interview post/Hpost_beta_pred_Kodiak.rds"))
-Hpost_beta_pred_Seward <- readRDS(here("Interview post/Hpost_beta_pred_Seward.rds"))
-Hpost_beta_pred_Valdez <- readRDS(here("Interview post/Hpost_beta_pred_Valdez.rds"))
-Hpost_beta_pred_Whittier <- readRDS(here("Interview post/Hpost_beta_pred_Whittier.rds"))
-Hpost_epsilon_pred_Homer <- readRDS(here("Interview post/Hpost_epsilon_pred_Homer.rds"))
-Hpost_epsilon_pred_Kodiak <- readRDS(here("Interview post/Hpost_epsilon_pred_Kodiak.rds"))
-Hpost_epsilon_pred_Seward <- readRDS(here("Interview post/Hpost_epsilon_pred_Seward.rds"))
-Hpost_epsilon_pred_Valdez <- readRDS(here("Interview post/Hpost_epsilon_pred_Valdez.rds"))
-Hpost_epsilon_pred_Whittier <- readRDS(here("Interview post/Hpost_epsilon_pred_Whittier.rds"))
-Hpost_gamma_pred_Homer <- readRDS(here("Interview post/Hpost_gamma_pred_Homer.rds"))
-Hpost_gamma_pred_Kodiak <- readRDS(here("Interview post/Hpost_gamma_pred_Kodiak.rds"))
-Hpost_gamma_pred_Seward <- readRDS(here("Interview post/Hpost_gamma_pred_Seward.rds"))
-Hpost_gamma_pred_Valdez <- readRDS(here("Interview post/Hpost_gamma_pred_Valdez.rds"))
-Hpost_gamma_pred_Whittier <- readRDS(here("Interview post/Hpost_gamma_pred_Whittier.rds"))
+Hpost_alpha_pred_Homer <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_alpha_pred_Homer.rds")
+Hpost_alpha_pred_Kodiak <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_alpha_pred_Kodiak.rds")
+Hpost_alpha_pred_Seward <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_alpha_pred_Seward.rds")
+Hpost_alpha_pred_Valdez <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_alpha_pred_Valdez.rds")
+Hpost_alpha_pred_Whittier <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_alpha_pred_Whittier.rds")
+Hpost_beta_pred_Homer <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_beta_pred_Homer.rds")
+Hpost_beta_pred_Kodiak <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_beta_pred_Kodiak.rds")
+Hpost_beta_pred_Seward <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_beta_pred_Seward.rds")
+Hpost_beta_pred_Valdez <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_beta_pred_Valdez.rds")
+Hpost_beta_pred_Whittier <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_beta_pred_Whittier.rds")
+Hpost_epsilon_pred_Homer <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_epsilon_pred_Homer.rds")
+Hpost_epsilon_pred_Kodiak <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_epsilon_pred_Kodiak.rds")
+Hpost_epsilon_pred_Seward <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_epsilon_pred_Seward.rds")
+Hpost_epsilon_pred_Valdez <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_epsilon_pred_Valdez.rds")
+Hpost_epsilon_pred_Whittier <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_epsilon_pred_Whittier.rds")
+Hpost_gamma_pred_Homer <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_gamma_pred_Homer.rds")
+Hpost_gamma_pred_Kodiak <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_gamma_pred_Kodiak.rds")
+Hpost_gamma_pred_Seward <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_gamma_pred_Seward.rds")
+Hpost_gamma_pred_Valdez <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_gamma_pred_Valdez.rds")
+Hpost_gamma_pred_Whittier <- readRDS("./Lingcod_Report_0323/Interview post/Hpost_gamma_pred_Whittier.rds")
 
 
 #  * ll calcs -------------------------------------------------------------
@@ -448,7 +447,7 @@ Hll_Whittier <-
        gamma = mapply(get_llpred, pred = Hpost_gamma_pred_Whittier, obs = dat_Whittier))
 
 ll_H <- list(Hll_Homer, Hll_Kodiak, Hll_Seward, Hll_Valdez, Hll_Whittier)
-saveRDS(ll_H, here("Data/ll_H.rds"))
+saveRDS(ll_H, "./Lingcod_Report_0323/Data/ll_H.rds")
 
 
 
@@ -491,9 +490,8 @@ apply(Hpost_epsilon_pred_Seward[[10]]$sims.list$q_pred, c(2, 3), mean)
 # Selecting non-Halibut groundfish harvest
 # Limited to only the open lingcod season (Starting July 1)
 ################################################################################
-library(here)
-int_boat <- readRDS(here("int_boat.rds"))
-source(here("functions.R"))
+int_boat <- readRDS("./Lingcod_Report_0323/int_boat.rds")
+source("./Lingcod_Report_0323/functions.R")
 library(magrittr)
 library(ggplot2)
 
@@ -554,7 +552,7 @@ ni <- 5E4; nb <- ni/2; nc <- 3; nt <- 100
                                      model.file = modfile_alpha_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_alpha_pred_Homer, here("Interview post/Epost_alpha_pred_Homer.rds"))
+saveRDS(Epost_alpha_pred_Homer, "./Lingcod_Report_0323/Interview post/Epost_alpha_pred_Homer.rds")
 Epost_alpha_pred_Kodiak <- 
   lapply(dat_Kodiak_e, 
          function(x){x2 <- x[names(x) != "pred_area"]
@@ -563,7 +561,7 @@ Epost_alpha_pred_Kodiak <-
                                      model.file = modfile_alpha_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_alpha_pred_Kodiak, here("Interview post/Epost_alpha_pred_Kodiak.rds"))
+saveRDS(Epost_alpha_pred_Kodiak, "./Lingcod_Report_0323/Interview post/Epost_alpha_pred_Kodiak.rds")
 
 Epost_alpha_pred_Seward <- 
   lapply(dat_Seward_e, 
@@ -573,7 +571,7 @@ Epost_alpha_pred_Seward <-
                                      model.file = modfile_alpha_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_alpha_pred_Seward, here("Interview post/Epost_alpha_pred_Seward.rds"))
+saveRDS(Epost_alpha_pred_Seward, "./Lingcod_Report_0323/Interview post/Epost_alpha_pred_Seward.rds")
 
 Epost_alpha_pred_Valdez <- 
   lapply(dat_Valdez_e, 
@@ -583,7 +581,7 @@ Epost_alpha_pred_Valdez <-
                                      model.file = modfile_alpha_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_alpha_pred_Valdez, here("Interview post/Epost_alpha_pred_Valdez.rds"))
+saveRDS(Epost_alpha_pred_Valdez, "./Lingcod_Report_0323/Interview post/Epost_alpha_pred_Valdez.rds")
 
 Epost_alpha_pred_Whittier <- 
   lapply(dat_Whittier_e, 
@@ -593,7 +591,7 @@ Epost_alpha_pred_Whittier <-
                                      model.file = modfile_alpha_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_alpha_pred_Whittier, here("Interview post/Epost_alpha_pred_Whittier.rds"))
+saveRDS(Epost_alpha_pred_Whittier, "./Lingcod_Report_0323/Interview post/Epost_alpha_pred_Whittier.rds")
 
 
 
@@ -642,7 +640,7 @@ Epost_beta_pred_Homer <-
                                      model.file = modfile_beta_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_beta_pred_Homer, here("Interview post/Epost_beta_pred_Homer.rds"))
+saveRDS(Epost_beta_pred_Homer, "./Lingcod_Report_0323/Interview post/Epost_beta_pred_Homer.rds")
 
 Epost_beta_pred_Kodiak <- 
   lapply(dat_Kodiak_e, 
@@ -652,7 +650,7 @@ Epost_beta_pred_Kodiak <-
                                      model.file = modfile_beta_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_beta_pred_Kodiak, here("Interview post/Epost_beta_pred_Kodiak.rds"))
+saveRDS(Epost_beta_pred_Kodiak, "./Lingcod_Report_0323/Interview post/Epost_beta_pred_Kodiak.rds")
 
 Epost_beta_pred_Seward <- 
   lapply(dat_Seward_e, 
@@ -662,7 +660,7 @@ Epost_beta_pred_Seward <-
                                      model.file = modfile_beta_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_beta_pred_Seward, here("Interview post/Epost_beta_pred_Seward.rds"))
+saveRDS(Epost_beta_pred_Seward, "./Lingcod_Report_0323/Interview post/Epost_beta_pred_Seward.rds")
 
 Epost_beta_pred_Valdez <- 
   lapply(dat_Valdez_e, 
@@ -672,7 +670,7 @@ Epost_beta_pred_Valdez <-
                                      model.file = modfile_beta_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_beta_pred_Valdez, here("Interview post/Epost_beta_pred_Valdez.rds"))
+saveRDS(Epost_beta_pred_Valdez, "./Lingcod_Report_0323/Interview post/Epost_beta_pred_Valdez.rds")
 
 Epost_beta_pred_Whittier <- 
   lapply(dat_Whittier_e, 
@@ -682,7 +680,7 @@ Epost_beta_pred_Whittier <-
                                      model.file = modfile_beta_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_beta_pred_Whittier, here("Interview post/Epost_beta_pred_Whittier.rds"))
+saveRDS(Epost_beta_pred_Whittier, "./Lingcod_Report_0323/Interview post/Epost_beta_pred_Whittier.rds")
 
 
 
@@ -736,7 +734,7 @@ Epost_epsilon_pred_Homer <-
                                      model.file = modfile_epsilon_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_epsilon_pred_Homer, here("Interview post/Epost_epsilon_pred_Homer.rds"))
+saveRDS(Epost_epsilon_pred_Homer, "./Lingcod_Report_0323/Interview post/Epost_epsilon_pred_Homer.rds")
 
 Epost_epsilon_pred_Kodiak <- 
   lapply(dat_Kodiak_e, 
@@ -746,7 +744,7 @@ Epost_epsilon_pred_Kodiak <-
                                      model.file = modfile_epsilon_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_epsilon_pred_Kodiak, here("Interview post/Epost_epsilon_pred_Kodiak.rds"))
+saveRDS(Epost_epsilon_pred_Kodiak, "./Lingcod_Report_0323/Interview post/Epost_epsilon_pred_Kodiak.rds")
 
 Epost_epsilon_pred_Seward <- 
   lapply(dat_Seward_e, 
@@ -756,7 +754,7 @@ Epost_epsilon_pred_Seward <-
                                      model.file = modfile_epsilon_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_epsilon_pred_Seward, here("Interview post/Epost_epsilon_pred_Seward.rds"))
+saveRDS(Epost_epsilon_pred_Seward, "./Lingcod_Report_0323/Interview post/Epost_epsilon_pred_Seward.rds")
 
 Epost_epsilon_pred_Valdez <- 
   lapply(dat_Valdez_e, 
@@ -766,7 +764,7 @@ Epost_epsilon_pred_Valdez <-
                                      model.file = modfile_epsilon_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_epsilon_pred_Valdez, here("Interview post/Epost_epsilon_pred_Valdez.rds"))
+saveRDS(Epost_epsilon_pred_Valdez, "./Lingcod_Report_0323/Interview post/Epost_epsilon_pred_Valdez.rds")
 
 Epost_epsilon_pred_Whittier <- 
   lapply(dat_Whittier_e, 
@@ -776,7 +774,7 @@ Epost_epsilon_pred_Whittier <-
                                      model.file = modfile_epsilon_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_epsilon_pred_Whittier, here("Interview post/Epost_epsilon_pred_Whittier.rds"))
+saveRDS(Epost_epsilon_pred_Whittier, "./Lingcod_Report_0323/Interview post/Epost_epsilon_pred_Whittier.rds")
 
 
 
@@ -834,7 +832,7 @@ Epost_gamma_pred_Homer <-
                                      model.file = modfile_gamma_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_gamma_pred_Homer, here("Interview post/Epost_gamma_pred_Homer.rds"))
+saveRDS(Epost_gamma_pred_Homer, "./Lingcod_Report_0323/Interview post/Epost_gamma_pred_Homer.rds")
 
 Epost_gamma_pred_Kodiak <- 
   lapply(dat_Kodiak_e, 
@@ -844,7 +842,7 @@ Epost_gamma_pred_Kodiak <-
                                      model.file = modfile_gamma_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_gamma_pred_Kodiak, here("Interview post/Epost_gamma_pred_Kodiak.rds"))
+saveRDS(Epost_gamma_pred_Kodiak, "./Lingcod_Report_0323/Interview post/Epost_gamma_pred_Kodiak.rds")
 
 Epost_gamma_pred_Seward <- 
   lapply(dat_Seward_e, 
@@ -854,7 +852,7 @@ Epost_gamma_pred_Seward <-
                                      model.file = modfile_gamma_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_gamma_pred_Seward, here("Interview post/Epost_gamma_pred_Seward.rds"))
+saveRDS(Epost_gamma_pred_Seward, "./Lingcod_Report_0323/Interview post/Epost_gamma_pred_Seward.rds")
 
 Epost_gamma_pred_Valdez <- 
   lapply(dat_Valdez_e, 
@@ -864,7 +862,7 @@ Epost_gamma_pred_Valdez <-
                                      model.file = modfile_gamma_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_gamma_pred_Valdez, here("Interview post/Epost_gamma_pred_Valdez.rds"))
+saveRDS(Epost_gamma_pred_Valdez, "./Lingcod_Report_0323/Interview post/Epost_gamma_pred_Valdez.rds")
 
 Epost_gamma_pred_Whittier <- 
   lapply(dat_Whittier_e, 
@@ -874,31 +872,31 @@ Epost_gamma_pred_Whittier <-
                                      model.file = modfile_gamma_pred, 
                                      n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, 
                                      parallel = TRUE)})
-saveRDS(Epost_gamma_pred_Whittier, here("Interview post/Epost_gamma_pred_Whittier.rds"))
+saveRDS(Epost_gamma_pred_Whittier, "./Lingcod_Report_0323/Interview post/Epost_gamma_pred_Whittier.rds")
 
 
 ### 
 # Model Selection
-Epost_alpha_pred_Homer <- readRDS(here("Interview post/Epost_alpha_pred_Homer.rds"))
-Epost_alpha_pred_Kodiak <- readRDS(here("Interview post/Epost_alpha_pred_Kodiak.rds"))
-Epost_alpha_pred_Seward <- readRDS(here("Interview post/Epost_alpha_pred_Seward.rds"))
-Epost_alpha_pred_Valdez <- readRDS(here("Interview post/Epost_alpha_pred_Valdez.rds"))
-Epost_alpha_pred_Whittier <- readRDS(here("Interview post/Epost_alpha_pred_Whittier.rds"))
-Epost_beta_pred_Homer <- readRDS(here("Interview post/Epost_beta_pred_Homer.rds"))
-Epost_beta_pred_Kodiak <- readRDS(here("Interview post/Epost_beta_pred_Kodiak.rds"))
-Epost_beta_pred_Seward <- readRDS(here("Interview post/Epost_beta_pred_Seward.rds"))
-Epost_beta_pred_Valdez <- readRDS(here("Interview post/Epost_beta_pred_Valdez.rds"))
-Epost_beta_pred_Whittier <- readRDS(here("Interview post/Epost_beta_pred_Whittier.rds"))
-Epost_epsilon_pred_Homer <- readRDS(here("Interview post/Epost_epsilon_pred_Homer.rds"))
-Epost_epsilon_pred_Kodiak <- readRDS(here("Interview post/Epost_epsilon_pred_Kodiak.rds"))
-Epost_epsilon_pred_Seward <- readRDS(here("Interview post/Epost_epsilon_pred_Seward.rds"))
-Epost_epsilon_pred_Valdez <- readRDS(here("Interview post/Epost_epsilon_pred_Valdez.rds"))
-Epost_epsilon_pred_Whittier <- readRDS(here("Interview post/Epost_epsilon_pred_Whittier.rds"))
-Epost_gamma_pred_Homer <- readRDS(here("Interview post/Epost_gamma_pred_Homer.rds"))
-Epost_gamma_pred_Kodiak <- readRDS(here("Interview post/Epost_gamma_pred_Kodiak.rds"))
-Epost_gamma_pred_Seward <- readRDS(here("Interview post/Epost_gamma_pred_Seward.rds"))
-Epost_gamma_pred_Valdez <- readRDS(here("Interview post/Epost_gamma_pred_Valdez.rds"))
-Epost_gamma_pred_Whittier <- readRDS(here("Interview post/Epost_gamma_pred_Whittier.rds"))
+Epost_alpha_pred_Homer <- readRDS("./Lingcod_Report_0323/Interview post/Epost_alpha_pred_Homer.rds")
+Epost_alpha_pred_Kodiak <- readRDS("./Lingcod_Report_0323/Interview post/Epost_alpha_pred_Kodiak.rds")
+Epost_alpha_pred_Seward <- readRDS("./Lingcod_Report_0323/Interview post/Epost_alpha_pred_Seward.rds")
+Epost_alpha_pred_Valdez <- readRDS("./Lingcod_Report_0323/Interview post/Epost_alpha_pred_Valdez.rds")
+Epost_alpha_pred_Whittier <- readRDS("./Lingcod_Report_0323/Interview post/Epost_alpha_pred_Whittier.rds")
+Epost_beta_pred_Homer <- readRDS("./Lingcod_Report_0323/Interview post/Epost_beta_pred_Homer.rds")
+Epost_beta_pred_Kodiak <- readRDS("./Lingcod_Report_0323/Interview post/Epost_beta_pred_Kodiak.rds")
+Epost_beta_pred_Seward <- readRDS("./Lingcod_Report_0323/Interview post/Epost_beta_pred_Seward.rds")
+Epost_beta_pred_Valdez <- readRDS("./Lingcod_Report_0323/Interview post/Epost_beta_pred_Valdez.rds")
+Epost_beta_pred_Whittier <- readRDS("./Lingcod_Report_0323/Interview post/Epost_beta_pred_Whittier.rds")
+Epost_epsilon_pred_Homer <- readRDS("./Lingcod_Report_0323/Interview post/Epost_epsilon_pred_Homer.rds")
+Epost_epsilon_pred_Kodiak <- readRDS("./Lingcod_Report_0323/Interview post/Epost_epsilon_pred_Kodiak.rds")
+Epost_epsilon_pred_Seward <- readRDS("./Lingcod_Report_0323/Interview post/Epost_epsilon_pred_Seward.rds")
+Epost_epsilon_pred_Valdez <- readRDS("./Lingcod_Report_0323/Interview post/Epost_epsilon_pred_Valdez.rds")
+Epost_epsilon_pred_Whittier <- readRDS("./Lingcod_Report_0323/Interview post/Epost_epsilon_pred_Whittier.rds")
+Epost_gamma_pred_Homer <- readRDS("./Lingcod_Report_0323/Interview post/Epost_gamma_pred_Homer.rds")
+Epost_gamma_pred_Kodiak <- readRDS("./Lingcod_Report_0323/Interview post/Epost_gamma_pred_Kodiak.rds")
+Epost_gamma_pred_Seward <- readRDS("./Lingcod_Report_0323/Interview post/Epost_gamma_pred_Seward.rds")
+Epost_gamma_pred_Valdez <- readRDS("./Lingcod_Report_0323/Interview post/Epost_gamma_pred_Valdez.rds")
+Epost_gamma_pred_Whittier <- readRDS("./Lingcod_Report_0323/Interview post/Epost_gamma_pred_Whittier.rds")
 
 
 
@@ -939,7 +937,7 @@ Ell_Whittier <-
 
 
 ll_E <- list(Ell_Homer, Ell_Kodiak, Ell_Seward, Ell_Valdez, Ell_Whittier)
-saveRDS(ll_E, here("Data/ll_E.rds"))
+saveRDS(ll_E, "./Lingcod_Report_0323/Data/ll_E.rds")
 
 #Model selection table
 Map(function(x, y){tab_ll(x) %>% dplyr::mutate(port = y, composition = "Lingcod Effort")}, 

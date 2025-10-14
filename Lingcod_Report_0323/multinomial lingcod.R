@@ -1,12 +1,11 @@
 #Looking for a method to fit groundfish harvest and effort compostion data for reporting
 #would like to detect a trend to composition data
-library(here)
 library(magrittr)
 library(ggplot2)
-int_boat <- readRDS(here("Data/int_boat.rds")) %>% 
+int_boat <- readRDS("./Lingcod_Report_0323/Data/int_boat.rds") %>% 
   dplyr::filter(port %in% c('Homer', 'Seward', 'Kodiak', 'Valdez', 'Whittier'))
-source(here("functions.R"))
-source(here("models.R"))
+source("./Lingcod_Report_0323/functions.R")
+source("./Lingcod_Report_0323/models.R")
 
 ports <- unique(int_boat$port)
 # Harvest Composition -----------------------------------------------------
@@ -39,7 +38,7 @@ postH_Homer <- mapply(jagsUI::jags,
                      MoreArgs = list(data = jags_datH[[1]], n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb),
                      SIMPLIFY = FALSE)
 lapply(postH_Homer, function(x) quantile(unlist(x$Rhat), probs = c(0.5, 0.9, 0.95, 0.99, 1), na.rm = TRUE))
-saveRDS(postH_Homer, here("Interview post/postH_Homer.rds"))
+saveRDS(postH_Homer, "./Lingcod_Report_0323/Interview post/postH_Homer.rds")
 postH_Homer[[1]] 
 postH_Homer[[2]] 
 postH_Homer[[3]] 
@@ -76,7 +75,7 @@ postH_Kodiak <- mapply(jagsUI::jags,
                        MoreArgs = list(data = jags_datH[[2]], n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb),
                        SIMPLIFY = FALSE)
 lapply(postH_Kodiak, function(x) quantile(unlist(x$Rhat), probs = c(0.5, 0.9, 0.95, 0.99, 1), na.rm = TRUE))
-saveRDS(postH_Kodiak, here("Interview post/postH_Kodiak.rds"))
+saveRDS(postH_Kodiak, "./Lingcod_Report_0323/Interview post/postH_Kodiak.rds")
 postH_Kodiak[[1]] 
 postH_Kodiak[[2]] 
 postH_Kodiak[[3]] 
@@ -113,7 +112,7 @@ postH_Seward <- mapply(jagsUI::jags,
                        MoreArgs = list(data = jags_datH[[3]], n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb),
                        SIMPLIFY = FALSE)
 lapply(postH_Seward, function(x) quantile(unlist(x$Rhat), probs = c(0.5, 0.9, 0.95, 0.99, 1), na.rm = TRUE))
-saveRDS(postH_Seward, here("Interview post/postH_Seward.rds"))
+saveRDS(postH_Seward, "./Lingcod_Report_0323/Interview post/postH_Seward.rds")
 postH_Seward[[1]] 
 postH_Seward[[2]] 
 postH_Seward[[3]] 
@@ -154,7 +153,7 @@ postH_Valdez <- mapply(jagsUI::jags,
                        MoreArgs = list(data = jags_datH[[4]], n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb),
                        SIMPLIFY = FALSE)
 lapply(postH_Valdez, function(x) quantile(unlist(x$Rhat), probs = c(0.5, 0.9, 0.95, 0.99, 1), na.rm = TRUE))
-saveRDS(postH_Valdez, here("Interview post/postH_Valdez.rds"))
+saveRDS(postH_Valdez, "./Lingcod_Report_0323/Interview post/postH_Valdez.rds")
 postH_Valdez[[1]] 
 postH_Valdez[[2]] 
 postH_Valdez[[3]] 
@@ -193,7 +192,7 @@ postH_Whittier <- mapply(jagsUI::jags,
                          MoreArgs = list(data = jags_datH[[5]], n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb),
                          SIMPLIFY = FALSE)
 lapply(postH_Whittier, function(x) quantile(unlist(x$Rhat), probs = c(0.5, 0.9, 0.95, 0.99, 1), na.rm = TRUE))
-saveRDS(postH_Whittier, here("Interview post/postH_Whittier.rds"))
+saveRDS(postH_Whittier, "./Lingcod_Report_0323/Interview post/postH_Whittier.rds")
 postH_Whittier[[1]] 
 postH_Whittier[[2]] 
 postH_Whittier[[3]] 
@@ -248,7 +247,7 @@ postE_Homer <- mapply(jagsUI::jags,
                       MoreArgs = list(data = jags_datE[[1]], n.chains = nc, n.thin = nt, n.iter = 2 * ni, n.burnin = nb, store.data = TRUE, parallel = TRUE),
                       SIMPLIFY = FALSE)
 lapply(postE_Homer, function(x) quantile(unlist(x$Rhat), probs = c(0.5, 0.9, 0.95, 0.99, 1), na.rm = TRUE))
-saveRDS(postE_Homer, here("Interview post/postE_Homer.rds"))
+saveRDS(postE_Homer, "./Lingcod_Report_0323/Interview post/postE_Homer.rds")
 
 postE_Homer[[1]] 
 postE_Homer[[2]] 
@@ -284,7 +283,7 @@ postE_Kodiak <- mapply(jagsUI::jags,
                        MoreArgs = list(data = jags_datE[[2]], n.chains = nc, n.thin = nt, n.iter = 1.5 * ni, n.burnin = nb, store.data = TRUE),
                        SIMPLIFY = FALSE)
 lapply(postE_Kodiak, function(x) quantile(unlist(x$Rhat), probs = c(0.5, 0.9, 0.95, 0.99, 1), na.rm = TRUE))
-saveRDS(postE_Kodiak, here("Interview post/postE_Kodiak.rds"))
+saveRDS(postE_Kodiak, "./Lingcod_Report_0323/Interview post/postE_Kodiak.rds")
 
 postE_Kodiak[[1]] 
 postE_Kodiak[[2]] 
@@ -319,7 +318,7 @@ postE_Seward <- mapply(jagsUI::jags,
                          MoreArgs = list(data = jags_datE[[3]], n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, store.data = TRUE),
                          SIMPLIFY = FALSE)
 lapply(postE_Seward, function(x) quantile(unlist(x$Rhat), probs = c(0.5, 0.9, 0.95, 0.99, 1), na.rm = TRUE))
-saveRDS(postE_Seward, here("Interview post/postE_Seward.rds"))
+saveRDS(postE_Seward, "./Lingcod_Report_0323/Interview post/postE_Seward.rds")
 
 postE_Seward[[1]] 
 postE_Seward[[2]] 
@@ -357,7 +356,7 @@ postE_Valdez <- mapply(jagsUI::jags,
                          MoreArgs = list(data = jags_datE[[4]], n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, store.data = TRUE),
                          SIMPLIFY = FALSE)
 lapply(postE_Valdez, function(x) quantile(unlist(x$Rhat), probs = c(0.5, 0.9, 0.95, 0.99, 1), na.rm = TRUE))
-saveRDS(postE_Valdez, here("Interview post/postE_Valdez.rds"))
+saveRDS(postE_Valdez, "./Lingcod_Report_0323/Interview post/postE_Valdez.rds")
 
 postE_Valdez[[1]] 
 postE_Valdez[[2]] 
@@ -392,7 +391,7 @@ postE_Whittier <- mapply(jagsUI::jags,
                            MoreArgs = list(data = jags_datE[[5]], n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb, store.data = TRUE),
                            SIMPLIFY = FALSE)
 lapply(postE_Whittier, function(x) quantile(unlist(x$Rhat), probs = c(0.5, 0.9, 0.95, 0.99, 1), na.rm = TRUE))
-saveRDS(postE_Whittier, here("Interview post/postE_Whittier.rds"))
+saveRDS(postE_Whittier, "./Lingcod_Report_0323/Interview post/postE_Whittier.rds")
 
 postE_Whittier[[1]] 
 postE_Whittier[[2]] 
@@ -422,17 +421,17 @@ plot_post(postE_Whittier[[4]], int_E, "E", ports[5])
 
 # Save results ------------------------------------------------------------
 #code to load all the posteriors
-postE_Homer <- readRDS(here("Interview post/postE_Homer.rds"))
-postE_Kodiak <- readRDS(here("Interview post/postE_Kodiak.rds"))
-postE_Seward <- readRDS(here("Interview post/postE_Seward.rds"))
-postE_Valdez <- readRDS(here("Interview post/postE_Valdez.rds"))
-postE_Whittier <- readRDS(here("Interview post/postE_Whittier.rds"))
+postE_Homer <- readRDS("./Lingcod_Report_0323/Interview post/postE_Homer.rds")
+postE_Kodiak <- readRDS("./Lingcod_Report_0323/Interview post/postE_Kodiak.rds")
+postE_Seward <- readRDS("./Lingcod_Report_0323/Interview post/postE_Seward.rds")
+postE_Valdez <- readRDS("./Lingcod_Report_0323/Interview post/postE_Valdez.rds")
+postE_Whittier <- readRDS("./Lingcod_Report_0323/Interview post/postE_Whittier.rds")
 
-postH_Homer <- readRDS(here("Interview post/postH_Homer.rds"))
-postH_Kodiak <- readRDS(here("Interview post/postH_Kodiak.rds"))
-postH_Seward <- readRDS(here("Interview post/postH_Seward.rds"))
-postH_Valdez <- readRDS(here("Interview post/postH_Valdez.rds"))
-postH_Whittier <- readRDS(here("Interview post/postH_Whittier.rds"))
+postH_Homer <- readRDS("./Lingcod_Report_0323/Interview post/postH_Homer.rds")
+postH_Kodiak <- readRDS("./Lingcod_Report_0323/Interview post/postH_Kodiak.rds")
+postH_Seward <- readRDS("./Lingcod_Report_0323/Interview post/postH_Seward.rds")
+postH_Valdez <- readRDS("./Lingcod_Report_0323/Interview post/postH_Valdez.rds")
+postH_Whittier <- readRDS("./Lingcod_Report_0323/Interview post/postH_Whittier.rds")
 
 
 
@@ -454,7 +453,7 @@ mapply(ggsave,
        filename = paste0(names(comp_plots), ".png"), 
        plot = comp_plots, 
        MoreArgs = list(device = "png", 
-                       path = here("Figures/")))
+                       path = "./Lingcod_Report_0323/Figures/"))
 
 #save model posterior estimates
 
@@ -477,7 +476,7 @@ mod_p <-
     WhittierE = p_post(postE_Whittier[[3]], yrs = 0, areas = ports[[5]]),
     WhittierH = p_post(postH_Whittier[[3]], yrs = 0, areas = ports[[5]])
   )
-saveRDS(mod_p, here("Data/mod_p.rds"))
+saveRDS(mod_p, "./Lingcod_Report_0323/Data/mod_p.rds")
 
 post_list <- list(postH_Homer=postH_Homer, postE_Homer=postE_Homer, 
                   postH_Kodiak=postH_Kodiak,postE_Kodiak=postE_Kodiak, 
@@ -487,7 +486,7 @@ post_list <- list(postH_Homer=postH_Homer, postE_Homer=postE_Homer,
 tab_sd <- 
   lapply(seq_along(post_list), get_sd, posts = post_list, obj_names = names(post_list)) %>% 
   do.call(rbind, .)
-saveRDS(tab_sd, here("Data/tab_sd.rds"))
+saveRDS(tab_sd, "./Lingcod_Report_0323/Data/tab_sd.rds")
 
 
 
