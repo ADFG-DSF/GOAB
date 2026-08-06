@@ -21,7 +21,7 @@ lc <- do.call(rbind.fill, list(ling9104, ling2005, ling2006, ling2007, ling2008,
                                ling2009, ling2010, ling2011, ling2012, ling2013, 
                                ling2014, ling2015, ling2016, ling2017, ling2018, 
                                ling2019, ling2020, ling2021, ling2022, ling2023,
-                               ling2024))
+                               ling2024, ling2025))
 detach(package:plyr)
 
 lc$AGE <- as.integer(lc$AGE)
@@ -92,8 +92,9 @@ totaln_age <- comp2_age %>%
 
 comp3_age <- merge(comp2_age, totaln_age, by = c("SFmgmtarea", "YEAR")) %>% 
   mutate(
-    pij = (nijC + nijP + nijU + nijM) / sum(niC + niP + niU + niM),
-    n = (niC + niP + niU + niM)
+    nij = nijC + nijP + nijU + nijM,
+    n   = niC + niP + niU + niM,
+    pij = nij / n
   )
 ##Cohorts
 plotages <- comp3_age %>%
@@ -123,8 +124,8 @@ lc_age_PWS <- ggplot(data = lc_PWS) +
   scale_size_continuous(guide = FALSE) +
   scale_fill_continuous(guide = FALSE) +
   theme_bw() +
-  labs(title = 'Lingcod Age Comps',
-       subtitle = 'SFmgmtarea=PWS') +
+  labs(
+       subtitle = 'Prince William Sound') +
   theme(
     plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
     plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
@@ -188,8 +189,8 @@ lc_age_CI <- ggplot(data = lc_CI) +
   scale_size_continuous(guide = FALSE) +
   scale_fill_continuous(guide = FALSE) +
   theme_bw() +
-  labs(title = 'Lingcod Age Comps',
-       subtitle = 'SFmgmtarea=CI') +
+  labs(
+       subtitle = 'Cook Inlet') +
   theme(
     plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
     plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
@@ -219,8 +220,8 @@ lc_age_KOD <- ggplot(data = lc_KOD) +
   scale_size_continuous(guide = FALSE) +
   scale_fill_continuous(guide = FALSE) +
   theme_bw() +
-  labs(title = 'Lingcod Age Comps',
-       subtitle = 'SFmgmtarea=KOD') +
+  labs(
+       subtitle = 'Kodiak') +
   theme(
     plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
     plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
@@ -252,8 +253,8 @@ lc_age_NG <- ggplot(data = lc_NG) +
   scale_size_continuous(guide = FALSE) +
   scale_fill_continuous(guide = FALSE) +
   theme_bw() +
-  labs(title = 'Lingcod Age Comps',
-       subtitle = 'SFmgmtarea=NG') +
+  labs(
+       subtitle = 'North Gulf Coast') +
   theme(
     plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
     plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
@@ -379,8 +380,9 @@ totaln_age_nok <- comp2_age_nok %>%
 
 comp3_age_nok <- merge(comp2_age_nok, totaln_age_nok, by = c("YEAR")) %>% 
   mutate(
-    pij = (nijC + nijP + nijU + nijM) / sum(niC + niP + niU + niM),
-    n = (niC + niP + niU + niM)
+    nij = nijC + nijP + nijU + nijM,
+    n   = niC + niP + niU + niM,
+    pij = nij / n
   )
 ##Cohorts
 plotages_nok <- comp3_age_nok %>%
@@ -400,22 +402,15 @@ lc_age_nok <- ggplot(data = plotages_nok) +
   scale_size_continuous(guide = FALSE) +
   scale_fill_continuous(guide = FALSE) +
   theme_bw() +
-  labs(title = 'Lingcod Age Comps',
-       subtitle = 'Southcentral minus KOD') +
+  labs(
+       subtitle = 'Southcentral - not Kodiak') +
   theme(
     plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
     plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
     axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
     axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
     axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
-  ) +
-  # Adding lines to indicate strong cohorts
-  geom_abline(intercept = -1989, slope = 1, color = 'red') +
-  annotate("text", x = 1996, y = 9, label = "1989", color = "red") +
-  geom_abline(intercept = -1995, slope = 1, color = 'red') +
-  annotate("text", x = 1996, y = 2, label = "1995", color = "red") +
-  geom_abline(intercept = -1999, slope = 1, color = 'red') +
-  annotate("text", x = 1999, y = 1, label = "1999", color = "red")
+  )
 
 
 lc_age_nok

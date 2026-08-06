@@ -22,7 +22,7 @@ rf_all <- do.call(rbind.fill, list(rock9195, rock9600, rock2001, rock2002, rock2
                                    rock2009, rock2010, rock2011, rock2012, rock2013, 
                                    rock2014, rock2015, rock2016, rock2017, rock2018, 
                                    rock2019, rock2020, rock2021, rock2022, rock2023,
-                                   rock2024))
+                                   rock2024, rock2025))
 detach(package:plyr)
 
 ##########
@@ -92,8 +92,9 @@ totaln_age <- comp2_age %>%
 
 comp3_age <- merge(comp2_age, totaln_age, by = c("SFmgmtarea", "YEAR", "SPECIES")) %>% 
   mutate(
-    pij = (nijC + nijP + nijU + nijM) / sum(niC + niP + niU + niM),
-    n = (niC + niP + niU + niM)
+    nij = nijC + nijP + nijU + nijM,
+    n   = niC + niP + niU + niM,
+    pij = nij / n
   )
 ## Use year of capture and age to determine cohort
 plotages <- comp3_age %>%
@@ -130,6 +131,7 @@ brf_age_PWS <- ggplot(data = black_PWS) +
   scale_x_continuous(breaks = seq(1996,max(black_PWS$YEAR), 3), labels = as.character(seq(1996,max(black_PWS$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(black_PWS$YEAR))) +
   scale_y_continuous(breaks = seq(0, 65, 5), name = 'Age',
+                     limits = c(0, 65),
                      sec.axis = sec_axis(~ . * scale_b_PWS, name = 'Sample Size', breaks = seq(0, 1500, 250))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(range = c(2, 15), guide = FALSE) +
   theme_bw() +
@@ -166,9 +168,10 @@ scale_y_PWS <- max(Yelloweye_PWS$n) / max(Yelloweye_PWS$AGE)
 ye_age_PWS <- ggplot(data = Yelloweye_PWS) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
   geom_line(aes(x = YEAR, y = n / scale_y_PWS), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+  scale_x_continuous(breaks = seq(1996, 2025, 3), labels = as.character(seq(1996, 2025, 3)), name = 'Year',
                      limit = c(1996, max(Yelloweye_PWS$YEAR))) +
-  scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
+  scale_y_continuous(expand = expansion(mult = c(0, 0)),
+                     breaks = seq(0, 110, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_y_PWS, name = 'Sample Size', breaks = seq(0, 800, 200))) +  # Add a second Y-axis for 'n'
   scale_size_continuous(range = c(2, 15), guide = FALSE) +
   theme_bw() +
@@ -189,7 +192,10 @@ ye_age_PWS <- ggplot(data = Yelloweye_PWS) +
   geom_abline(intercept = -1998, slope = 1, color = 'red') +
   annotate("text", x = 1998, y = 1, label = "1998", color = "red") +
   geom_abline(intercept = -2010, slope = 1, color = 'red') +
-  annotate("text", x = 2010, y = 2, label = "2010", color = "red") 
+  annotate("text", x = 2010, y = 2, label = "2010", color = "red") +
+  geom_abline(intercept = -2019, slope = 1, color = 'red') +
+  annotate("text", x = 2019, y = 2, label = "2019", color = "red") 
+  
 
 
 ye_age_PWS
@@ -454,8 +460,9 @@ totaln_age_all <- comp2_age_all %>%
 
 comp3_age_all <- merge(comp2_age_all, totaln_age_all, by = c("YEAR", "SPECIES")) %>% 
   mutate(
-    pij = (nijC + nijP + nijU + nijM) / sum(niC + niP + niU + niM),
-    n = (niC + niP + niU + niM)
+    nij = nijC + nijP + nijU + nijM,
+    n   = niC + niP + niU + niM,
+    pij = nij / n
   )
 ##Create tables for appendix
 plotages_all <- comp3_age_all %>%
