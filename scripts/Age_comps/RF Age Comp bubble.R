@@ -5,6 +5,7 @@
 # Created by CWM on 01/25/24
 # Modified to include plots by management area for all Sport Fish management 
 # areas - CWM 02/10/25
+# Updated formatting CWM 09/22/26
 #############################################################################
 library(tidyverse)
 
@@ -63,9 +64,9 @@ comp_age <- agecomp %>%
   group_by(SFmgmtarea, USER, YEAR, SPECIES, AGE) %>%
   summarise(COUNT = n()) %>%
   ungroup() %>% 
-##restructure data file so sample size (nj) by each user group is a separate variable,
-##all on one line for each species
-# Assign values to respective variables based on user value
+  ##restructure data file so sample size (nj) by each user group is a separate variable,
+  ##all on one line for each species
+  # Assign values to respective variables based on user value
   mutate(nijC = if_else(USER == 'Charter', COUNT, 0),
          nijP = if_else(USER == 'Private', COUNT, 0),
          nijU = if_else(USER == 'Unknown', COUNT, 0),
@@ -127,23 +128,22 @@ scale_b_PWS <- max(black_PWS$n) / max(black_PWS$AGE)
 
 brf_age_PWS <- ggplot(data = black_PWS) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_b_PWS), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1996,max(black_PWS$YEAR), 3), labels = as.character(seq(1996,max(black_PWS$YEAR), 3)), name = 'Year',
+  geom_line(aes(x = YEAR, y = n / scale_b_PWS), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_x_continuous(breaks = seq(1996, max(black_PWS$YEAR), 3), labels = as.character(seq(1996, max(black_PWS$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(black_PWS$YEAR))) +
   scale_y_continuous(breaks = seq(0, 65, 5), name = 'Age',
-                     limits = c(0, 65),
-                     sec.axis = sec_axis(~ . * scale_b_PWS, name = 'Sample Size', breaks = seq(0, 1500, 250))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+                     sec.axis = sec_axis(~ . * scale_b_PWS, name = 'Sample Size', breaks = seq(0, 550, 150))) +  # Add a second Y-axis for 'n'
+  scale_size_continuous(range = c(2,15), guide = FALSE) +
   theme_bw() +
-  labs(title = 'Black Rockfish Age Comps',
+  labs(title = 'Black Rockfish Age Composition',
        subtitle = 'Prince William Sound') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
-  ) +
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       # Bold and centered title
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    # Bold and centered subtitle
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered x-axis title
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered y-axis title
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) # Bold and centered secondary y-axis title
+  )+
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1991, slope = 1, color = 'red') +
   annotate("text", x = 1996, y = 3, label = "1991", color = "red") +
@@ -167,22 +167,22 @@ scale_y_PWS <- max(Yelloweye_PWS$n) / max(Yelloweye_PWS$AGE)
 
 ye_age_PWS <- ggplot(data = Yelloweye_PWS) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_y_PWS), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1996, 2025, 3), labels = as.character(seq(1996, 2025, 3)), name = 'Year',
+  geom_line(aes(x = YEAR, y = n / scale_y_PWS), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_x_continuous(breaks = seq(1996, max(Yelloweye_PWS$YEAR), 3), labels = as.character(seq(1996, max(Yelloweye_PWS$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(Yelloweye_PWS$YEAR))) +
   scale_y_continuous(expand = expansion(mult = c(0, 0)),
                      breaks = seq(0, 110, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_y_PWS, name = 'Sample Size', breaks = seq(0, 800, 200))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+  scale_size_continuous(range = c(2,15), guide = FALSE) +
   theme_bw() +
-  labs(title = 'Yelloweye Rockfish Age Comps',
+  labs(title = 'Yelloweye Rockfish Age Composition',
        subtitle = 'Prince William Sound') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       # Bold and centered title
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    # Bold and centered subtitle
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered x-axis title
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered y-axis title
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) # Bold and centered secondary y-axis title
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1968, slope = 1, color = 'red') +
@@ -195,7 +195,7 @@ ye_age_PWS <- ggplot(data = Yelloweye_PWS) +
   annotate("text", x = 2010, y = 2, label = "2010", color = "red") +
   geom_abline(intercept = -2019, slope = 1, color = 'red') +
   annotate("text", x = 2019, y = 2, label = "2019", color = "red") 
-  
+
 
 
 ye_age_PWS
@@ -212,21 +212,21 @@ scale_b_CI <- max(black_CI$n) / max(black_CI$AGE)
 
 brf_age_CI <- ggplot(data = black_CI) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_b_CI), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+  geom_line(aes(x = YEAR, y = n / scale_b_CI), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_x_continuous(breaks = seq(1996, max(black_CI$YEAR), 3), labels = as.character(seq(1996, max(black_CI$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(black_CI$YEAR))) +
   scale_y_continuous(breaks = seq(0, 65, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_b_CI, name = 'Sample Size', breaks = seq(0, 550, 150))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+  scale_size_continuous(range = c(2,15), guide = FALSE) +
   theme_bw() +
-  labs(title = 'Black Rockfish Age Comps',
+  labs(title = 'Black Rockfish Age Composition',
        subtitle = 'Cook Inlet') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       # Bold and centered title
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    # Bold and centered subtitle
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered x-axis title
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered y-axis title
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) # Bold and centered secondary y-axis title
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1979, slope = 1, color = 'red') +
@@ -255,21 +255,21 @@ scale_y_CI <- max(Yelloweye_CI$n) / max(Yelloweye_CI$AGE)
 
 ye_age_CI <- ggplot(data = Yelloweye_CI) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_y_CI), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+  geom_line(aes(x = YEAR, y = n / scale_y_CI), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_x_continuous(breaks = seq(1996, max(Yelloweye_CI$YEAR), 3), labels = as.character(seq(1996, max(Yelloweye_CI$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(Yelloweye_CI$YEAR))) +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_y_CI, name = 'Sample Size', breaks = seq(0, 120, 40))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+  scale_size_continuous(range = c(2,15), guide = FALSE) +
   theme_bw() +
-  labs(title = 'Yelloweye Rockfish Age Comps',
+  labs(title = 'Yelloweye Rockfish Age Composition',
        subtitle = 'Cook Inlet') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       # Bold and centered title
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    # Bold and centered subtitle
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered x-axis title
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered y-axis title
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) # Bold and centered secondary y-axis title
   )
 # Not adding cohorts, low sample size
 
@@ -286,21 +286,21 @@ scale_b_KOD <- max(black_KOD$n) / max(black_KOD$AGE)
 
 brf_age_KOD <- ggplot(data = black_KOD) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_b_KOD), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+  geom_line(aes(x = YEAR, y = n / scale_b_KOD), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_x_continuous(breaks = seq(1996, max(black_KOD$YEAR), 3), labels = as.character(seq(1996, max(black_KOD$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(black_KOD$YEAR))) +
   scale_y_continuous(breaks = seq(0, 65, 5), name = 'Age',
-                     sec.axis = sec_axis(~ . * scale_b_KOD, name = 'Sample Size', breaks = seq(0, 600, 150))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+                     sec.axis = sec_axis(~ . * scale_b_KOD, name = 'Sample Size', breaks = seq(0, 550, 150))) +  # Add a second Y-axis for 'n'
+  scale_size_continuous(range = c(2,15), guide = FALSE) +
   theme_bw() +
-  labs(title = 'Black Rockfish Age Comps',
+  labs(title = 'Black Rockfish Age Composition',
        subtitle = 'Kodiak') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       # Bold and centered title
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    # Bold and centered subtitle
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered x-axis title
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered y-axis title
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) # Bold and centered secondary y-axis title
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1979, slope = 1, color = 'red') +
@@ -331,21 +331,21 @@ scale_y_KOD <- max(Yelloweye_KOD$n) / max(Yelloweye_KOD$AGE)
 
 ye_age_KOD <- ggplot(data = Yelloweye_KOD) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_y_KOD), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+  geom_line(aes(x = YEAR, y = n / scale_y_NG), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_x_continuous(breaks = seq(1996, max(Yelloweye_KOD$YEAR), 3), labels = as.character(seq(1996, max(Yelloweye_KOD$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(Yelloweye_KOD$YEAR))) +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_y_KOD, name = 'Sample Size', breaks = seq(0, 50, 15))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+  scale_size_continuous(range = c(2,15), guide = FALSE) +
   theme_bw() +
-  labs(title = 'Yelloweye Rockfish Age Comps',
+  labs(title = 'Yelloweye Rockfish Age Composition',
        subtitle = 'Kodiak') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       # Bold and centered title
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    # Bold and centered subtitle
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered x-axis title
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered y-axis title
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) # Bold and centered secondary y-axis title
   )
 # Not adding cohorts, low sample size
 
@@ -363,21 +363,21 @@ scale_b_NG <- max(black_NG$n) / max(black_NG$AGE)
 
 brf_age_NG <- ggplot(data = black_NG) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_b_NG), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+  geom_line(aes(x = YEAR, y = n / scale_b_NG), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_x_continuous(breaks = seq(1996, max(black_NG$YEAR), 3), labels = as.character(seq(1996, max(black_NG$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(black_NG$YEAR))) +
   scale_y_continuous(breaks = seq(0, 65, 5), name = 'Age',
-                     sec.axis = sec_axis(~ . * scale_b_NG, name = 'Sample Size', breaks = seq(0, 600, 150))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+                     sec.axis = sec_axis(~ . * scale_b_NG, name = 'Sample Size', breaks = seq(0, 550, 150))) +  # Add a second Y-axis for 'n'
+  scale_size_continuous(range = c(2,15), guide = FALSE) +
   theme_bw() +
-  labs(title = 'Black Rockfish Age Comps',
+  labs(title = 'Black Rockfish Age Composition',
        subtitle = 'North Gulf Coast') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       # Bold and centered title
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    # Bold and centered subtitle
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered x-axis title
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered y-axis title
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) # Bold and centered secondary y-axis title
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1991, slope = 1, color = 'red') +
@@ -404,21 +404,21 @@ scale_y_NG <- max(Yelloweye_NG$n) / max(Yelloweye_NG$AGE)
 
 ye_age_NG <- ggplot(data = Yelloweye_NG) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_y_NG), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
-                     limit = c(1996, max(Yelloweye_KOD$YEAR))) +
+  geom_line(aes(x = YEAR, y = n / scale_y_NG), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_x_continuous(breaks = seq(1996, max(Yelloweye_NG$YEAR), 3), labels = as.character(seq(1996, max(Yelloweye_NG$YEAR), 3)), name = 'Year',
+                     limit = c(1996, max(Yelloweye_NG$YEAR))) +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_y_NG, name = 'Sample Size', breaks = seq(0, 200, 50))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+  scale_size_continuous(range = c(2,15), guide = FALSE) +
   theme_bw() +
-  labs(title = 'Yelloweye Rockfish Age Comps',
+  labs(title = 'Yelloweye Rockfish Age Composition',
        subtitle = 'North Gulf Coast') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       # Bold and centered title
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    # Bold and centered subtitle
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered x-axis title
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered y-axis title
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) # Bold and centered secondary y-axis title
   )
 # Not adding cohorts, low sample size
 
@@ -481,21 +481,21 @@ scale_b_all <- max(black_all$n) / max(black_all$AGE)
 
 brf_age_all <- ggplot(data = black_all) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_b_all), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+  geom_line(aes(x = YEAR, y = n / scale_b_all), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_x_continuous(breaks = seq(1996, max(black_all$YEAR), 3), labels = as.character(seq(1996, max(black_all$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(black_all$YEAR))) +
   scale_y_continuous(breaks = seq(0, 65, 5), name = 'Age',
-                     sec.axis = sec_axis(~ . * scale_b_all, name = 'Sample Size', breaks = seq(0, 2650, 650))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+                     sec.axis = sec_axis(~ . * scale_b_all, name = 'Sample Size', breaks = seq(0, 550, 150))) +  # Add a second Y-axis for 'n'
+  scale_size_continuous(range = c(2,15), guide = FALSE) +
   theme_bw() +
-  labs(title = 'Black Rockfish Age Comps',
+  labs(title = 'Black Rockfish Age Composition',
        subtitle = 'Southcentral') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       # Bold and centered title
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    # Bold and centered subtitle
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered x-axis title
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered y-axis title
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) # Bold and centered secondary y-axis title
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1991, slope = 1, color = 'red') +
@@ -520,21 +520,21 @@ scale_y_all <- max(Yelloweye_all$n) / max(Yelloweye_all$AGE)
 
 ye_age_all <- ggplot(data = Yelloweye_all) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_y_all), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
-  scale_x_continuous(breaks = seq(1996, 2023, 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
+  geom_line(aes(x = YEAR, y = n / scale_b_NG), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  scale_x_continuous(breaks = seq(1996, max(Yelloweye_all$YEAR), 3), labels = as.character(seq(1996, 2023, 3)), name = 'Year',
                      limit = c(1996, max(Yelloweye_all$YEAR))) +
   scale_y_continuous(breaks = seq(0, 110, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_y_all, name = 'Sample Size', breaks = seq(0, 950, 250))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+  scale_size_continuous(range = c(2,15), guide = FALSE) +
   theme_bw() +
-  labs(title = 'Yelloweye Rockfish Age Comps',
+  labs(title = 'Yelloweye Rockfish Age Composition',
        subtitle = 'Southcentral') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       # Bold and centered title
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    # Bold and centered subtitle
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered x-axis title
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     # Bold and centered y-axis title
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) # Bold and centered secondary y-axis title
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1968, slope = 1, color = 'red') +

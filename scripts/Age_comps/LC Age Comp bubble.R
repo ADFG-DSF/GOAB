@@ -116,23 +116,25 @@ scale_PWS <- max(lc_PWS$n) / max(lc_PWS$AGE)
 
 lc_age_PWS <- ggplot(data = lc_PWS) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_PWS), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  geom_line(aes(x = YEAR, y = n / scale_PWS), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
   scale_x_continuous(breaks = seq(1996, max(lc_PWS$YEAR), 3), labels = as.character(seq(1996, max(lc_PWS$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(lc_PWS$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_PWS, name = 'Sample Size', breaks = seq(0, 700, 100))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(guide = FALSE) +
-  scale_fill_continuous(guide = FALSE) +
+  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+  #scale_fill_continuous(guide = FALSE) +
   theme_bw() +
   labs(
+      title = 'Lingcod Age Composition',
        subtitle = 'Prince William Sound') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) 
   )
+
 
 lc_age_PWS
 
@@ -150,22 +152,23 @@ scale_PWS <- max(lc_PWS$n) / max(lc_PWS$AGE)
 
 lc_age_PWS <- ggplot(data = lc_PWS) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_PWS), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  geom_line(aes(x = YEAR, y = n / scale_PWS), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
   scale_x_continuous(breaks = seq(1996, max(lc_PWS$YEAR), 3), labels = as.character(seq(1996, max(lc_PWS$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(lc_PWS$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
-                     sec.axis = sec_axis(~ . * scale_PWS, name = 'Sample Size', breaks = seq(0, 750, 100))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(guide = FALSE) +
-  scale_fill_continuous(guide = FALSE) +
+                     sec.axis = sec_axis(~ . * scale_PWS, name = 'Sample Size', breaks = seq(0, 700, 100))) +  # Add a second Y-axis for 'n'
+  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+  #scale_fill_continuous(guide = FALSE) +
   theme_bw() +
-  labs(title = 'Lingcod Age Comps',
-       subtitle = 'SFmgmtarea=PWS') +
+  labs(
+    title = 'Lingcod Age Composition',
+    subtitle = 'Prince William Sound') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) 
   )
 
 lc_age_PWS
@@ -181,22 +184,23 @@ scale_CI <- max(lc_CI$n) / max(lc_CI$AGE)
 
 lc_age_CI <- ggplot(data = lc_CI) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_CI), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  geom_line(aes(x = YEAR, y = n / scale_CI), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
   scale_x_continuous(breaks = seq(1996, max(lc_CI$YEAR), 3), labels = as.character(seq(1996, max(lc_CI$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(lc_CI$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
-                     sec.axis = sec_axis(~ . * scale_CI, name = 'Sample Size', breaks = seq(0, 250, 50))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(guide = FALSE) +
-  scale_fill_continuous(guide = FALSE) +
+                     sec.axis = sec_axis(~ . * scale_CI, name = 'Sample Size', breaks = seq(0, 200, 50))) +  # Add a second Y-axis for 'n'
+  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+  #scale_fill_continuous(guide = FALSE) +
   theme_bw() +
   labs(
-       subtitle = 'Cook Inlet') +
+    title = 'Lingcod Age Composition',
+    subtitle = 'Cook  Inlet') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) 
   )
 
 lc_age_CI
@@ -212,23 +216,24 @@ scale_KOD <- max(lc_KOD$n) / max(lc_KOD$AGE)
 
 lc_age_KOD <- ggplot(data = lc_KOD) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_KOD), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  geom_line(aes(x = YEAR, y = n / scale_KOD), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
   scale_x_continuous(breaks = seq(1996, max(lc_KOD$YEAR), 3), labels = as.character(seq(1996, max(lc_KOD$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(lc_KOD$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_KOD, name = 'Sample Size', breaks = seq(0, 250, 50))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(guide = FALSE) +
-  scale_fill_continuous(guide = FALSE) +
+  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+  #scale_fill_continuous(guide = FALSE) +
   theme_bw() +
   labs(
        subtitle = 'Kodiak') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) 
   )
+
 
 lc_age_KOD
 
@@ -245,23 +250,25 @@ scale_NG <- max(lc_NG$n) / max(lc_NG$AGE)
 
 lc_age_NG <- ggplot(data = lc_NG) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_NG), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  geom_line(aes(x = YEAR, y = n / scale_NG), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
   scale_x_continuous(breaks = seq(1996, max(lc_NG$YEAR), 3), labels = as.character(seq(1996, max(lc_NG$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(lc_NG$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_NG, name = 'Sample Size', breaks = seq(0, 200, 50))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(guide = FALSE) +
-  scale_fill_continuous(guide = FALSE) +
+  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+  #scale_fill_continuous(guide = FALSE) +
   theme_bw() +
   labs(
+    title = 'Lingcod Age Composition',
        subtitle = 'North Gulf Coast') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) 
   )
+
 
 lc_age_NG
 
@@ -316,22 +323,22 @@ scale_all <- max(plotages_all$n) / max(plotages_all$AGE)
 
 lc_age_all <- ggplot(data = plotages_all) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_all), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  geom_line(aes(x = YEAR, y = n / scale_all), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
   scale_x_continuous(breaks = seq(1996, max(plotages_all$YEAR), 3), labels = as.character(seq(1996, max(plotages_all$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(plotages_all$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_all, name = 'Sample Size', breaks = seq(0, 1000, 200))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(guide = FALSE) +
-  scale_fill_continuous(guide = FALSE) +
+  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+  #scale_fill_continuous(guide = FALSE) +
   theme_bw() +
   labs(title = 'Lingcod Age Comps',
        subtitle = 'Southcentral') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) 
   ) +
   # Adding lines to indicate strong cohorts
   geom_abline(intercept = -1989, slope = 1, color = 'red') +
@@ -394,23 +401,24 @@ scale_nok <- max(plotages_nok$n) / max(plotages_nok$AGE)
 
 lc_age_nok <- ggplot(data = plotages_nok) +
   geom_point(aes(x = YEAR, y = AGE, size = pij), shape = 21, color = 'black', fill = "grey", stroke = 0.1, alpha = 0.7) +
-  geom_line(aes(x = YEAR, y = n / scale_nok), color = 'grey', size = 1.4, linetype = 'solid', alpha = 0.4) +
+  geom_line(aes(x = YEAR, y = n / scale_nok), color = 'grey24', size = 1.4, linetype = 'solid', alpha = 0.4) +
   scale_x_continuous(breaks = seq(1996, max(plotages_nok$YEAR), 3), labels = as.character(seq(1996, max(plotages_nok$YEAR), 3)), name = 'Year',
                      limit = c(1996, max(plotages_nok$YEAR))) +
   scale_y_continuous(breaks = seq(0, 30, 5), name = 'Age',
                      sec.axis = sec_axis(~ . * scale_nok, name = 'Sample Size', breaks = seq(0, 1000, 200))) +  # Add a second Y-axis for 'n'
-  scale_size_continuous(guide = FALSE) +
-  scale_fill_continuous(guide = FALSE) +
+  scale_size_continuous(range = c(2, 15), guide = FALSE) +
+  #scale_fill_continuous(guide = FALSE) +
   theme_bw() +
   labs(
        subtitle = 'Southcentral - not Kodiak') +
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),       # Bold and centered title
-    plot.subtitle = element_text(face = "bold", hjust = 0.5),    # Bold and centered subtitle
-    axis.title.x = element_text(face = "bold", hjust = 0.5),     # Bold and centered x-axis title
-    axis.title.y = element_text(face = "bold", hjust = 0.5),     # Bold and centered y-axis title
-    axis.title.y.right = element_text(face = "bold", hjust = 0.5) # Bold and centered secondary y-axis title
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 18),       
+    plot.subtitle = element_text(face = "bold", hjust = 0.5, size = 15),    
+    axis.title.x = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y = element_text(face = "bold", hjust = 0.5, size = 14),     
+    axis.title.y.right = element_text(face = "bold", hjust = 0.5, size = 14) 
   )
+
 
 
 lc_age_nok
